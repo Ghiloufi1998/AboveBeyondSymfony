@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hebergement index{% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Hebergement index </h1>    <p class="create"> <a href="{{ path('app_hebergement_new') }}">Create new</a> </p>  </div>
+   
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>HebergementId</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Disponibilité</th>
+                <th>Adresse</th>
+                <th>Image</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hebergement in hebergements %}
+            <tr>
+                <td>{{ hebergement.hebergementId }}</td>
+                <td>{{ hebergement.description }}</td>
+                <td>{{ hebergement.type }}</td>
+                <td>{{ hebergement.Disponibilite }}</td>
+                <td>{{ hebergement.adresse }}</td>
+                <td>{{ hebergement.image }}</td>
+                <td>{{ hebergement.prix }}</td>
+                <td>
+                    <a href="{{ path('app_hebergement_show', {'hebergementId': hebergement.hebergementId}) }}">show</a>
+                    <a href="{{ path('app_hebergement_edit', {'hebergementId': hebergement.hebergementId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+<br> <br>
+<div> 
+{% for hebergement in hebergements %}
+<img src="{{ asset(hebergement.image) }}" height="300px" width="500" alt="">
+</div>  
+{% endfor %}
+{% endblock %}
