@@ -1,0 +1,54 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Hebergement{% endblock %}
+
+{% block body %}
+    
+        <div class="move-text">
+		<div class="marquee">Register your hotel with us free of cost.<a href="{{ path('reserv_indiv') }}">Here</a></div>
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+		</script>
+	</div>
+	
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-bottom-info">
+				<h3>Check out our various weekend getaway deals here!</h3>
+			</div>
+            {% for hebergement in hebergements %}
+			<div class="banner-bottom-grids">
+				<div class="col-md-4 weekend-grids">
+					<div class="weekend-grid">
+						<a href="products.html">
+							<img src="{{ asset(hebergement.image) }}" height="300px" width="500" alt="">
+
+							<div class="deals-info-grid">
+								<div class="deals-grids">
+									<div class="col-md-8 deals-rating">
+										<h3>{{ hebergement.description }}</h3>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									</div>
+									<div class="col-md-4 deals-price">
+										<p class="now">{{ (hebergement.prix)+30 }} D</p>
+										<p>{{ hebergement.prix }}  D </p>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				
+	</div>
+    
+
+{% endfor %}
+    
+{% endblock %}

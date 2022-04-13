@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
+
 
 /**
  * Transport
@@ -22,41 +24,67 @@ class Transport
     private $transportId;
 
     /**
+     * @Assert\NotBlank(message="Champ type vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 3,
+     *      max = 12,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
+     * @Assert\NotBlank(message="Champ description vide ! ")
      * @var string
+     *  Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Champ Disponibilite vide ! ")
      * @var int
+     * @Assert\Expression(" this.getDisponibilite()==1 || this.getDisponibilite()==0  ",message="Dispo 0 ou 1 ")
      *
      * @ORM\Column(name="Disponibilité", type="integer", nullable=false)
      */
     private $Disponibilite;
 
     /**
+     * @Assert\NotBlank(message="Champ prix vide ! ")
      * @var int
-     *
+     *@Assert\Positive(message="Le prix doit etre positif ! ")
      * @ORM\Column(name="Prix", type="integer", nullable=false)
      */
     private $prix;
 
     /**
+     * @Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     *
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
     private $image;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir l'hebergemnt adéquat ! ")
      * @var \Hebergement
      *
      * @ORM\ManyToOne(targetEntity="Hebergement")

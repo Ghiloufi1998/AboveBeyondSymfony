@@ -30,6 +30,20 @@ class HebergementController extends AbstractController
     }
 
     /**
+     * @Route("/hotels", name="hotels", methods={"GET"})
+     */
+    public function hotels(EntityManagerInterface $entityManager): Response
+    {
+        $hebergements = $entityManager
+            ->getRepository(Hebergement::class)
+            ->findAll();
+
+        return $this->render('hebergement/afficher.html.twig', [
+            'hebergements' => $hebergements,
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_hebergement_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -57,6 +71,16 @@ class HebergementController extends AbstractController
     public function show(Hebergement $hebergement): Response
     {
         return $this->render('hebergement/show.html.twig', [
+            'hebergement' => $hebergement,
+        ]);
+    }
+
+    /**
+     * @Route("/consulter/{hebergementId}", name="consulter", methods={"GET"})
+     */
+    public function consulter(Hebergement $hebergement): Response
+    {
+        return $this->render('hebergement/consulter.html.twig', [
             'hebergement' => $hebergement,
         ]);
     }

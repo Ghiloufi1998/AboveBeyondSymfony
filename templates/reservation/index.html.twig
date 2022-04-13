@@ -17,8 +17,8 @@
                 <th>NbrAdultes</th>
                 <th>NbrEnfants</th>
                 <th>Destination</th>
-                <th>HebergementId</th>
-                <th>VolId</th>
+                <th>Hebergement</th>
+                <th>Vol</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,8 +32,8 @@
                 <td>{{ reservation.nbrAdultes }}</td>
                 <td>{{ reservation.nbrEnfants }}</td>
                 <td>{{ reservation.destination }}</td>
-                <td>{{ reservation.hebergementId }}</td>
-                <td>{{ reservation.volId }}</td>
+                <td>{{ reservation.hebergement }}</td>
+                <td>{{ reservation.vol }}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'revId': reservation.revId}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'revId': reservation.revId}) }}">edit</a>

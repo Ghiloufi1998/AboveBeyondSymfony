@@ -1,0 +1,12 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div >
+        {{ form_widget(form,  {'attr': {'class': 'form-group'}} ) }}
+        
+        {{ form_errors(form,{'attr':{'class':'text-danger'}}) }}
+        
+    </div>
+     <button >  {{ button_label|default('Réserver') }}  </button>
+    
+    
+{{ form_end(form) }}
+

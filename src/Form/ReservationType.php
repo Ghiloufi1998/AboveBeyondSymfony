@@ -23,8 +23,8 @@ class ReservationType extends AbstractType
             ->add('nbrAdultes')
             ->add('nbrEnfants')
             //->add('destination')
-            ->add('hebergementId')
-            ->add('volId')
+            ->add('hebergement')
+            ->add('vol')
             //->add('idUser')
             //
         ;

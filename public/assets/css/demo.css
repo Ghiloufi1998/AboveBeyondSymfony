@@ -287,3 +287,32 @@ button.bton, a.bton{
   flex-direction: row;
 
 }
+textarea{
+  width: 100%;
+}
+
+#reservation_hebergementId, #transport_hebergement{
+
+width: 40%;
+margin-left: 10%;
+
+}
+
+#reservation_volId{
+
+  width: 40%;
+  margin-left: 27.5%;
+  
+  }
+ .txt{
+
+  text-align: center;
+ }
+ .cnt{
+  justify-content: center;
+
+}
+.abv{
+  margin-top: 80px;
+}
+

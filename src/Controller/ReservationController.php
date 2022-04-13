@@ -41,7 +41,7 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $reservation->setDestination($form["volId"]->getData());
+            $reservation->setDestination($form["vol"]->getData());
             $entityManager->persist($reservation);
             $entityManager->flush();
 
@@ -49,6 +49,32 @@ class ReservationController extends AbstractController
         }
 
         return $this->render('reservation/new.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    
+    /**
+     * @Route("/reserver", name="reserv_indiv", methods={"GET", "POST"})
+     */
+    public function reserver(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $reservation = new Reservation();
+        $reservation->settype('Individuelle');
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $reservation->setDestination($form["vol"]->getData());
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('reserv_indiv', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('reservation/reserver.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
         ]);

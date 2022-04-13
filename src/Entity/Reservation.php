@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
+
 
 /**
  * Reservation
@@ -22,35 +24,52 @@ class Reservation
     private $revId;
 
     /**
+     * @Assert\NotBlank(message="Vérifier la date! ")
      * @var \DateTime
+     * @Assert\Expression("this.getDateDeb() < this.getDateFin()",message="Date début ne doit pas être dépassée la date fin")
      *
      * @ORM\Column(name="Date_Deb", type="date", nullable=false)
      */
     private $dateDeb;
 
     /**
+     * @Assert\NotBlank(message="Vérifier la date! ")
      * @var \DateTime
+     * @Assert\Expression("this.getDateFin() > this.getDateDeb()",message="Date fin ne doit pas être antérieur à la date debut")
      *
      * @ORM\Column(name="Date_Fin", type="date", nullable=false)
      */
     private $dateFin;
 
     /**
+     * @Assert\NotBlank(message="Champ type vide ! ")
+
      * @var string
+     * Assert\Length(
+     *      min = 3,
+     *      max = 12,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
+     *
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
+     * @Assert\NotBlank(message="Champ Nbr_adultes vide ! ")
      * @var int
+     * @Assert\Positive(message="Le nombre d'adultes doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_adultes", type="integer", nullable=false)
      */
     private $nbrAdultes;
 
     /**
+     * @Assert\NotBlank(message="Champ Nbr_enfants vide ! ")
      * @var int
+     * @Assert\Positive(message="Le nombre d'enfants doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_enfants", type="integer", nullable=false)
      */
@@ -82,6 +101,7 @@ class Reservation
 
     //S7i7
     /**
+     * @Assert\NotBlank(message="Veuillez Choisir Hebergement ! ")
      * @var \Hebergement
      *
      * @ORM\ManyToOne(targetEntity="Hebergement")
@@ -89,10 +109,11 @@ class Reservation
      *   @ORM\JoinColumn(name="Hebergement_id", referencedColumnName="Hebergement_id")
      * })
      */
-    private $hebergementId;
+    private $hebergement;
 
 
     /**
+     * @Assert\NotBlank(message="Veuillez Choisir Destination ! ")
      * @var \Vol
      *
      * @ORM\ManyToOne(targetEntity="Vol")
@@ -100,7 +121,7 @@ class Reservation
      *   @ORM\JoinColumn(name="Vol_id", referencedColumnName="Vol_id")
      * })
      */
-    private $volId;
+    private $vol;
 
     /**
      * @var \User
@@ -226,26 +247,26 @@ class Reservation
     }
         // object join
 
-        public function getHebergementId(): ?Hebergement
+        public function getHebergement(): ?Hebergement
         {
-            return $this->hebergementId;
+            return $this->hebergement;
         }
 
-        public function setHebergementId(?Hebergement $hebergementId): self
+        public function setHebergement(?Hebergement $hebergement): self
         {
-            $this->hebergementId = $hebergementId;
+            $this->hebergement = $hebergement;
 
             return $this;
         }
 
-        public function getVolId(): ?Vol
+        public function getVol(): ?Vol
         {
-            return $this->volId;
+            return $this->vol;
         }
 
-        public function setVolId(?Vol $volId): self
+        public function setVol(?Vol $vol): self
         {
-            $this->volId = $volId;
+            $this->vol = $vol;
 
             return $this;
         }

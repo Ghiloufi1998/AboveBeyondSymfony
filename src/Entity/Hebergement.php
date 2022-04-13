@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
+
 
 /**
  * Hebergement
@@ -22,27 +24,44 @@ class Hebergement
     private $hebergementId;
 
     /**
+     * @Assert\NotBlank(message="Champ description vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
+     * @Assert\NotBlank(message="Champ type vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 3,
+     *      max = 12,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
      */
     private $type;
 
     /**
+     * @Assert\NotBlank(message="Champ Disponibilite vide ! ")
      * @var int
+     * @Assert\Expression(" this.getDisponibilite()==1 || this.getDisponibilite()==0  ",message="Dispo 0 ou 1 ")
      *
      * @ORM\Column(name="Disponibilité", type="integer", nullable=false)
      */
     private $Disponibilite;
 
     /**
+     * @Assert\NotBlank(message="Champ adresse vide ! ")
      * @var string
      *
      * @ORM\Column(name="Adresse", type="string", length=255, nullable=false)
@@ -50,14 +69,24 @@ class Hebergement
     private $adresse;
 
     /**
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
+     *
      *
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
     private $image;
 
     /**
+     * @Assert\NotBlank(message="Champ prix vide ! ")
      * @var int|null
+     * @Assert\Positive(message="Le prix doit etre positif ! ")
      *
      * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
      */

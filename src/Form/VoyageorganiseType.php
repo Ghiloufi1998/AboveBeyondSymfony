@@ -16,8 +16,8 @@ class VoyageorganiseType extends AbstractType
             ->add('image')
             ->add('prix')
             ->add('nbrePlaces')
-            ->add('vol')
-            ->add('transport')
+            //->add('vol')
+            //->add('transport')
         ;
     }
 
