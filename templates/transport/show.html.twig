@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transport{% endblock %}
+
+{% block body %}
+    <h1>Transport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>TransportId</th>
+                <td>{{ transport.transportId }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ transport.type }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ transport.description }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ transport.disp }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ transport.prix }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ transport.image }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transport_index') }}">back to list</a>
+
+    <a href="{{ path('app_transport_edit', {'transportId': transport.transportId}) }}">edit</a>
+
+    {{ include('transport/_delete_form.html.twig') }}
+{% endblock %}

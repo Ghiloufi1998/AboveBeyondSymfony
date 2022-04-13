@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transport index{% endblock %}
+
+{% block body %}
+    <h1>Transport index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>TransportId</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Disponibilite</th>
+                <th>Prix</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transport in transports %}
+            <tr>
+                <td>{{ transport.transportId }}</td>
+                <td>{{ transport.type }}</td>
+                <td>{{ transport.description }}</td>
+                <td>{{ transport.disp }}</td>
+                <td>{{ transport.prix }}</td>
+                <td>{{ transport.image }}</td>
+                <td>
+                    <a href="{{ path('app_transport_show', {'transportId': transport.transportId}) }}">show</a>
+                    <a href="{{ path('app_transport_edit', {'transportId': transport.transportId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transport_new') }}">Create new</a>
+{% endblock %}

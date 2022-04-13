@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Facture" table="facture">
+    <indexes>
+      <index name="PK_rev" columns="rev_ID"/>
+      <index name="Pk_paiment" columns="Pai_ID"/>
+    </indexes>
+    <id name="idFac" type="integer" column="ID_fac">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateEch" type="date" column="Date_ech" nullable="true">
+      <options>
+        <option name="default">NULL</option>
+      </options>
+    </field>
+    <field name="montantTtc" type="integer" column="Montant_ttc" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">NULL</option>
+      </options>
+    </field>
+    <field name="etat" type="string" column="Etat" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+        <option name="default">NULL</option>
+      </options>
+    </field>
+    <many-to-one field="pai" target-entity="Paiement" fetch="LAZY">
+      <join-columns>
+        <join-column name="Pai_ID" referenced-column-name="Pai_ID"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="rev" target-entity="Reservation" fetch="LAZY">
+      <join-columns>
+        <join-column name="rev_ID" referenced-column-name="rev_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

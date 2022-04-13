@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="body">  
+    <div class="tab">
+    <div class="tab-header" > <h1> Réponse info </h1>  <p class="create">  <a href="{{ path('app_reponses_index') }}">back to list</a>
+ </p>  </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ReponsesId</th>
+                <td>{{ reponse.reponsesId }}</td>
+            </tr>
+            <tr>
+                <th>Reponse</th>
+                <td>{{ reponse.reponse }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="buttons">
+    <a class ="bton" href="{{ path('app_reponses_edit', {'reponsesId': reponse.reponsesId}) }}">edit</a>
+
+    {{ include('reponses/_delete_form.html.twig') }}
+    </div>
+
+    </div>
+    </div>
+
+{% endblock %}

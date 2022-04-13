@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Sondage index </h1>    <p class="create"> <a href="{{ path('app_sondage_new') }}">Create new </a> </p>  </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>SondageId</th>
+                <th>Sujet</th>
+                <th>Catégorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+            <tr>
+                <td>{{ sondage.sondageId }}</td>
+                <td>{{ sondage.sujet }}</td>
+                <td>{{ sondage.categorie }}</td>
+                <td>
+                    <a href="{{ path('app_sondage_display', {'sondageId': sondage.sondageId}) }}">Gérer</a>
+                    <a href="{{ path('app_sondage_edit', {'sondageId': sondage.sondageId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>       
+   
+</div>    
+
+
+    
+{% endblock %}
