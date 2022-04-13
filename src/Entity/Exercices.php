@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Exercices
  *
@@ -25,6 +25,7 @@ class Exercices
      * @var string
      *
      * @ORM\Column(name="Type", type="string", length=250, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un Type")
      */
     private $type;
 
@@ -32,6 +33,7 @@ class Exercices
      * @var string
      *
      * @ORM\Column(name="Question", type="string", length=250, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Saisir une question")
      */
     private $question;
 
@@ -39,6 +41,7 @@ class Exercices
      * @var string
      *
      * @ORM\Column(name="Reponse", type="string", length=250, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Saisir une réponse")
      */
     private $reponse;
 
@@ -46,6 +49,7 @@ class Exercices
      * @var string
      *
      * @ORM\Column(name="Hint", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Saisir une hint")
      */
     private $hint;
 
@@ -53,6 +57,7 @@ class Exercices
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Téleverser une image")
      */
     private $image;
 
@@ -76,7 +81,7 @@ class Exercices
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -88,7 +93,7 @@ class Exercices
         return $this->question;
     }
 
-    public function setQuestion(string $question): self
+    public function setQuestion(?string $question): self
     {
         $this->question = $question;
 
@@ -100,7 +105,7 @@ class Exercices
         return $this->reponse;
     }
 
-    public function setReponse(string $reponse): self
+    public function setReponse(?string $reponse): self
     {
         $this->reponse = $reponse;
 
@@ -112,7 +117,7 @@ class Exercices
         return $this->hint;
     }
 
-    public function setHint(string $hint): self
+    public function setHint(?string $hint): self
     {
         $this->hint = $hint;
 
@@ -124,7 +129,7 @@ class Exercices
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 

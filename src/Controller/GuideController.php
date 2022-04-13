@@ -78,7 +78,7 @@ class GuideController extends AbstractController
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
             $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $cour->setImage($fileName);
+            $guide->setImage($fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_guide_index', [], Response::HTTP_SEE_OTHER);

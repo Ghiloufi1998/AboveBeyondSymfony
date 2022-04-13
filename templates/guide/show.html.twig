@@ -9,10 +9,7 @@
  </p>  </div>
     <table class="table">
         <tbody>
-            <tr>
-                <th>IdG</th>
-                <td>{{ guide.idG }}</td>
-            </tr>
+          
             <tr>
                 <th>Titre</th>
                 <td>{{ guide.titre }}</td>
@@ -24,6 +21,10 @@
             <tr>
                 <th>Level</th>
                 <td>{{ guide.level }}</td>
+            </tr>
+             <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/'~guide.image) }}"width="150"height="120"alt="" ></td>
             </tr>
         </tbody>
     </table>

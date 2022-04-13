@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Guide
  *
@@ -32,6 +32,7 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="Pays", type="string", length=250, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un Pays")
      */
     private $pays;
 
@@ -39,6 +40,12 @@ class Guide
      * @var int
      *
      * @ORM\Column(name="Level", type="integer", nullable=false)
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "Veuillez Choisir un Niveau entre {{ min }} et {{ max }} ",
+     * )
+     * @Assert\NotBlank(message="Veuillez Saisir un Niveau")
      */
     private $level;
 
@@ -46,6 +53,7 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Téleverser une image")
      */
     private $image;
 
@@ -69,7 +77,7 @@ class Guide
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(?string $titre): self
     {
         $this->titre = $titre;
 
@@ -81,7 +89,7 @@ class Guide
         return $this->pays;
     }
 
-    public function setPays(string $pays): self
+    public function setPays(?string $pays): self
     {
         $this->pays = $pays;
 
@@ -93,7 +101,7 @@ class Guide
         return $this->level;
     }
 
-    public function setLevel(int $level): self
+    public function setLevel(?int $level): self
     {
         $this->level = $level;
 
@@ -105,7 +113,7 @@ class Guide
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
