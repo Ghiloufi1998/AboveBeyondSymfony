@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercices index{% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Exercices </h1>    <p class="create">   <a href="{{ path('app_exercices_new') }}">Create new</a></p>  </div>
+ 
+
+    <table class="table">
+        <thead>
+            <tr>
+             
+                <th>Type</th>
+                <th>Question</th>
+                <th>Reponse</th>
+                <th>Hint</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exercice in exercices %}
+            <tr>
+              
+                <td>{{ exercice.type }}</td>
+                <td>{{ exercice.question }}</td>
+                <td>{{ exercice.reponse }}</td>
+                
+                <td>{{ exercice.hint }}</td>
+                <td> <img src="{{ asset('uploads/'~exercice.image) }}"width="150"height="120"alt="" > </td>
+                <td style="text-align:center">
+                    <a href="{{ path('app_exercices_show', {'idEx': exercice.idEx}) }}"><button type="button" class="btn btn-primary">Afficher</button></a>
+                    <br>
+                    <a href="{{ path('app_exercices_edit', {'idEx': exercice.idEx}) }}"><button type="button" class="btn btn-success">Modifier</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+  
+{% endblock %}

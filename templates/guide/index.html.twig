@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guide {% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Guides </h1>    <p class="create">   <a href="{{ path('app_exercices_new') }}">Creer un Nouveau Guide</a></p>  </div>
+ 
+    <table class="table">
+        <thead>
+            <tr>
+              
+                <th>Titre</th>
+                <th>Pays</th>
+                <th>Level</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for guide in guides %}
+            <tr>    
+               
+                <td>{{ guide.titre }}</td>
+                <td>{{ guide.pays }}</td>
+                <td>{{ guide.level }}</td>
+                 <td> <img src="{{ asset('uploads/'~guide.image) }}"width="150"height="120"alt="" > </td>
+                <td style="text-align:center">
+                    <a href="{{ path('app_guide_show', {'idG': guide.idG}) }}"><button type="button" class="btn btn-primary">Afficher</button></a>
+
+                    <a href="{{ path('app_guide_edit', {'idG': guide.idG}) }}"><button type="button" class="btn btn-success">Modifier</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  </div>
+</div>
+{% endblock %}

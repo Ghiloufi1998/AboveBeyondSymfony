@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guide{% endblock %}
+
+{% block body %}
+<div class="body">  
+    <div class="tab">
+    <div class="tab-header" > <h1> Reservation info </h1>    <p class="create">  <a href="{{ path('app_exercices_index') }}">back to list</a>
+ </p>  </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdG</th>
+                <td>{{ guide.idG }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ guide.titre }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ guide.pays }}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{ guide.level }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_guide_index') }}">back to list</a>
+
+    <a href="{{ path('app_guide_edit', {'idG': guide.idG}) }}">edit</a>
+
+    {{ include('guide/_delete_form.html.twig') }}
+     </div>
+
+    </div>
+    </div>
+{% endblock %}
