@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Voyageorganise{% endblock %}
+
+{% block body %}
+   
+    <div class="body">  
+    <div class="tab">
+    <div class="tab-header" >  <h1>Create new Voyageorganise</h1>  <p class="create">   <a href="{{ path('app_voyageorganise_new') }}">Create new</a></p>  </div>
+ 
+
+    {{ include('voyageorganise/_form.html.twig') }}
+
+    <a href="{{ path('app_voyageorganise_index') }}">back to list</a>
+     </div>
+     </div>
+
+{% endblock %}

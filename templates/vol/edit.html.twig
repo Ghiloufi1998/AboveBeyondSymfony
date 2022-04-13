@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Vol{% endblock %}
+
+{% block body %}
+   
+ <div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Edit vol </h1>    <p class="create">   <a href="{{ path('app_vol_new') }}">Create new</a></p>  </div>
+ 
+    {{ include('vol/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_vol_index') }}">back to list</a>
+
+    {{ include('vol/_delete_form.html.twig') }}
+     </div>
+</div>
+{% endblock %}
