@@ -13,7 +13,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>TransportId</th>
+               
                 <th>Type</th>
                 <th>Description</th>
                 <th>Disponibilite</th>
@@ -27,12 +27,12 @@
             
            
             <tr>
-                <td>{{ transport.transportId }}</td>
+                
                 <td>{{ transport.type }}</td>
                 <td>{{ transport.description }}</td>
                 <td>{{ transport.Disponibilite }}</td>
                 <td>{{ transport.prix }}</td>
-                <td>{{ transport.image }}</td>
+                <td> <img src="{{ asset('assets/img/' ~  transport.image) }}" height="100px" width="150" ></td>
                 <td>
                     <a href="{{ path('app_transport_show', {'transportId': transport.transportId}) }}">show</a>
                     <a href="{{ path('app_transport_edit', {'transportId': transport.transportId}) }}">edit</a>

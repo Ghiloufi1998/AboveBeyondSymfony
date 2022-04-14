@@ -52,10 +52,12 @@ class Hebergement
     private $type;
 
     /**
-     * @Assert\NotBlank(message="Champ Disponibilite vide ! ")
+     * 
      * @var int
+     * @Assert\NotBlank(message="Champ Disponibilite vide ! ")
      * @Assert\Expression(" this.getDisponibilite()==1 || this.getDisponibilite()==0  ",message="Dispo 0 ou 1 ")
      *
+     * 
      * @ORM\Column(name="Disponibilité", type="integer", nullable=false)
      */
     private $Disponibilite;
@@ -69,16 +71,10 @@ class Hebergement
     private $adresse;
 
     /**
-     * Assert\NotBlank(message="Champ image vide ! ")
+     *
      * @var string
-     * Assert\Length(
-     *      min = 5,
-     *      max = 50,
-     *   minMessage = "min error ",
-     *   maxMessage = "max error "
-     *   )
-     *
-     *
+     * 
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
     private $image;

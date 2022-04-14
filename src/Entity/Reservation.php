@@ -58,8 +58,10 @@ class Reservation
     private $type;
 
     /**
-     * @Assert\NotBlank(message="Champ Nbr_adultes vide ! ")
      * @var int
+     * 
+     * @Assert\NotBlank(message="Champ Nbr_adultes vide ! ")
+
      * @Assert\Positive(message="Le nombre d'adultes doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_adultes", type="integer", nullable=false)
@@ -67,8 +69,9 @@ class Reservation
     private $nbrAdultes;
 
     /**
-     * @Assert\NotBlank(message="Champ Nbr_enfants vide ! ")
+     * 
      * @var int
+     * @Assert\NotBlank(message="Champ Nbr_enfants vide ! ")
      * @Assert\Positive(message="Le nombre d'enfants doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_enfants", type="integer", nullable=false)
@@ -78,6 +81,7 @@ class Reservation
     /**
      * @var string
      *
+     * 
      * @ORM\Column(name="Destination", type="string", length=255, nullable=false)
      */
     private $destination;

@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>HebergementId</th>
+                
                 <th>Description</th>
                 <th>Type</th>
                 <th>Disponibilité</th>
@@ -24,12 +24,12 @@
         <tbody>
         {% for hebergement in hebergements %}
             <tr>
-                <td>{{ hebergement.hebergementId }}</td>
+                
                 <td>{{ hebergement.description }}</td>
                 <td>{{ hebergement.type }}</td>
                 <td>{{ hebergement.Disponibilite }}</td>
                 <td>{{ hebergement.adresse }}</td>
-                <td>{{ hebergement.image }}</td>
+                <td> <img src="{{ asset(hebergement.image) }}" height="100px" width="150" > </td>
                 <td>{{ hebergement.prix }}</td>
                 <td>
                     <a href="{{ path('app_hebergement_show', {'hebergementId': hebergement.hebergementId}) }}">show</a>

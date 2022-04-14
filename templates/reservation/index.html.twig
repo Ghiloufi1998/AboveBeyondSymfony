@@ -10,7 +10,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>RevId</th>
+                
                 <th>DateDeb</th>
                 <th>DateFin</th>
                 <th>Type</th>
@@ -25,7 +25,7 @@
         <tbody>
         {% for reservation in reservations %}
             <tr>
-                <td>{{ reservation.revId }}</td>
+               
                 <td>{{ reservation.dateDeb ? reservation.dateDeb|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d') : '' }}</td>
                 <td>{{ reservation.type }}</td>
