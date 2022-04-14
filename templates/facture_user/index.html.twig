@@ -1,20 +1,50 @@
 {% extends 'front.html.twig' %}
 
 {% block body %}
- <style>.container {
-	padding-right:-200px;
-    background-color:#fff;
-}</style>
-<div class="container"style="max-width:300px;">
-    <div class="row" style="margin-left:-40%;">
-  {{ form_start(form,{attr: {novalidate: 'novalidate','class': 'form-group'}}) }}
- 
-     {{ form_widget(form) }}
-     <button  >{{ button_label|default('Add To Cart') }}</button>
+ <style>.container-fluid{
+
+  padding:30px 50px;
+  transform: translate(-50%, -50%);
+  margin-left:50%;
+   margin-top:200px;
+   justify-content: space-between;
+  width: 300px;
+  background: #f2f2f2;
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 8px 
+    
+}
+.col,#some-custom-id{
+  padding-top:15px
+}
+
+</style>
+
+<div class="container-fluid"style="height:50%;">
+    <div class="row" >
+    {{ form_start(form,{attr: {novalidate: 'novalidate','class': 'form-group'}}) }}
+  <div class="row">
+        <div class="col">
+       {{ form_row(form.date) }}
+       </div>
+        <div class="col" id="some-custom-id">
+         {{ form_row(form. montant) }}
+        </div>
+        </div>
+        <div class="col" id="some-custom-id">
+           {{ form_row(form. modePay) }}
+        </div>
+          <div class="col">
+       <button  >{{ button_label|default('Add To Cart') }}</button>
+       </div>
+      
+    
+       {{ form_end(form) }}
+    </div>
    
-  {{ form_end(form) }}
-  </div>
-   
+</div>
   </div>
   </div>
         <div class="datasheet p-3 mb-2 bg-info text-white">

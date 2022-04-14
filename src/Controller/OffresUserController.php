@@ -25,17 +25,4 @@ class OffresUserController extends AbstractController
             'off' => $facts,
         ]);
     }
-      /**
-     * @Route("/", name="app_facture_show", methods={"GET"})
-     */
-    public function show(EntityManagerInterface $entityManager): Response
-    {
-        $factures = $entityManager
-            ->getRepository(Vol::class)
-            ->findAll();
-
-        return $this->render('offres_user/vol.html.twig', [
-            'factures' => $factures,
-        ]);
-    }
 }

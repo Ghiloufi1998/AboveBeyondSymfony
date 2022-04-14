@@ -23,7 +23,7 @@ class Paiement
 
     /**
      * @var \DateTime
-     *
+     *@Assert\NotBlank
      * @ORM\Column(name="Date", type="date", nullable=true, options={"default"="NULL"})
      */
     private $date ;
@@ -31,12 +31,8 @@ class Paiement
     /**
      * @var string|null
      * @Assert\NotBlank
-     *  @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="cannot contain a number"
-     * )
-     * @ORM\Column(name="Montant", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     *  
+     * @ORM\Column(name="Montant", type="integer", length=65535, nullable=true, options={"default"="NULL"})
      */
     private $montant ;
 

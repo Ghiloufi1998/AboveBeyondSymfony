@@ -39,7 +39,7 @@ class Facture
      * @var string|null
      * @Assert\NotBlank
      * @Assert\Regex(
-     *     pattern="/\/",
+     *     pattern="/\d/",
      *     match=false,
      *     message="cannot contain a number"
      * )
