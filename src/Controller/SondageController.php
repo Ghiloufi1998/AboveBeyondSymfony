@@ -71,12 +71,12 @@ class SondageController extends AbstractController
     /**
      * @Route("/{sondageId}", name="app_sondage_show", methods={"GET"})
      */
-    public function show(Sondage $sondage): Response
+  /*  public function show(Sondage $sondage): Response
     {
         return $this->render('questions/index.html.twig', [
             'sondage' => $sondage,
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{sondageId}/edit", name="app_sondage_edit", methods={"GET", "POST"})

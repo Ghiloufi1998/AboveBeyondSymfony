@@ -353,6 +353,14 @@ select {
 
 select {
   word-wrap: normal;
+  border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 select:disabled {
   opacity: 1;
@@ -382,6 +390,14 @@ button:not(:disabled),
 
 textarea {
   resize: vertical;
+  border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 fieldset {
