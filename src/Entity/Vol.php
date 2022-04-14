@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 /**
  * Vol
@@ -21,29 +22,51 @@ class Vol
      */
     private $volId;
 
-    /**
+   /**
+     * @Assert\NotBlank(message=" Destination obligatoire ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Destination", type="string", length=255, nullable=false)
      */
     private $destination;
-
-    /**
+/**
+     * @Assert\NotBlank(message="Depart obligatoire !  ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Depart", type="string", length=255, nullable=false)
      */
     private $depart;
 
-    /**
+     /**
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
     private $image;
 
-    /**
+     /**
+     * @Assert\NotBlank(message="Veuillez indiquer le  prix ! ")
      * @var int|null
+     * @Assert\Positive(message="Le prix doit etre positif ! ")
      *
      * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
      */

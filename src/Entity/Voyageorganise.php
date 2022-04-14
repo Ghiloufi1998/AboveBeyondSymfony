@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 /**
  * Voyageorganise
@@ -22,28 +23,46 @@ class Voyageorganise
     private $voyageId;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir  ce champ! ")
      * @var string
+     * Assert\Length(
+     *      min = 3,
+     *      max = 12,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
      */
     private $description;
 
-    /**
+     /**
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Image", type="string", length=100, nullable=false)
      */
     private $image;
 
     /**
-     * @var int
+     * @Assert\NotBlank(message="Veuillez indiquer le  prix ! ")
+     * @var int|null
+     * @Assert\Positive(message="Le prix doit etre positif ! ")
      *
      * @ORM\Column(name="Prix", type="integer", nullable=false)
      */
     private $prix;
 
     /**
-     * @var int
+     * @Assert\NotBlank(message="Veuillez indiquer le  nombre de places ! ")
+     * @var int|null
+     * @Assert\Positive(message="Le nombre doit etre positif ! ")
      *
      * @ORM\Column(name="Nbre_Places", type="integer", nullable=false)
      */

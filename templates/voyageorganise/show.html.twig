@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voyageorganise{% endblock %}
+{% block title %}Voyage organise{% endblock %}
 
 {% block body %}
     
  <div class="body">  
-<div class="tab">
-<div class="tab-header" > <h1>Voyageorganise</h1>   <p class="create"> <a href="">Create new</a> </p>  </div> <table class="table">
+ <div class="tab">
+ <div class="tab-header" > <h1>Voyage organise</h1>   <p class="create"> <a href="">Create new</a> </p>  </div> <table class="table">
         <tbody>
            
             <tr>
@@ -30,7 +30,7 @@
 
     <a href="{{ path('app_voyageorganise_index') }}">back to list</a>
 
-    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}">edit</a>
+    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">edit</button></a>
 
     {{ include('voyageorganise/_delete_form.html.twig') }}
 

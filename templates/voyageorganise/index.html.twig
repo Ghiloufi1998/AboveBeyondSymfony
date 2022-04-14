@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voyageorganise index{% endblock %}
+{% block title %}Voyageorganise {% endblock %}
 
 {% block body %}
    
 <div class="body">  
 <div class="tab">
-<div class="tab-header" > <h1> Liste des Voyages  organisés </h1>    <p class="create">   <a href="{{ path('app_voyageorganise_new') }}">Create new</a></p>  </div>
+<div class="tab-header" > <h1> Liste des Voyages  organisés </h1>    <p class="create">   <a href="{{ path('app_voyageorganise_new') }}"><button type="button" class="btn btn-primary">Create new</button></a></p>  </div>
  
 <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                 <td>{{ voyageorganise.prix }}</td>
                 <td>{{ voyageorganise.nbrePlaces }}</td>
                 <td>
-                    <a href="{{ path('app_voyageorganise_show', {'voyageId': voyageorganise.voyageId}) }}">show</a>
-                    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}">edit</a>
+                    <a href="{{ path('app_voyageorganise_show', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">show</button></a>
+                    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">edit</button></a>
                 </td>
             </tr>
         {% else %}

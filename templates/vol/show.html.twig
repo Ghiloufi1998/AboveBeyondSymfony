@@ -7,7 +7,7 @@
     
 <div class="body">  
 <div class="tab">
-<div class="tab-header" > <h1> Liste des Vols </h1>    <p class="create">   <a href="{{ path('app_vol_new') }}">Create new</a></p>  </div>
+<div class="tab-header" ><h1> Liste des Vols </h1><p class="create">   <a href="{{ path('app_vol_new') }}">Create new</a></p></div>
  
     <table class="table">
         <tbody>
@@ -44,4 +44,6 @@
     <a href="{{ path('app_vol_edit', {'volId': vol.volId}) }}">edit</a>
 
     {{ include('vol/_delete_form.html.twig') }}
+    </div>
+    </div>
 {% endblock %}
