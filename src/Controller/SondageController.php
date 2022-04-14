@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Validator\Constraints as Assert; 
+
 
 /**
  * @Route("/sondage")
@@ -21,7 +22,8 @@ use Knp\Component\Pager\PaginatorInterface;
 class SondageController extends AbstractController
 {
     /**
-     * @Route("/", name="app_sondage_index", methods={"GET"})
+     * 
+    * @Route("/", name="app_sondage_index", methods={"GET"})
      */
     public function index(SondageRepository $RepositorySondage): Response
     {
@@ -115,16 +117,14 @@ class SondageController extends AbstractController
 /**
      * @Route("/{sondageId}/showsurvey", name="app_sondage_showsurvey", methods={"GET","POST"})
      */
-    public function showAction($sondageId,Request $request, PaginatorInterface $paginator)
+    public function showAction($sondageId,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         
         $entity = $em->getRepository(Sondage::class)->find($sondageId);
-    // $p=$paginator->paginate($entity,$request->query->getInt('page',1),4);
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Survey entity.');
-        }
+    
+       
 
         $builder = $this->createFormBuilder();
 
@@ -132,15 +132,17 @@ class SondageController extends AbstractController
            $type=$question->getType();
             if ($type==='YES/NO' ){
            
-            $builder->add('question'.$question->getQuestionId(),  ChoiceType::class,[
+            $builder->add('question'.$question->getQuestionId(), ChoiceType::class,[
                 'expanded' => true,
                 'label' => $question->getQuestion(),
+            
                 'choices' => [
                     'Yes'=>"Yes",
                     'No' =>"No",
                 ],
                 'attr'=>[
                     'style'=>'display : flex; flex-direction: row-reverse; align-items: flex-start; justify-content : center; ',
+                   
                 ]
              ]) 
              ;
@@ -149,10 +151,11 @@ class SondageController extends AbstractController
                 $builder ->add('question'.$question->getQuestionId(), TextareaType::class,[
                     'label'=>$question->getQuestion(),
                     
+                    
 
                 ]);
              }else {//($type ==='Rate'){
-                $builder ->add('question'.$question->getQuestionId(),  ChoiceType::class,[
+                $builder ->add('question'.$question->getQuestionId(),  ChoiceType::class ,[
                     'expanded' => true,
                     'label' => $question->getQuestion(),
                     'choices' => [
@@ -178,17 +181,16 @@ class SondageController extends AbstractController
         $form->handleRequest($request);
         $reponse=new Reponses();
         if ($form->isSubmitted() && $form->isValid()) {
-          //  $data=$form->getData();
+
             foreach ($entity->getQuestion() as $question) {
                 $data=$form->getData();
                 $reponse=new Reponses();
-               if (isset($data['question'.$question->getQuestionId()])){
-                   // $dataRep=$data['question'.$question->getQuestionId()];
-                    $reponse->setReponse($data['question'.$question->getQuestionId()]);
-                    $reponse->setQuestion($question);
-                    $em->persist($reponse);
-                    $em->flush();
-                }
+               // $dataRep=$data['question'.$question->getQuestionId()];
+               $reponse->setReponse($data['question'.$question->getQuestionId()]);
+                $reponse->setQuestion($question);
+                $em->persist($reponse);
+                $em->flush();
+                
                
             }
             

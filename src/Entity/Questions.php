@@ -30,6 +30,12 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=50, nullable=false)
+     * @Assert\NotBlank(message="Veuillez entrer un question")
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * 
      */
     private $question;
 
@@ -37,6 +43,11 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un type")
+     * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     *    )
      */
     private $type;
 
@@ -46,7 +57,9 @@ class Questions
      * @ORM\ManyToOne(targetEntity="Sondage",inversedBy="Questions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sondage_id", referencedColumnName="sondage_id")
+     *
      * })
+     *  @Assert\NotBlank(message="Veuillez Choisir un sondage")
      */
     private $sondage;
 

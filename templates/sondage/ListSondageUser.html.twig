@@ -21,7 +21,7 @@
                 <td>{{ sondage.sujet }}</td>
                 <td>{{ sondage.categorie }}</td>
                 <td>
-                    <a href="{{ path('app_sondage_showsurvey', {'sondageId': sondage.sondageId}) }}">Répondre</a>
+                    <a href="{{ path('app_sondage_showsurvey', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary">Répondre</button></a>
                 
             </tr>
         {% else %}

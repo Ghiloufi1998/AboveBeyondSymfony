@@ -242,7 +242,7 @@ html{
      td:last-child {
         font-size: 0.95em;
         line-height: 1.4;
-        text-align: left;
+        text-align: center;
      }
   
   
@@ -255,8 +255,8 @@ html{
 
        
     tr:nth-child(2n) { background-color: white; }
-    tr:nth-child(2n+1) { background-color: lighten(#398B93
-, 55%) }
+    tr:nth-child(2n+1) { background-color:white /*lighten(#398B93
+, 55%)*/ }
 
 .create{
 

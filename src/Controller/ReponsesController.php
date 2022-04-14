@@ -33,7 +33,7 @@ class ReponsesController extends AbstractController
     /**
      * @Route("/new", name="app_reponses_new", methods={"GET", "POST"})
      */
- /*   public function new( Request $request, EntityManagerInterface $entityManager): Response
+   public function new( Request $request, EntityManagerInterface $entityManager): Response
     {
       //  $questions = $repo->findById($sondageId);
         $reponse = new Reponses();
@@ -51,7 +51,7 @@ class ReponsesController extends AbstractController
             'reponse' => $reponse,
             'form' => $form->createView(),
         ]);
-    }*/
+    }
 
     /**
      * @Route("/{reponsesId}", name="app_reponses_show", methods={"GET"})

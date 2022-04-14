@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert; 
 /**
  * @ORMEntity(repositoryClass="AppRepositoryMyClassRepository")
  */
@@ -30,6 +31,17 @@ class Sondage
      * @var string
      *
      * @ORM\Column(name="sujet", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un sujet")
+     * * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Le nom d'un article doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom d'un article doit comporter au plus {{ limit }} caractères"
+     * )
      */
     private $sujet;
 
@@ -37,6 +49,17 @@ class Sondage
      * @var string
      *
      * @ORM\Column(name="catégorie", type="string", length=20, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir une catégorie")
+     * * @Assert\Type(
+     *     type="string",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 20,
+     *      minMessage = "Le nom d'un article doit comporter au moins {{ limit }} caractères",
+     *      maxMessage = "Le nom d'un article doit comporter au plus {{ limit }} caractères"
+     * )
      */
     private $categorie;
 
