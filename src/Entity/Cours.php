@@ -60,11 +60,7 @@ class Cours
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Téleverser une image")
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Veuillez Saisir une Chaine"
-     * )
+     *
      */
     private $image;
 
