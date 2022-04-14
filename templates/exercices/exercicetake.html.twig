@@ -1,0 +1,36 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Liste Cours de Guide {% endblock %}
+
+{% block body %}
+
+ <div class="move-text">
+		
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+          
+		</script>
+	</div>
+    
+<div class="body-form" >
+    <div  class="form">
+    <h1>Répondre au question    </h1>
+    {{ include('exercices/_form.html.twig') }}
+
+
+ {% for flashMessage in app.session.flashbag.get('notice') %}
+
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+
+  
+{% endfor %}
+   
+	
+</div>
+    </div>
+    
+{% endblock %}

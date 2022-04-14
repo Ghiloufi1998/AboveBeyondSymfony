@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Guide;
+use App\Entity\Cours;
+use App\Repository\CoursRepository;
 use App\Form\GuideType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,7 +31,22 @@ class GuideController extends AbstractController
             'guides' => $guides,
         ]);
     }
+    
 
+    /**
+     * @Route("/listeguide", name="listeguide", methods={"GET"})
+     */
+    public function guides(EntityManagerInterface $entityManager): Response
+    {
+        $guides = $entityManager
+            ->getRepository(Guide::class)
+            ->findAll();
+
+        return $this->render('guide/listeguide.html.twig', [
+            'guides' => $guides,
+        ]);
+    }
+    
     /**
      * @Route("/new", name="app_guide_new", methods={"GET", "POST"})
      */
@@ -65,6 +82,8 @@ class GuideController extends AbstractController
             'guide' => $guide,
         ]);
     }
+    
+
 
     /**
      * @Route("/{idG}/edit", name="app_guide_edit", methods={"GET", "POST"})

@@ -1,0 +1,48 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Cours  {% endblock %}
+
+{% block body %}
+ <div class="move-text">
+		
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+		</script>
+	</div>
+{% for cour in cours %}
+    {% if cour.type == "Vidéo" %}
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-bottom-info">
+				<h3>Bienvenu Dans votre cours</h3>
+			</div>
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/hmLBSCiEoas" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       
+       <a href="{{ path('exercicebyidc', {'idCrs': cour.idCrs}) }}"><button type="button" class="btn btn-primary" >Voir les Exercices</button></a>
+       
+       {% else %}
+       	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-bottom-info">
+				<h3>Bienvenu Dans votre cours</h3>
+			</div>
+           
+<blockquote class="blockquote">
+
+  <p  class="mb-0" ><b>{{cour.contenu}} </b></p>
+  <footer class="blockquote-footer">Above and Beyond <cite title="Source Title">Texte sur {{cour.titre}}</cite></footer>
+</blockquote>
+
+
+<a> <button type="button" class="btn btn-primary" href="{{ path('exercicebyidc', {'idCrs': cour.idCrs}) }}">Voir les Exercices</button>
+       {% endif %}
+			
+			
+	</div>
+    
+
+{% endfor %}
+    
+{% endblock %}

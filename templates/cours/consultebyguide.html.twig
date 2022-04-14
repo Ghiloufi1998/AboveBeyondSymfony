@@ -1,0 +1,54 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Liste Cours de Guide {% endblock %}
+
+{% block body %}
+
+ <div class="move-text">
+		
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+		</script>
+	</div>
+	
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-bottom-info">
+				<h3>Liste des Cours</h3>
+			</div>
+            {% for cour in cours %}
+			<div class="banner-bottom-grids">
+				<div class="col-md-4 weekend-grids">
+					<div class="weekend-grid">
+						<a href="{{ path('prendrecours', {'idCrs': cour.idCrs}) }}">
+							<img src="{{ asset('/uploads/' ~cour.image) }}" height="300px" width="500" alt="">
+
+							<div class="deals-info-grid">
+								<div class="deals-grids">
+									<div class="col-md-8 deals-rating">
+										<h3>{{ cour.titre }}</h3>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+									</div>
+									<div class="col-md-4 deals-price">
+										<p class="now"></p>
+										<p> </p>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				
+	</div>
+    
+
+{% endfor %}
+    
+{% endblock %}

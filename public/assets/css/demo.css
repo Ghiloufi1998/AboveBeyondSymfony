@@ -20,6 +20,26 @@
   text-transform: lowercase;
 }
 
+#reservation_volId{
+
+  width: 40%;
+  margin-left: 27.5%;
+  
+  }
+ .txt{
+
+  text-align: center;
+ }
+ .cnt{
+  justify-content: center;
+
+}
+.abv{
+  margin-top: 80px;
+}
+
+
+
 /* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
 /* Detached navbar */
 .layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
@@ -296,4 +316,7 @@ button.bton, a.bton{
   display: flex;
   flex-direction: row;
 
+}
+textarea{
+  width: 100%;
 }
