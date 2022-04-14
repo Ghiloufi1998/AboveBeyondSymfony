@@ -26,6 +26,11 @@ class Exercices
      *
      * @ORM\Column(name="Type", type="string", length=250, nullable=false)
      * @Assert\NotBlank(message="Veuillez Choisir un Type")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $type;
 
@@ -34,6 +39,11 @@ class Exercices
      *
      * @ORM\Column(name="Question", type="string", length=250, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir une question")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $question;
 
@@ -42,6 +52,11 @@ class Exercices
      *
      * @ORM\Column(name="Reponse", type="string", length=250, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir une réponse")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $reponse;
 
@@ -50,6 +65,11 @@ class Exercices
      *
      * @ORM\Column(name="Hint", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir une hint")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $hint;
 
@@ -58,6 +78,7 @@ class Exercices
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     * 
      */
     private $image;
 

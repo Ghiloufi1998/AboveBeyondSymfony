@@ -34,6 +34,11 @@ class Cours
      *
      * @ORM\Column(name="Titre", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir un titre")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez Saisir une Chaine"
+     * )
      */
     private $titre;
 
@@ -42,6 +47,11 @@ class Cours
      *
      * @ORM\Column(name="Contenu", type="text", length=65535, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir un Contenu")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez Saisir une Chaine"
+     * )
      */
     private $contenu;
 
@@ -50,6 +60,11 @@ class Cours
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez Saisir une Chaine"
+     * )
      */
     private $image;
 

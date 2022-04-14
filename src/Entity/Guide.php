@@ -25,6 +25,11 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="Titre", type="string", length=255, nullable=false)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $titre;
 
@@ -33,6 +38,11 @@ class Guide
      *
      * @ORM\Column(name="Pays", type="string", length=250, nullable=false)
      * @Assert\NotBlank(message="Veuillez Choisir un Pays")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
      */
     private $pays;
 
@@ -54,6 +64,7 @@ class Guide
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     * 
      */
     private $image;
 

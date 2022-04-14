@@ -1890,29 +1890,6 @@ span.starTextLabel {
     width: 1.15384615em;
     height: 1.15384615em;
     vertical-align: top;
-	display: flex;
-	align-items: center;
-  
-	border-radius: 100px;
-	padding: 14px 16px;
-	margin: 10px 0;
-  
-	cursor: pointer;
-	transition: .3s;
-	background: hsla(0, 0%, 80%, .14);
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 1px;
-	height: 1px;
-	opacity: 0;
-	z-index: -1;
-	width: 22px;
-  height: 22px;
-  border-radius: 100px;
-
-  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
-  position: relative;
 }
 
 .hotel-price{
