@@ -1,0 +1,24 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+ <style>.container {
+	padding-right:-200px;
+    background-color:#fff;
+}</style>
+<div class="container"style="max-width:300px;">
+    <div class="row" style="margin-left:-40%;">
+  {{ form_start(form,{attr: {novalidate: 'novalidate','class': 'form-group'}}) }}
+ 
+     {{ form_widget(form) }}
+     <button  >{{ button_label|default('Add To Cart') }}</button>
+   
+  {{ form_end(form) }}
+  </div>
+   
+  </div>
+  </div>
+        <div class="datasheet p-3 mb-2 bg-info text-white">
+                        <a href="" class="text-white"><i class="fa fa-file-text"></i> Download DataSheet</a>
+                    </div>
+
+{% endblock %}

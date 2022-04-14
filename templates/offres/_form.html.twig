@@ -1,0 +1,10 @@
+
+{% block body %}
+{{ form_start(form,{attr: {novalidate: 'novalidate','class': 'form-group'}}) }}
+    {{ form_widget(form) }}
+   
+     <button  class ="bton">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+{% endblock %}
+<div>

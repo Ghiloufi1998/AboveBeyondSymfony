@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% block title %}Facture{% endblock %}
+
+
+ <div class="body">  
+<div class="tab">
+<div class="tab-header" >   <h1>Facture</h1>    <p class="create"> <a href="{{ path('app_facture_index') }}">back to list</a> </p>  </div>
+  
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdFac</th>
+                <td>{{ facture.idFac }}</td>
+            </tr>
+            <tr>
+                <th>DateEch</th>
+                <td>{{ facture.dateEch ? facture.dateEch|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MontantTtc</th>
+                <td>{{ facture.montantTtc }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ facture.etat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+     <div class="buttons">
+    <a class ="bton" href="{{ path('app_facture_edit', {'idFac': facture.idFac}) }}">edit</a>
+
+    {{ include('facture/_delete_form.html.twig') }}
+    </div>
+ 
+    
+{% endblock %}

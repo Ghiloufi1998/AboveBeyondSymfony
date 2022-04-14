@@ -1,0 +1,289 @@
+/*
+* demo.css
+* File include item demo only specific css only
+******************************************************************************/
+
+
+.menu .app-brand.demo {
+  height: 64px;
+  margin-top: 12px;
+}
+
+.app-brand-logo.demo svg {
+  width: 22px;
+  height: 38px;
+}
+
+.app-brand-text.demo {
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  text-transform: lowercase;
+}
+
+/* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
+/* Detached navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-horizontal):not(.layout-without-menu) .layout-page {
+  padding-top: 76px !important;
+}
+/* Default navbar */
+.layout-navbar-fixed .layout-wrapper:not(.layout-without-menu) .layout-page {
+  padding-top: 64px !important;
+}
+
+/* Navbar page z-index issue solution */
+.content-wrapper .navbar {
+  z-index: auto;
+}
+
+/*
+* Content
+******************************************************************************/
+
+.demo-blocks > * {
+  display: block !important;
+}
+
+.demo-inline-spacing > * {
+  margin: 1rem 0.375rem 0 0 !important;
+}
+
+/* ? .demo-vertical-spacing class is used to have vertical margins between elements. To remove margin-top from the first-child, use .demo-only-element class with .demo-vertical-spacing class. For example, we have used this class in forms-input-groups.html file. */
+.demo-vertical-spacing > * {
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-lg > * {
+  margin-top: 1.875rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-lg.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.demo-vertical-spacing-xl > * {
+  margin-top: 5rem !important;
+  margin-bottom: 0 !important;
+}
+.demo-vertical-spacing-xl.demo-only-element > :first-child {
+  margin-top: 0 !important;
+}
+
+.rtl-only {
+  display: none !important;
+  text-align: left !important;
+  direction: ltr !important;
+}
+
+[dir='rtl'] .rtl-only {
+  display: block !important;
+}
+
+/*
+* Layout demo
+******************************************************************************/
+
+.layout-demo-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.layout-demo-placeholder img {
+  width: 900px;
+}
+.layout-demo-info {
+  text-align: center;
+  margin-top: 1rem;
+}
+.form {
+  background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 500px;
+	max-width: 100%;
+  padding: 30px 40px;
+
+}
+.body-form {
+
+  background-color:rgba(67, 89, 113, 0);;
+	font-family: 'Open Sans', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50vh;
+	margin: 0;
+  width: 100%;
+  padding: 30px 10px;	
+  z-index: 1000;
+
+
+
+  }
+
+  form button {
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: #2691d9!important;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+  }
+  form button:hover{
+    border-color: #2691d9;
+    transition: .5s;
+  }
+
+  .footer{
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    width: 100%;
+    z-index: 10;
+    background: inherit;
+  }
+
+html{
+  position: relative;
+
+}
+  input{
+    border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 14px;
+	padding: 10px;
+	width: 100%;
+  }
+  label{
+    
+    display: inline-block;
+	  margin-bottom: 5px;
+    color: black;
+  }
+  input:focus {
+    outline: 0;
+    border-color: #777;
+  }
+  .tab{
+    border: 1px solid darken(#398B93
+, 5%);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    max-width: calc(100% - 2em);
+    margin: 1em auto;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    
+ }
+
+ table {
+  width: 100%;}
+  
+  th,td { 
+     color: darken(#398B93, 10%);
+     padding: 10px; 
+  }
+  
+  
+  td {
+     text-align: center;
+     vertical-align: middle;
+    }
+     
+     td:last-child {
+        font-size: 0.95em;
+        line-height: 1.4;
+        text-align: left;
+     }
+  
+  
+  th { 
+     background-color: lighten(#398B93
+, 50%);
+     font-weight: 300;
+     text-align: center;
+  }
+
+       
+    tr:nth-child(2n) { background-color: white; }
+    tr:nth-child(2n+1) { background-color: lighten(#398B93
+, 55%) }
+
+.create{
+
+  float: right;
+  justify-content: center;
+  padding-top: 15px;
+}
+.body{
+  width:100%;
+  padding-bottom: 20px;
+}
+
+.tab-header  {
+  overflow: hidden;
+  justify-content: center;
+  padding:  0px 10px;
+}
+.tab-header h1 {
+  
+  float: left;
+}
+
+button.bton, a.bton{
+  display:inline-block;
+  padding:0.7em 1.4em;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.15em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  text-transform:uppercase;
+  font-weight:400!important;
+  color:#FFFFFF;
+  background-color:#3369ff;
+  box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align:center;
+  position:relative;
+  width: fit-content;
+  }
+  button.bton, a.bton:active{
+  top:0.1em;
+
+  }
+
+  button.bton{
+    background-color:rgba(255, 0, 0, 0.626)!important;
+    }
+  a.bton{
+    height:47px;
+    margin-top: 3px;
+    padding-top: 13px;
+    font-size: medium;
+   
+    }
+.buttons{
+
+  display: flex;
+  flex-direction: row;
+
+}
