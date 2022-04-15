@@ -1,0 +1,890 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from p.w3layouts.com/demos/govihar/web/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Apr 2022 12:26:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Above & Beyond</title>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Govihar Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!-- //Custom Theme files -->
+{% block stylesheets %}
+			
+			<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />
+			<link href="{{asset('front/css/bootstrap.css')}}" type="text/css" rel="stylesheet" media="all">
+			<link href="{{asset('front/css/style.css')}}" type="text/css" rel="stylesheet" media="all">
+			<link rel="stylesheet" href="{{asset('front/css/flexslider.css')}}" type="text/css" media="screen" />
+			<link type="text/css" rel="stylesheet" href="{{asset('front/css/JFFormStyle-1.css')}}" />
+			<!-- fonts -->
+						<link href="{{asset('http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,700,500italic,700italic,900,900italic')}}" rel='stylesheet' type='text/css'>
+						<link href="{{asset('http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic')}}" rel='stylesheet' type='text/css'>
+						<!-- //fonts -->
+			<style>
+
+
+			* {
+			box-sizing: border-box;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			}
+
+
+			#w3lDemoBar.w3l-demo-bar {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 9999;
+			padding: 40px 5px;
+			padding-top:70px;
+			margin-bottom: 70px;
+			background: #0D1326;
+			border-top-left-radius: 9px;
+			border-bottom-left-radius: 9px;
+			}
+
+			#w3lDemoBar.w3l-demo-bar a {
+			display: block;
+			color: #e6ebff;
+			text-decoration: none;
+			line-height: 24px;
+			opacity: .6;
+			margin-bottom: 20px;
+			text-align: center;
+			}
+
+			#w3lDemoBar.w3l-demo-bar span.w3l-icon {
+			display: block;
+			}
+
+			#w3lDemoBar.w3l-demo-bar a:hover {
+			opacity: 1;
+			}
+
+			#w3lDemoBar.w3l-demo-bar .w3l-icon svg {
+			color: #e6ebff;
+			}
+			#w3lDemoBar.w3l-demo-bar .responsive-icons {
+			margin-top: 30px;
+			border-top: 1px solid #41414d;
+			padding-top: 40px;
+			}
+			#w3lDemoBar.w3l-demo-bar .demo-btns {
+			border-top: 1px solid #41414d;
+			padding-top: 30px;
+			}
+			#w3lDemoBar.w3l-demo-bar .responsive-icons a span.fa {
+			font-size: 26px;
+			}
+			#w3lDemoBar.w3l-demo-bar .no-margin-bottom{
+			margin-bottom:0;
+			}
+			.toggle-right-sidebar span {
+			background: #0D1326;
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			color: #e6ebff;
+			border-radius: 50px;
+			font-size: 26px;
+			cursor: pointer;
+			opacity: .5;
+			}
+			.pull-right {
+			float: right;
+			position: fixed;
+			right: 0px;
+			top: 70px;
+			width: 90px;
+			z-index: 99999;
+			text-align: center;
+			}
+			/* ============================================================
+			RIGHT SIDEBAR SECTION
+			============================================================ */
+
+			#right-sidebar {
+			width: 90px;
+			position: fixed;
+			height: 100%;
+			z-index: 1000;
+			right: 0px;
+			top: 0;
+			margin-top: 60px;
+			-webkit-transition: all .5s ease-in-out;
+			-moz-transition: all .5s ease-in-out;
+			-o-transition: all .5s ease-in-out;
+			transition: all .5s ease-in-out;
+			overflow-y: auto;
+			}
+
+
+			/* ============================================================
+			RIGHT SIDEBAR TOGGLE SECTION
+			============================================================ */
+
+			.hide-right-bar-notifications {
+			margin-right: -300px !important;
+			-webkit-transition: all .3s ease-in-out;
+			-moz-transition: all .3s ease-in-out;
+			-o-transition: all .3s ease-in-out;
+			transition: all .3s ease-in-out;
+			}
+
+
+
+			@media (max-width: 992px) {
+			#w3lDemoBar.w3l-demo-bar a.desktop-mode{
+				display: none;
+
+			}
+			}
+			@media (max-width: 767px) {
+			#w3lDemoBar.w3l-demo-bar a.tablet-mode{
+				display: none;
+
+			}
+			}
+			@media (max-width: 568px) {
+			#w3lDemoBar.w3l-demo-bar a.mobile-mode{
+				display: none;
+			}
+			#w3lDemoBar.w3l-demo-bar .responsive-icons {
+				margin-top: 0px;
+				border-top: none;
+				padding-top: 0px;
+			}
+			#right-sidebar,.pull-right {
+				width: 90px;
+			}
+			#w3lDemoBar.w3l-demo-bar .no-margin-bottom-mobile{
+				margin-bottom: 0;
+			}
+			}
+			</style>
+			
+											<!---strat-date-piker---->
+											<link rel="stylesheet" href="{{ asset('front/css/jquery-ui.css') }}" />
+											
+					
+
+
+			
+{% endblock %}
+
+{% block javascripts %}
+
+						<!-- js -->
+						
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+						<script src="{{asset('front/js/jquery.min.js')}}"></script>
+						<script src="{{asset('front/js/modernizr.custom.js')}}"></script>
+						<!-- //js -->
+						<script type="text/javascript">
+								$(document).ready(function () {
+									$('#horizontalTab').easyResponsiveTabs({
+										type: 'default', //Types: default, vertical, accordion           
+										width: 'auto', //auto or any width like 600px
+										fit: true   // 100% fit in a container
+									});
+								});
+							</script>
+						<!--pop-up-->
+
+						<script src="{{asset('front/js/menu_jquery.js')}}"></script>
+						<!--//pop-up-->	
+						</head>
+						<body>
+						<!--<script src="../../../../m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>-->	
+						<script>
+						(function(){
+							if(typeof _bsa !== 'undefined' && _bsa) {
+								// format, zoneKey, segment:value, options
+								_bsa.init('flexbar', 'CKYI627U', 'placement:w3layoutscom');
+							}
+						})();
+						</script>
+						<script>
+						(function(){
+						if(typeof _bsa !== 'undefined' && _bsa) {
+							// format, zoneKey, segment:value, options
+							_bsa.init('fancybar', 'CKYDL2JN', 'placement:demo');
+						}
+						})();
+						</script>
+						<script>
+						(function(){
+							if(typeof _bsa !== 'undefined' && _bsa) {
+								// format, zoneKey, segment:value, options
+								_bsa.init('stickybox', 'CKYI653J', 'placement:w3layoutscom');
+							}
+						})();
+						</script>
+						<!-- Global site tag (gtag.js) - Google Analytics -->
+						<script async src='https://www.googletagmanager.com/gtag/js?id=UA-149859901-1'></script>
+						<script>
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+
+						gtag('config', 'UA-149859901-1');
+						</script>
+
+						<script>
+							window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+							ga('create', 'UA-149859901-1', 'demo.w3layouts.com');
+							ga('require', 'eventTracker');
+							ga('require', 'outboundLinkTracker');
+							ga('require', 'urlChangeTracker');
+							ga('send', 'pageview');
+						</script>
+						<script async src='../../../front/js/autotrack.js'></script>
+														<script src="front/js/jquery-ui.js"></script>
+													  <script>
+															  $(function() {
+																$( "#datepicker,#datepicker1" ).datepicker();
+															  });
+													  </script>
+
+																			  
+								<script>
+									function cycle($item, $cycler){
+										setTimeout(cycle, 2000, $item.next(), $cycler);
+										
+										$item.slideUp(1000,function(){
+											$item.appendTo($cycler).show();        
+										});
+						
+										}
+									cycle($('#cycler div:first'),  $('#cycler'));
+								</script>
+							
+						<script type="text/javascript">
+						 $(window).load(function() {			
+						  $("#flexiselDemo1").flexisel({
+							visibleItems: 4,
+							animationSpeed: 1000,
+							autoPlay: true,
+							autoPlaySpeed: 3000,    		
+							pauseOnHover:true,
+							enableResponsiveBreakpoints: true,
+							responsiveBreakpoints: { 
+								portrait: { 
+									changePoint:480,
+									visibleItems: 1
+								}, 
+								landscape: { 
+									changePoint:640,
+									visibleItems: 2
+								},
+								tablet: { 
+									changePoint:768,
+									visibleItems: 3
+								}
+							}
+						});
+						});
+						</script>
+						<script type="text/javascript" src="front/js/jquery.flexisel.js"></script>			 
+				
+	<script defer src="front/js/jquery.flexslider.js"></script>
+	<script src="front/js/easyResponsiveTabs.js" type="text/javascript"></script>
+	<script src="front/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			SyntaxHighlighter.all();
+			});
+			$(window).load(function(){
+			$('.flexslider').flexslider({
+			animation: "slide",
+			start: function(slider){
+			$('body').removeClass('loading');
+			}
+			});
+		});
+	</script>
+		<script>
+												$(function() {
+													$( "#datepicker,#datepicker1" ).datepicker();
+												});
+											</script>
+											<!---/End-date-piker---->
+											<!-- Set here the key for your domain in order to hide the watermark on the web server -->
+											
+
+{% endblock %}					
+							
+						
+<body>
+<!-- New toolbar-->
+{% block sidebar %}
+
+						<div class="pull-right toggle-right-sidebar">
+						<span class="fa title-open-right-sidebar tooltipstered fa-angle-double-right"></span>
+						</div>
+
+						<div id="right-sidebar" class="right-sidebar-notifcations nav-collapse">
+						<div class="bs-example bs-example-tabs right-sidebar-tab-notification" data-example-id="togglable-tabs">
+
+							<div id="w3lDemoBar" class="w3l-demo-bar">
+								<div class="demo-btns">
+								<a href="https://w3layouts.com/?p=44843">
+									<span class="w3l-icon -back">
+										<span class="fa fa-arrow-left"></span>
+									</span>
+									<span class="w3l-text"></span>
+								</a>
+								<a href="https://w3layouts.com/?p=44843">
+									<span class="w3l-icon -download">
+										<span class="fa fa-download"></span>
+									</span>
+									<span class="w3l-text"></span>
+								</a>
+								<a href="https://w3layouts.com/checkout/?add-to-cart=44843" class="no-margin-bottom-mobile">
+									<span class="w3l-icon -buy">
+										<span class="fa fa-shopping-cart"></span>
+									</span>
+									<span class="w3l-text"></span>
+								</a>
+							</div>
+								<!---<div class="responsive-icons">
+									<a href="#url" class="desktop-mode">
+										<span class="w3l-icon -desktop">
+											<span class="fa fa-desktop"></span>
+										</span>
+									</a>
+									<a href="#url" class="tablet-mode">
+										<span class="w3l-icon -tablet">
+											<span class="fa fa-tablet"></span>
+										</span>
+									</a>
+									<a href="#url" class="mobile-mode no-margin-bottom">
+										<span class="w3l-icon -mobile">
+											<span class="fa fa-mobile"></span>
+										</span>
+									</a>
+								</div>-->
+							</div>
+							<div class="right-sidebar-panel-content animated fadeInRight" tabindex="5003"
+								style="overflow: hidden; outline: none;">
+							</div>
+						</div>
+						</div>
+						</div>
+
+							<!--header-->
+							<div class="header">
+								<div class="container">
+									<div class="header-grids">
+										<img src="{{ asset('logob.png') }}" height="160px" width="200">
+										<!--navbar-header-->
+										<div class="header-dropdown">
+											<div class="emergency-grid">
+												<!--<ul>
+													<li>Toll Free : </li>
+													<li class="call">+1 234 567 8901</li>
+												</ul>-->
+										<div class="abv">		
+											<div class="logo">
+												<h1><a  href="#"><span>Above</span>& Beyond</a></h1>
+											</div>
+										</div>
+											</div>
+											<div class="clearfix"> </div>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+									<div class="nav-top">
+										<div class="top-nav">
+											<span class="menu"><img src="images/menu.png" alt="" /></span>
+											<ul class="nav1">
+												 {% block usersession %} <li class="nav-item"><a class="nav-link" href="/login">Sign Up</a></li> {% endblock %}
+                
+                <li class="nav-item"><a class="nav-link" href="/reclamation">Reclamation</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+												
+											</ul>
+											<div class="clearfix"> </div>
+											<!-- script-for-menu -->
+													<script> 
+													$( "span.menu" ).click(function() {
+														$( "ul.nav1" ).slideToggle( 300, function() {
+														// Animation complete.
+														});
+														});
+													
+													</script>
+												<!-- /script-for-menu -->
+										</div>
+										<div class="dropdown-grids">
+												<div id="loginContainer"><a href="#" id="loginButton"><span>Login</span></a>
+													<div id="loginBox">                
+														<form id="loginForm">
+															<div class="login-grids">
+																<div class="login-grid-left">
+																	<fieldset id="body">
+																		<fieldset>
+																			<label for="email">Email Address</label>
+																			<input type="text" name="email" id="email">
+																		</fieldset>
+																		<fieldset>
+																			<label for="password">Password</label>
+																			<input type="password" name="password" id="password">
+																		</fieldset>
+																		<input type="submit" id="login" value="Sign in">
+																		<label for="checkbox"><input type="checkbox" id="checkbox"> <i>Remember me</i></label>
+																	</fieldset>
+																	<span><a href="#">Forgot your password?</a></span>
+																	<div class="or-grid">
+																		<p>OR</p>
+																	</div>
+																	<div class="social-sits">
+																		<div class="facebook-button">
+																			<a href="#">Connect with Facebook</a>
+																		</div>
+																		<div class="chrome-button">
+																			<a href="#">Connect with Google</a>
+																		</div>
+																		<div class="button-bottom">
+																			<p>New account? <a href="signup.html">Signup</a></p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</div>
+							<!--//header-->
+							<!-- banner -->
+							
+{% endblock %}	
+<div class="banner">
+								<!-- container -->
+								
+									
+								
+																	
+{% block body %}
+       
+{% endblock %}	
+</div>
+
+{% block mid %}
+
+		<div class="banner-bottom">
+		<!-- container -->
+		<div class="container">
+			<div class="banner-bottom-info">
+				<h3>Today's Top Deals</h3>
+			</div>
+			<div class="banner-bottom-grids">
+				<div class="col-md-4 banner-bottom-grid">
+					<div class="destinations">
+						 <ul>
+							<li class="button"><a href="#">Goa Popular Hotels</a>
+								<li class="dropdown active">
+									<a href="products.html">
+										<div class="destinations-grid">
+											<img src="images/a1.jpg" alt="" />
+										</div>
+										<div class="destinations-grid-info">
+											<div class="destinations-hotel">Lorem ipsum dolor sit amet , Goa</div>
+											<div class="destinations-star"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
+											<div class="destinations-price">$100</div>
+											<div class="clearfix"> </div>
+										</div>
+									</a>
+								 </li>
+							</li>
+							<li class="button"><a href="#">Bangalore Popular Hotels</a>
+								<li class="dropdown">
+									<a href="products.html">
+										<div class="destinations-grid">
+											<img src="images/a4.jpg" alt="" />
+										</div>
+										<div class="destinations-grid-info">
+											<div class="destinations-hotel">Lorem ipsum dolor sit amet , Bangalore</div>
+											<div class="destinations-star"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
+											<div class="destinations-price">$100</div>
+											<div class="clearfix"> </div>
+										</div>
+									</a>
+								 </li>
+							</li>							
+							<li class="button"><a href="#">Bangkok Popular Hotels</a>
+								 <li class="dropdown">
+									<a href="products-2.html">
+										<div class="destinations-grid">
+											<img src="images/a3.jpg" alt="" />
+										</div>
+										<div class="destinations-grid-info">
+											<div class="destinations-hotel">Lorem ipsum dolor sit amet , Bangkok</div>
+											<div class="destinations-star"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
+											<div class="destinations-price">$240</div>
+											<div class="clearfix"> </div>
+										</div>
+									</a>
+								 </li>
+							</li>
+							<li class="button"><a href="#">Malaysia Popular Hotels</a>
+								 <li class="dropdown">
+									<a href="products.html">
+										<div class="destinations-grid">
+											<img src="images/a1.jpg" alt="" />
+										</div>
+										<div class="destinations-grid-info">
+											<div class="destinations-hotel">Lorem ipsum dolor sit amet , Malaysia</div>
+											<div class="destinations-star"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="glyphicon glyphicon-star" aria-hidden="true"></span></div>
+											<div class="destinations-price">$320</div>
+											<div class="clearfix"> </div>
+										</div>
+									</a>
+								 </li>
+							 </li>							 
+						 </ul>
+					</div>
+					<div class="choose">
+						<div class="choose-info">
+							<h4>Why Choose Us</h4>
+						</div>
+						<div class="choose-grids">
+							<div class="choose-grids-info">
+								<div class="choose-left">
+									<h5>09</h5>
+									<span>Million</span>
+								</div>
+								<div class="choose-right">
+									<a href="products.html">Aliquam faucibus vehicula vulputate</a>
+									<p>Maecenas euismod tortor a tristique convallis diam eros aliquam.</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="choose-grids-info">
+								<div class="choose-left">
+									<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+								</div>
+								<div class="choose-right">
+									<a href="products.html">Sed tincidunt consectetur augue</a>
+									<p>Nulla bibendum libero in nunc eleifend tincidunt. Aliquam quis molestie lectus</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="choose-grids-info">
+								<div class="choose-left">
+									<h6>$</h6>
+								</div>
+								<div class="choose-right">
+									<a href="products.html">Nullam et arcu interdum, accumsan justo</a>
+									<p>Maecenas dapibus eu purus vel imperdiet. Maecenas cursus, arcu sed tempus </p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 banner-bottom-grid">
+					<div class="banner-bottom-middle">
+						<a href="products.html">
+							<img src="images/a2.jpg" alt="" />
+							<div class="destinations-grid-info tours">
+								<h5>Book your next Malaysia holiday!</h5>
+								<p>Integer eget aliquam nibh. Donec blandit volutpat libero id lacinia</p>
+								<p class="b-period">Book Period: Now - 7 September 2015 | Travel Period: Now - 31 October 2015 </p>
+							</div>
+						</a>
+					</div>
+					<div class="top-destinations-grids">
+						<div class="top-destinations-info">
+							<h4>Top Destinations</h4>
+						</div>
+						<div class="top-destinations-bottom">
+							<div class="td-grids">
+								<div class="col-xs-3 td-left">
+									<img src="images/t1.jpg" alt="" />
+								</div>
+								<div class="col-xs-7 td-middle">
+									<a href="products.html">Donec libero id lacinia</a>
+									<p>Dapibus eu purus vel libero in nunc</p>
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</div>
+								<div class="col-xs-2 td-right">
+									<p>$190</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="td-grids">
+								<div class="col-xs-3 td-left">
+									<img src="images/t2.jpg" alt="" />
+								</div>
+								<div class="col-xs-7 td-middle">
+									<a href="products.html">Donec libero id lacinia</a>
+									<p>Dapibus eu purus vel libero in nunc</p>
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</div>
+								<div class="col-xs-2 td-right">
+									<p>$213</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="td-grids">
+								<div class="col-xs-3 td-left">
+									<img src="images/t3.jpg" alt="" />
+								</div>
+								<div class="col-xs-7 td-middle">
+									<a href="products.html">Donec libero id lacinia</a>
+									<p>Dapibus eu purus vel libero in nunc</p>
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</div>
+								<div class="col-xs-2 td-right">
+									<p>$176</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="td-grids">
+								<div class="col-xs-3 td-left">
+									<img src="images/t4.jpg" alt="" />
+								</div>
+								<div class="col-xs-7 td-middle">
+									<a href="products.html">Donec libero id lacinia</a>
+									<p>Dapibus eu purus vel libero in nunc</p>
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</div>
+								<div class="col-xs-2 td-right">
+									<p>$490</p>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 banner-bottom-grid">
+					<div class="banner-bottom-right">
+						<a href="products.html">
+							<img src="images/a3.jpg" alt="" />
+							<div class="destinations-grid-info tours">
+									<h5>New Hotel Experiences at Your Favourite Destinations</h5>
+									<p>Integer eget aliquam nibh. Donec blandit volutpat libero id lacinia</p>
+									<p class="b-period">Book Period: Now - 7 September 2015 | Travel Period: Now - 31 October 2015 </p>
+							</div>
+						</a>
+					</div>
+					<div class="news-grids">
+						<div class="news-grids-info">
+							<h4>Latest News</h4>
+						</div>
+						<div class="news-grids-bottom">
+							<!-- date -->
+							<div id="design" class="date">
+								<div id="cycler">   
+									<div class="date-text">
+										<a href="single.html">August 15,2015</a>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">July 08,2015</a>
+										<p>Nullam non turpis sit amet metus tristique egestas et et orci.</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">February 15,2015</a>
+										<p>Duis venenatis ac ipsum vel ultricies in placerat quam</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">January 15,2015</a>
+										<p>Pellentesque ullamcorper fringilla ipsum, ornare dapibus velit volutpat sit amet.</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">September 24,2014</a>
+										<p>In lobortis ipsum mi, ac imperdiet elit pellentesque at.</p>
+									</div>
+								</div>
+								<script>
+									function cycle($item, $cycler){
+										setTimeout(cycle, 2000, $item.next(), $cycler);
+										
+										$item.slideUp(1000,function(){
+											$item.appendTo($cycler).show();        
+										});
+						
+										}
+									cycle($('#cycler div:first'),  $('#cycler'));
+								</script>
+							</div>
+							<!-- //date -->
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!-- //container -->
+	</div>
+
+
+
+
+
+       
+{% endblock %}	
+
+
+
+{% block footer %}
+
+		</div>
+	
+							
+	<!-- //banner-bottom -->
+	<!---728x90--->
+	<!-- popular-grids -->
+	<div class="popular-grids">
+		<!-- container -->
+		<div class="container">
+			<div class="popular-info">
+			
+			</div>
+			<!-- slider -->
+			<div class="slider">
+				<div class="arrival-grids">			 
+					 <ul id="flexiselDemo1">
+						 <li>
+							 <a href="products.html"><img src="{{ asset('front/images/a3.jpg') }}" alt=""/>
+							 </a>
+						 </li>
+						 <li>
+							 <a href="products.html"><img src="{{ asset('front/images/a2.jpg') }}" alt=""/>
+							 </a>
+						 </li>
+						 <li>
+							 <a href="products.html"><img src="{{ asset('front/images/a4.jpg') }}" alt=""/>
+							 </a>
+						 </li>
+						 <li>
+							 <a href="products.html"><img src="{{ asset('front/images/a1.jpg') }}" alt=""/>
+							 </a>
+						 </li>
+						</ul>
+						<script type="text/javascript">
+						 $(window).load(function() {			
+						  $("#flexiselDemo1").flexisel({
+							visibleItems: 4,
+							animationSpeed: 1000,
+							autoPlay: true,
+							autoPlaySpeed: 3000,    		
+							pauseOnHover:true,
+							enableResponsiveBreakpoints: true,
+							responsiveBreakpoints: { 
+								portrait: { 
+									changePoint:480,
+									visibleItems: 1
+								}, 
+								landscape: { 
+									changePoint:640,
+									visibleItems: 2
+								},
+								tablet: { 
+									changePoint:768,
+									visibleItems: 3
+								}
+							}
+						});
+						});
+						</script>
+						
+						<script type="text/javascript" src="{{ asset('front/js/jquery.flexisel.js') }}"></script>			 
+				</div>
+			</div>
+			<!-- //slider -->
+		</div>
+		<!--
+		 //container -->
+	</div>
+			<div class="footer-bottom-grids">
+		<!-- container -->
+		<div class="container">
+				<div class="footer-bottom-top-grids">
+					<div class="col-md-4 footer-bottom-left">
+						<h4>Download our mobile Apps</h4>
+						<div class="d-apps">
+							<ul>
+							
+								<li><a href="#"><img src="{{ asset('front/images/app1.png') }}" alt="" /></a></li>
+								<li><a href="#"><img src="{{ asset('front/images/app2.png') }}" alt="" /></a></a></li>
+								<li><a href="#"><img src="{{ asset('front/images/app3.png') }}" alt="" /></a></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-4 footer-bottom-left">
+						<h4>We Accept</h4>
+						<div class="a-cards">
+							<ul>
+								<li><a href="#"><img src="{{ asset('front/images/c1.png') }}" alt="" /></a></li>
+								<li><a href="#"><img src="{{ asset('front/images/c2.png') }}" alt="" /></a></a></li>
+								<li><a href="#"><img src="{{ asset('front/images/c3.png') }}" alt="" /></a></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-4 footer-bottom-left">
+						<h4>Follow Us</h4>
+						<div class="social">
+							<ul>
+								<li><a href="#" class="facebook"> </a></li>
+								<li><a href="#" class="facebook twitter"> </a></li>
+								<li><a href="#" class="facebook chrome"> </a></li>
+								<li><a href="#" class="facebook dribbble"> </a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+					<div class="copyright">
+						<p>Copyrights © 2022 Above & Beyond  Created by <a href="https://www.facebook.com/AboveBeyondTN">Arcane</a></p>
+					</div>
+				</div>
+		</div>
+	</div>
+	<script defer src="{{ asset('front/js/jquery.flexslider.js') }}"></script>
+	<script src="{{ asset('front/js/easyResponsiveTabs.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('front/js/jquery-ui.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('front/js/script.js') }}"></script>
+	<script type="text/javascript">
+		$(function(){
+			SyntaxHighlighter.all();
+			});
+			$(window).load(function(){
+			$('.flexslider').flexslider({
+			animation: "slide",
+			start: function(slider){
+			$('body').removeClass('loading');
+			}
+			});
+		});
+	</script>		
+
+
+<div id = "v-w3layouts"></div><script>(function(v,d,o,ai){ai=d.createElement('script');ai.defer=true;ai.async=true;ai.src=v.location.protocol+o;d.head.appendChild(ai);})(window, document, '../../../../a.vdo.ai/core/v-w3layouts/vdo.ai.js');</script>
+		
+					
+
+
+	
+
+{% endblock %}							
+	
+	
+	</body>
+
+<!-- Mirrored from p.w3layouts.com/demos/govihar/web/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Apr 2022 12:26:37 GMT Menna raja3  <meta name="robots" content="noindex">-->
+</html>

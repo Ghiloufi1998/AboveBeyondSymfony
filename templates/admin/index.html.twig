@@ -1,0 +1,85 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}welcome{% endblock %}
+
+{% block body %}
+
+<section id="main-content">
+      <section class="wrapper">
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+    <h1>above and beyond</h1>
+
+        <form method="post" ><label>Chercher</label>
+        <input type="text" name="AfficherClasse" onkeyup="myFunction()" placeholder="Nom (EX:DHIA) "  id="myInput" >
+        </form >
+        
+    <table class="table" id="mytable">
+        <thead>
+            <tr>
+                <th>Adminname</th>
+                <th>Lastname</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for admin in admins %}
+            <tr>
+               
+                <td>{{ admin.adminname }}</td>
+                <td>{{ admin.lastname }}</td>
+                <td>{{ admin.birthday|date("m/d/y") }}</td>
+                <td>{{ admin.gender }}</td>
+                <td>{{ admin.tel }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.password }}</td>
+                <td>
+                <a href="{{ path('admin_index', {'id': admin.id}) }}"><img src="{{ asset ('uploads/' ~ admin.image) }}" alt=""height="80px" width="80px"></a>
+                </td>
+                <td>
+                    <a href="{{ path('admin_show', {'id': admin.id}) }}">show</a>
+                    <a href="{{ path('admin_edit', {'id': admin.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<script>
+        function myFunction() {
+            var input, filter, table, tr, td, i,j, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("mytable");
+            tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+            for (i = 0; i < tr.length; i++) {
+                td= tr[i].getElementsByTagName("td")[1];
+
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        </script>
+        
+    <a href="{{ path('admin_new') }}">Create new</a>
+    </div>
+</div>
+</section>
+{% endblock %}

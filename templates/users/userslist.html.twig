@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section id="main-content">
+      <section class="wrapper">
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+<div class="container">
+
+  <h2>Liste des Users</h2>
+
+  <br> </br>  
+  <th>Trier : </th>
+  <a href="{{path('TrierParDate2') }}"> ASC</a>   
+  <a href="{{path('TrierParDate') }}">  DESC</a>
+  
+  <a class="btn btn-success" href="{{path('PDF') }}">  PDF </a>
+<br> </br>    
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+        <th>Tel number</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Photo</th>
+        <th>Editer</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for User in Users %}
+      <tr><td>
+       {{ User.name }}
+      </td>   <td>
+        {{ User.fname}}
+       </td> <td>
+     {{ User.birthday|date("m/d/y")}}
+       </td> <td>
+     {{ User.gender }}
+      </td>   <td>
+        {{ User.num}}
+       </td> <td>
+
+     {{ User.email}}
+       </td> <td>
+     {{ User.password}}
+       </td> <td>
+<a href="{{ path('listUser', {'id': User.id}) }}"><img src="{{ asset ('uploads/' ~ User.image) }}" alt=""height="80px" width="80px"></a>
+ 
+     <a href="{{path('showUser', {'id': User.id}) }}"> Consulter</a>
+        &nbsp;&nbsp;
+     <a href="{{path('deleteUser', {'id': User.id}) }}"style="color: #930020"> Supprimer</a>
+
+     </tr> 
+    </tbody>
+    {% endfor %}
+  </table>   
+
+
+</div>
+</div>
+</div>
+</section>
+{{ knp_pagination_render(Users) }}
+
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'base2.html.twig' %}
+{% block body %}
+<div class="body">  
+<div class="tab">
+
+    <div class="tab-header" > <h1> reclamation info</h1>    <p class="create"> 
+ </p>  </div>
+
+ 
+ <table class="table">
+        <thead>
+            <tr>
+               
+                 <th>Sujet</th>
+        <th>User</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Editer</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for Reclamation in Reclamations %}
+            <tr>
+               
+                <td>{{ Reclamation.sujet }}</td>
+                <td>{{ Reclamation.user.name }}</td>
+                <td>{{ Reclamation.date|date("m/d/y") }}</td>
+                <td>{{ Reclamation.description }}</td>
+    
+                <td style="text-align:center">
+                     <a href="{{path('showreclamationBack', {'id': Reclamation.id}) }}"> Consulter</a>
+
+    <a href="{{path('deletereclamationBack', {'id': Reclamation.id}) }}"style="color: #930020"> Supprimer</a>
+    </td>
+            </tr> 
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+    </div>
+ 
+{% endblock %}
+

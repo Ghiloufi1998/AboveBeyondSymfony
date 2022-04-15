@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ {% block head %}
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Register Form</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+<!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main CSS-->
+    <link href="csss/main.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="csss/style.css">
+
+</head>
+{% endblock %}
+  {% block body %}
+<body>
+
+    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+              
+                <div class="card-body">
+                
+                    <h2 class="title">Registration Info</h2>
+                  
+                    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+                     <div class="row row-space">
+                      <div class="col-2">
+                        <div class="input-group">
+                        {{ form_errors(form.name) }}
+                            {{ form_widget(form.name,{'attr': {'class': 'input--style-1' , 'placeholder' : 'NAME'}}) }}
+                        </div>
+                        </div>
+                        <div class="col-2">
+                         <div class="input-group">
+                         {{ form_errors(form.fname) }}
+                            {{ form_widget(form.fname,{'attr': {'class': 'input--style-1' , 'placeholder' : 'FAMILY NAME'}}) }}
+                        </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                {{ form_errors(form.birthday) }}
+                                 {{ form_widget(form.birthday,{'attr': {'class': 'input--style-1' , 'placeholder' : 'BIRTHDATE'}}) }}
+                                </div>
+                             </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                {{ form_errors(form.gender) }}
+                                {{ form_widget(form.gender,{'attr': {'class': 'input--style-1' , 'placeholder' : 'GENDER'}}) }}
+                         </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                            {{ form_errors(form.num) }}
+                            {{ form_widget(form.num,{'attr': {'class': 'input--style-1 ', 'placeholder' : 'Telephone Number'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-2">
+                            <div class="input-group">
+                            {{ form_errors(form.email) }}
+                             {{ form_widget(form.email,{'attr': {'class': 'input--style-1' , 'placeholder' : 'Email', 'type':'email'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-2">
+                            <div class="input-group">
+                            {{ form_errors(form.image) }}
+                             {{ form_widget(form.image) }}
+                                </div>
+                                </div>
+                                <div class="col-2">
+                            <div class="input-group">
+                            {{ form_errors(form.password) }}
+                             {{ form_widget(form.password,{'attr': {'class': 'input--style-1' , 'placeholder' : 'Password', 'type':'password'}}) }}
+                                </div>
+                                </div>
+                                <div class="col-2">
+                            <div class="input-group">
+                            {{ form_errors(form.confirmpassword) }}
+                             {{ form_widget(form.confirmpassword,{'attr': {'class': 'input--style-1' , 'placeholder' : 'Confirm Password', 'type':'password'}}) }}
+                                </div>
+                                </div>
+                                
+                                 <div class="col-2">
+                                   <div class="signup-image">
+                        <figure><img src="images/signup-image.jpg" alt="sing up image" width="300"></figure>
+                    </div>
+                    </div>
+                       
+                       <input type ="hidden" id="recaptchaResponse" name = "recaptcha-response">
+
+                        <div class="row row-space">
+                      <div class="col-2">
+                        <div class="input-group">
+                        {{ form_widget(form.Register,{'attr': {'class': 'btn btn--radius btn--green ', 'placeholder' : 'Register'}}) }}
+                                
+                        </div>
+                         </div>
+                         </div>
+                        <div class="col-2">
+                    <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                               
+                            </ul>
+                        </div>
+                        </div>
+                        {{ form_end(form) }}
+                    
+                    <script src="https://www.google.com/recaptcha/api.js?render=6Lcer3saAAAAAGWJghFmUWW9VZvQ-GCWKih4JxOw"></script>
+                       <script>
+                        
+                       grecaptcha.ready(function() {
+                       grecaptcha.execute('6Lcer3saAAAAAGWJghFmUWW9VZvQ-GCWKih4JxOw', {action: 'homepage'}).then(function(token) {
+              document.getElementById("recaptchaResponse").value = token
+          });
+        });
+      }
+  </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+<script src="vendor/jquery/jquery.min.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

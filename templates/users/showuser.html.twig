@@ -1,0 +1,76 @@
+{% extends 'base2.html.twig' %}
+
+{% block body %}
+<div class="body-form" >
+    <div  class="form">
+<section id="main-content">
+      <section class="wrapper">
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+<div class="container">
+
+  <h2> <center>Consulter User</h2>
+
+  <br></br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="{{ path('listUser', {'id': User.id}) }}"><img src="{{ asset ('uploads/' ~ User.image) }}"  alt=""height="200px" width="400px" ></a>
+
+ <br></br>
+<div class="container">
+<p>Name: </p>
+  <div class="well">{{ User.name }}</div>
+  
+</div>
+
+  
+<div class="container">
+ <p>Family name : </p>
+  <div class="well">{{ User.fname}}</div>
+ 
+</div>
+<div class="container">
+   <p>Birthday : </p>
+  <div class="well">{{ User.birthday|date("m/d/y")}}</div>
+  
+  <div class="container">
+<p>Gender: </p>
+  <div class="well"> {{ User.gender }}</div>
+  
+</div>
+
+  
+<div class="container">
+ <p>Tel number : </p>
+  <div class="well">{{ User.num}}</div>
+ 
+</div>
+<div class="container">
+   <p>Email : </p>
+  <div class="well">{{ User.email}}</div>
+  
+</div>
+<div class="container">
+   <p>Password : </p>
+  <div class="well">{{ User.password}}</div>
+
+  
+  
+</div>
+  <br></br>
+  <div class="col-md-12">
+        <a href="{{path('deleteUser', {'id': User.id}) }}"> Supprimer</a>
+        &nbsp;&nbsp;
+        <a href="{{path('listUser', {'id': User.id}) }}"> Annuler</a>
+          </div>
+
+     
+
+ </div>
+ </div>
+</div>
+</section>
+ </div>
+</div>
+{% endblock %}
+

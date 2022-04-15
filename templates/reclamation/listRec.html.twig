@@ -1,0 +1,61 @@
+{% extends 'front.html.twig' %}
+{% block usersession %}
+                 {% if session.has('user') %}
+                  <li class="nav-item"><a class="nav-link">{{session.all.user.name}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{path('test_logout')}}">Logout</a></li>
+                {% else %}
+                  <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                {% endif %}
+{% endblock %}
+{% block body %}
+
+<div class="container">
+<div class="col-md-8 banner-right">
+				<div class="sap_tabs">	
+					<div class="booking-info txt">
+					
+                    
+
+            <h2> <center>Liste des réclamations</h2>
+        </div>
+  <br> </br>  
+  <th>Trier : </th>
+ 
+<br> </br>           
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Sujet</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Editer</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for Reclamation in Reclamations %}
+      <tr><td>
+       {{ Reclamation.sujet }}
+      </td>   <td>
+        {{ Reclamation.date|date("m/d/y")}}
+       </td> <td>
+     {{ Reclamation.description}}
+       </td> <td>
+
+     <a href="{{path('showreclamation', {'id': Reclamation.id}) }}"> Consulter</a>
+     <a href="{{ path('updatereclamation', {'id': Reclamation.id}) }}"style="color: #D6BA32"> Modifier</a>
+     <a href="{{path('deletereclamation', {'id': Reclamation.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');"style="color: #930020"> Supprimer</a>
+
+     </tr> 
+    </tbody>
+    {% endfor %}
+  </table>   
+
+
+</div>
+</div>
+
+</div>
+
+{{ knp_pagination_render(Reclamations) }}
+{% endblock %}
+
