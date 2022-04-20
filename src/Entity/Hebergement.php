@@ -26,6 +26,11 @@ class Hebergement
     /**
      * @Assert\NotBlank(message="Champ description vide ! ")
      * @var string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez saisir une chaine pas d'entiers"
+     * )
      * Assert\Length(
      *      min = 5,
      *      max = 50,
@@ -40,6 +45,11 @@ class Hebergement
     /**
      * @Assert\NotBlank(message="Champ type vide ! ")
      * @var string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez saisir une chaine pas d'entiers"
+     * )
      * Assert\Length(
      *      min = 3,
      *      max = 12,
@@ -65,6 +75,7 @@ class Hebergement
     /**
      * @Assert\NotBlank(message="Champ adresse vide ! ")
      * @var string
+     * 
      *
      * @ORM\Column(name="Adresse", type="string", length=255, nullable=false)
      */

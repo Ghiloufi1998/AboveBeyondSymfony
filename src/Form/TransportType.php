@@ -5,6 +5,7 @@ use App\Entity\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class TransportType extends AbstractType
 {
@@ -15,7 +16,7 @@ class TransportType extends AbstractType
             ->add('description')
             ->add('Disponibilite')
             ->add('prix')
-            ->add('image')
+            ->add('image',FileType::class,array('data_class'=>null,'required'=>false))
             ->add('hebergement')
         ;
     }

@@ -29,7 +29,7 @@
                 <td>{{ hebergement.type }}</td>
                 <td>{{ hebergement.Disponibilite }}</td>
                 <td>{{ hebergement.adresse }}</td>
-                <td> <img src="{{ asset(hebergement.image) }}" height="100px" width="150" > </td>
+                <td> <img src="{{ asset('uploads/' ~ hebergement.image ) }}" height="100px" width="150" > </td>
                 <td>{{ hebergement.prix }}</td>
                 <td>
                     <a href="{{ path('app_hebergement_show', {'hebergementId': hebergement.hebergementId}) }}">show</a>

@@ -16,14 +16,14 @@
 	<div class="banner-bottom">
 		<div class="container">
 			<div class="banner-bottom-info">
-				<h3>Check out our various weekend getaway deals here!</h3>
+				<h3>Hebergements !</h3>
 			</div>
             {% for hebergement in hebergements %}
 			<div class="banner-bottom-grids">
 				<div class="col-md-4 weekend-grids">
 					<div class="weekend-grid">
 						<a href="#">
-							<img src="{{ asset(hebergement.image) }}" height="300px" width="500" alt="">
+							<img src="{{ asset('uploads/' ~ hebergement.image ) }}" height="300px" width="500" alt="">
 
 							<div class="deals-info-grid">
 								<div class="deals-grids">
@@ -50,5 +50,6 @@
     
 
 {% endfor %}
+{{  knp_pagination_render(hebergements) }}
     
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use App\Repository\ReservationRepository;
 use App\Form\ReservationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,23 +12,80 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
+
+
+    
     /**
      * @Route("/", name="app_reservation_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $reservations = $entityManager
+       /* $reservations = $entityManager
             ->getRepository(Reservation::class)
-            ->findAll();
+            //->orderbyprix();
+            ->findAll();*/
+          
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
+            
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
+            
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findAll();
+            
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
         ]);
+    }
+
+
+    
+    /**
+     * @Route("/trial", name="trial", methods={"GET", "POST"})
+     */
+    public function try(EntityManagerInterface $entityManager): Response
+    {
+       /* $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            //->orderbyprix();
+            ->findAll();*/
+          
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
+            
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
+            
+            $reservations =   intval($this->getDoctrine()->getRepository(Reservation::class)->expensive());
+            $reservations1 =  intval( $this->getDoctrine()->getRepository(Reservation::class)->cheap());
+
+            $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+            [['Categories', 'Nbre Réservations'],
+                ['Cheap', $reservations ],
+                ['Expensive',  $reservations1]
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Reponse');
+            $pieChart->getOptions()->setHeight(500);
+            $pieChart->getOptions()->setWidth(900);
+            $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+            $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+            $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+            $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+            $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+
+            
+
+        return $this->render('reservation/exp.html.twig', [
+            'reservations' => $reservations,
+            'reservations1' => $reservations1,
+            'piechart' => $pieChart ]);
     }
 
     /**
@@ -123,5 +182,6 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    
     
 }

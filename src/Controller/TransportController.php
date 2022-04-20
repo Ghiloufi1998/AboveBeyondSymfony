@@ -39,6 +39,10 @@ class TransportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get('image')->getData();
+            $fileName=(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+            $transport->setImage($fileName);
             $entityManager->persist($transport);
             $entityManager->flush();
 
@@ -50,6 +54,8 @@ class TransportController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+   
 
     /**
      * @Route("/{transportId}", name="app_transport_show", methods={"GET"})
@@ -70,6 +76,10 @@ class TransportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get('image')->getData();
+            $fileName=(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+            $transport->setImage($fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_transport_index', [], Response::HTTP_SEE_OTHER);

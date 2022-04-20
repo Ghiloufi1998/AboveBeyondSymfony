@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; 
 
@@ -10,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Reservation
  *
  * @ORM\Table(name="reservation", indexes={@ORM\Index(name="PK_vol", columns={"vol_ID"}), @ORM\Index(name="PK_heb", columns={"Hebergement_id"}), @ORM\Index(name="Fk", columns={"ID_user"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ReservationRepository::class)
  */
 class Reservation
 {

@@ -6,6 +6,8 @@ use App\Entity\Hebergement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class HebergementType extends AbstractType
 {
@@ -16,7 +18,7 @@ class HebergementType extends AbstractType
             ->add('type')
             ->add('disponibilite')
             ->add('adresse')
-            ->add('image')
+            ->add('image',FileType::class,array('data_class'=>null,'required'=>false))
             ->add('prix')
         ;
     }

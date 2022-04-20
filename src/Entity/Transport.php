@@ -26,6 +26,11 @@ class Transport
     /**
      * @Assert\NotBlank(message="Champ type vide ! ")
      * @var string
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez saisir une chaine pas d'entiers"
+     * )
      * Assert\Length(
      *      min = 3,
      *      max = 12,
@@ -40,12 +45,11 @@ class Transport
     /**
      * @Assert\NotBlank(message="Champ description vide ! ")
      * @var string
-     *  Assert\Length(
-     *      min = 5,
-     *      max = 50,
-     *   minMessage = "min error ",
-     *   maxMessage = "max error "
-     *   )
+     *@ Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez saisir une chaine pas d'entiers"
+     * )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
      */

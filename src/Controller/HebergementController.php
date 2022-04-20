@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 /**
  * @Route("/hebergement")
@@ -32,11 +34,20 @@ class HebergementController extends AbstractController
     /**
      * @Route("/hotels", name="hotels", methods={"GET"})
      */
-    public function hotels(EntityManagerInterface $entityManager): Response
+    public function hotels(EntityManagerInterface $entityManager,Request $request, PaginatorInterface $paginator): Response
     {
         $hebergements = $entityManager
             ->getRepository(Hebergement::class)
             ->findAll();
+
+        $hebergements = $paginator->paginate(
+                $hebergements,
+    
+                $request->query->getInt('page', 1),
+                3
+                // Items per page
+    
+            );    
 
         return $this->render('hebergement/afficher.html.twig', [
             'hebergements' => $hebergements,
@@ -53,6 +64,10 @@ class HebergementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get('image')->getData();
+            $fileName=(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+            $hebergement->setImage($fileName);
             $entityManager->persist($hebergement);
             $entityManager->flush();
 
@@ -94,6 +109,11 @@ class HebergementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get('image')->getData();
+            $fileName=(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+            $hebergement->setImage($fileName);
+            
             $entityManager->flush();
 
             return $this->redirectToRoute('app_hebergement_index', [], Response::HTTP_SEE_OTHER);
