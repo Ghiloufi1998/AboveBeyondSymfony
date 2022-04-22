@@ -55,11 +55,29 @@ class ReservationRepository extends ServiceEntityRepository
     }
     */
 
+    public function avg(){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select AVG(v.prix) from App\Entity\Reservation r, App\Entity\Vol v where v.volId = r.vol  ');
+        return $query->getSingleScalarResult();   
+     }
+
+
+
+
+//sort by multi 
 
     
-    public function findByDestination($x){
+    public function indiv(){
         $em=$this->getEntityManager();
-        $query=$em->createQuery('select r from App\Entity\Reservation r  ');
+        $query=$em->createQuery('select r from App\Entity\Reservation r where r.type= ?1  ')
+        ->setParameter(1,'Individuelle');
+        return $query->getResult();
+    }
+
+    public function voyage(){
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select r from App\Entity\Reservation r where r.type= ?1  ')
+        ->setParameter(1,'Voyage Organisé');
         return $query->getResult();
     }
 public function orderbyprix(){
@@ -83,20 +101,34 @@ public function orderbyprix(){
          ->setParameter(1,$q->getResult());
         return $query->getResult();
     }
-
-    public function cheap()
+    public function heber()
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT COUNT(r) FROM App\Entity\Reservation r, App\Entity\Vol v WHERE v.volId = r.vol and v.prix<300 
-        ');
+        $q=$em->createQuery(' SELECT COUNT(r1.hebergement) FROM App\Entity\Reservation r1 GROUP BY r1.hebergement ORDER BY COUNT(r1.hebergement) DESC ')
+        ->setMaxResults(1);
+         $query = $em->createQuery('SELECT COUNT(r.hebergement) nbrh, h.description BestHebergement FROM App\Entity\Reservation r,App\Entity\Hebergement h WHERE r.hebergement=h.hebergementId GROUP by r.hebergement HAVING COUNT(r.hebergement) = ?1')
+         ->setParameter(1,$q->getResult());
+        return $query->getResult();
+    }
+
+
+
+
+
+
+    public function cheap($x)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT COUNT(r) FROM App\Entity\Reservation r, App\Entity\Vol v WHERE v.volId = r.vol and v.prix<?1 
+        ')->setParameter(1,$x);
         return $query->getSingleScalarResult();
     }   
 
-    public function expensive()
+    public function expensive($x)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT COUNT(r)  FROM App\Entity\Reservation r, App\Entity\Vol v WHERE v.volId = r.vol and v.prix>300 
-        ');
+        $query = $em->createQuery('SELECT COUNT(r)  FROM App\Entity\Reservation r, App\Entity\Vol v WHERE v.volId = r.vol and v.prix>?1 
+        ')->setParameter(1,$x);
         return $query->getSingleScalarResult();
     }   
 

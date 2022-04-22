@@ -47,6 +47,18 @@
                 <th>Vol</th>
                 <td>{{ reservation.vol }}</td>
             </tr>
+            <tr>
+                <th>Qr</th>
+                 {% if qrCode %}
+                    <td><img src="{{ asset('assets/' ~ qrCode ) }}" alt="qr-code"></td>
+                    
+                {% endif %}
+            </tr>
+
+           
+                
+                
+                
         </tbody>
     </table>
 

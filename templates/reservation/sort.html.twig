@@ -6,9 +6,7 @@
 <div class="body">  
 <div class="tab">
 <div class="tab-header" > <h1> Reservation index </h1>    <p class="create"> <a href="{{ path('app_reservation_new') }}">Create new</a> </p>  </div>
-<div class="sort"> <a href="{{ path('sorted') }}">Trier par prix vol</a> </div>
-<div class="sort"> <a href="{{ path('indiv') }}">Indiv </a> </div>
-<div class="sort"> <a href="{{ path('voy') }}">Voyage org </a> </div>
+<div class="sort"> <a href="{{ path('app_reservation_index') }}"> Index </a> </div>
     <table class="table">
         <thead>
             <tr>
@@ -21,6 +19,7 @@
                 <th>Destination</th>
                 <th>Hebergement</th>
                 <th>Vol</th>
+                <th>Prix</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -36,6 +35,7 @@
                 <td>{{ reservation.destination }}</td>
                 <td>{{ reservation.hebergement }}</td>
                 <td>{{ reservation.vol }}</td>
+                <td>{{ reservation.vol.prix ~ '.00 Dt' }}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'revId': reservation.revId}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'revId': reservation.revId}) }}">edit</a>

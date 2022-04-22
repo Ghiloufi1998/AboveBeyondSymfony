@@ -28,6 +28,7 @@ class Reservation
      * @Assert\NotBlank(message="Vérifier la date! ")
      * @var \DateTime
      * @Assert\Expression("this.getDateDeb() < this.getDateFin()",message="Date début ne doit pas être dépassée la date fin")
+     * @Assert\GreaterThan ("today",message="Vérifier la date!")
      *
      * @ORM\Column(name="Date_Deb", type="date", nullable=false)
      */
@@ -37,6 +38,7 @@ class Reservation
      * @Assert\NotBlank(message="Vérifier la date! ")
      * @var \DateTime
      * @Assert\Expression("this.getDateFin() > this.getDateDeb()",message="Date fin ne doit pas être antérieur à la date debut")
+     * @Assert\GreaterThan ("today",message="Vérifier la date!")
      *
      * @ORM\Column(name="Date_Fin", type="date", nullable=false)
      */
@@ -275,5 +277,9 @@ class Reservation
 
             return $this;
         }
+
+        public function __toString() {
+            return 'Type:   '.$this->type.'   Destination :  '.$this->destination.'  Adultes:  '.$this->nbrAdultes.'  Enfants : '.$this->nbrEnfants.'  Hebergement : '.$this->hebergement->getDescription()
+            .' Date_Fin: '.$this->dateFin->format('Y-m-d H:i:s').' Date_Deb:  '.$this->dateDeb->format('Y-m-d H:i:s');}
        
 }

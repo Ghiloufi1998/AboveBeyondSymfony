@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Services\QrcodeService;
+
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/reservation")
@@ -43,12 +46,60 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/sort", name="sorted", methods={"GET"})
+     */
+    public function sort(EntityManagerInterface $entityManager): Response
+    {
+       /* $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            //->orderbyprix();
+            ->findAll();*/
+          
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
+            
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
+            
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findAll();
+            
+
+        return $this->render('reservation/sort.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
+
+    /**
+     * @Route("/indiv", name="indiv", methods={"GET"})
+     */
+    public function indiv(EntityManagerInterface $entityManager): Response
+    {
+       
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->indiv();
+        return $this->render('reservation/index.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
+
+    /**
+     * @Route("/voy", name="voy", methods={"GET"})
+     */
+    public function voy(EntityManagerInterface $entityManager): Response
+    {
+       
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->voyage();
+        return $this->render('reservation/index.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
+
+    
+
 
     
     /**
      * @Route("/trial", name="trial", methods={"GET", "POST"})
      */
-    public function try(EntityManagerInterface $entityManager): Response
+    public function try(EntityManagerInterface $entityManager, QrcodeService $qrcodeService): Response
     {
        /* $reservations = $entityManager
             ->getRepository(Reservation::class)
@@ -58,9 +109,10 @@ class ReservationController extends AbstractController
             //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
             
             //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
-            
-            $reservations =   intval($this->getDoctrine()->getRepository(Reservation::class)->expensive());
-            $reservations1 =  intval( $this->getDoctrine()->getRepository(Reservation::class)->cheap());
+            $avg = $this->getDoctrine()->getRepository(Reservation::class)->avg();
+            $reservations =   intval($this->getDoctrine()->getRepository(Reservation::class)->expensive($avg));
+            $reservations1 =  intval( $this->getDoctrine()->getRepository(Reservation::class)->cheap($avg));
+            //$dest = $this->getDoctrine()->getRepository(Reservation::class)->dest();
 
             $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
@@ -79,14 +131,45 @@ class ReservationController extends AbstractController
             $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
 
 
-
             
+            $heb = $this->getDoctrine()->getRepository(Reservation::class)->heber();
+            $dest = $this->getDoctrine()->getRepository(Reservation::class)->dest();
+
+           
+
+
 
         return $this->render('reservation/exp.html.twig', [
             'reservations' => $reservations,
             'reservations1' => $reservations1,
+            'heb' => $heb,
+            'dest' => $dest,
             'piechart' => $pieChart ]);
     }
+
+
+    /**
+     * @Route("/oo", name="oo", methods={"GET", "POST"})
+     */
+    public function oo(EntityManagerInterface $entityManager): Response
+    {
+       
+        $heb = $this->getDoctrine()->getRepository(Reservation::class)->heber();
+        $dest = $this->getDoctrine()->getRepository(Reservation::class)->dest();
+        $avg = $this->getDoctrine()->getRepository(Reservation::class)->avg();
+
+            $dateFormat = new DateTime();
+
+          
+
+        return $this->render('reservation/oo.html.twig', [
+            
+            'dest' => $dest ,
+            'avg' => $avg ,
+            'heb' => $heb ,
+            'date'=> $dateFormat]);
+    }
+
 
     /**
      * @Route("/new", name="app_reservation_new", methods={"GET", "POST"})
@@ -103,6 +186,7 @@ class ReservationController extends AbstractController
             $reservation->setDestination($form["vol"]->getData());
             $entityManager->persist($reservation);
             $entityManager->flush();
+            
 
             return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -117,7 +201,7 @@ class ReservationController extends AbstractController
     /**
      * @Route("/reserver", name="reserv_indiv", methods={"GET", "POST"})
      */
-    public function reserver(Request $request, EntityManagerInterface $entityManager): Response
+    public function reserver(Request $request, EntityManagerInterface $entityManager, QrcodeService $qrcodeService): Response
     {
         $reservation = new Reservation();
         $reservation->settype('Individuelle');
@@ -129,12 +213,15 @@ class ReservationController extends AbstractController
             $reservation->setDestination($form["vol"]->getData());
             $entityManager->persist($reservation);
             $entityManager->flush();
+           
+           
 
             return $this->redirectToRoute('reserv_indiv', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reservation/reserver.html.twig', [
             'reservation' => $reservation,
+            
             'form' => $form->createView(),
         ]);
     }
@@ -142,10 +229,13 @@ class ReservationController extends AbstractController
     /**
      * @Route("/{revId}", name="app_reservation_show", methods={"GET"})
      */
-    public function show(Reservation $reservation): Response
+    public function show(Reservation $reservation, QrcodeService $qrcodeService): Response
     {
+        $qrCode = null;
+        $qrCode = $qrcodeService->qrcode('iheb',$reservation);
         return $this->render('reservation/show.html.twig', [
             'reservation' => $reservation,
+            'qrCode' => $qrCode,
         ]);
     }
 

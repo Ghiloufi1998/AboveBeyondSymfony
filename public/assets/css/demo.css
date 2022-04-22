@@ -264,6 +264,14 @@ html{
   justify-content: center;
   padding-top: 15px;
 }
+.sort{
+  
+  
+  padding-bottom: 20px;
+  margin-left: 93%;
+
+
+}
 .body{
   width:100%;
   padding-bottom: 20px;
@@ -321,7 +329,19 @@ textarea{
   width: 100%;
 }
 
-#div_chart{
+.stats{
+  background-color: #3369ff;
  
+  
+ 
+
+}
+
+.indiv{
+  
+  
+  padding-bottom: 20px;
+  margin-left: 70%;
+
 
 }
