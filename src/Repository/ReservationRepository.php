@@ -111,7 +111,13 @@ public function orderbyprix(){
         return $query->getResult();
     }
 
-
+//total prix 
+public function tot()
+{
+    $em = $this->getEntityManager();
+    $query=$em->createQuery(' SELECT SUM(h.prix+v.prix)  from App\Entity\Reservation r,App\Entity\Vol v,App\Entity\Hebergement h where v.volId = r.vol and r.hebergement = h.hebergementId ');
+    return $query->getSingleScalarResult(); 
+}
 
 
 

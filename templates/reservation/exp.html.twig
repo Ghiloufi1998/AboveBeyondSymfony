@@ -16,33 +16,104 @@
         </script>
         {% endif %}
 
-        <div class="stats">
+         <div class="body-form1" >
+    <div  class="form1">
  {% for dest in dest %}
+ {% for heb in heb %}   
             <tr>
              
-             Nbre_d <input type="text " value="{{ dest.Destnbr }}" disabled >
-             Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled >
+             Nbre_d <input type="text " value="{{ dest.Destnbr|number_format }}" disabled id='4' >
+             Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled id='5' >
                  
             </tr>
-        {% endfor %}
+        
 
-        {% for heb in heb %}
+        
             <tr>
              
-             Nbre_h <input type="text " value="{{ heb.nbrh }}" disabled >
-             Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled >
+             Nbre_h <input type="text " value="{{ heb.nbrh|number_format }}" disabled id='1' >
+             Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled id="2" >
+
+
+             Prix moyen de réservation <input type="text " value="{{ avg }}" disabled id='6' >
+             Nbre expensive  <input type="text " value="{{ reservations }}" disabled id="7" >
+              Nbre cheap  <input type="text " value="{{ reservations1}}" disabled id="8" >
+              Total revenue  <input type="text " value="{{ tot }}" disabled id="9" >          
+             
                  
             </tr>
-        {% endfor %}
+
+       
    
 </div>
 
         
+</div> </div> </div> 
+
+<canvas id='myChart'></canvas>
+
+ in the div
+
+</div>
+
+<div class="graphe">
+                    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+
+                    <script>
+                    var ctx = document.getElementById('myChart');
+                    var n = document.getElementById('1').value;
+                    var h = document.getElementById('2').value;
+                    var d = document.getElementById('5').value;
+                    var nd = document.getElementById('4').value;
+
+                    var avg = document.getElementById('6').value;
+                    var e = document.getElementById('7').value;
+                    var c = document.getElementById('8').value;
+                  
+
+                    
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [h,d,'Avg Prix','Nbre exp','Nbre cheap'],
+                                datasets: [{
+                                    label: 'Nombre de réservations / Dinars',
+                                    data: [ n, nd, avg, e, c ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    </script>
 </div>
 
 
        
-
+        {% endfor %}
+        {% endfor %}
                 
 {% endblock %}
    

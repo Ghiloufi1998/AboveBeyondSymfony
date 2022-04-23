@@ -331,6 +331,7 @@ textarea{
 
 .stats{
   background-color: #3369ff;
+  margin-top: 500px;
  
   
  
@@ -345,3 +346,34 @@ textarea{
 
 
 }
+
+.graphe{
+
+  margin-top: 500px;
+}
+
+.form1 {
+  background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 500px;
+	max-width: 100%;
+  padding: 30px 40px;
+
+}
+.body-form1 {
+
+  background-color:rgba(67, 89, 113, 0);;
+	font-family: 'Open Sans', sans-serif;
+	display: flex;
+	
+	min-height: 50vh;
+	margin: 0;
+  width: 100%;
+  padding: 1000px 100px;	
+  z-index: 1000;
+
+
+
+  }

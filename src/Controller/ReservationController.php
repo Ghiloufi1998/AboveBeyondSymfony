@@ -113,6 +113,8 @@ class ReservationController extends AbstractController
             $reservations =   intval($this->getDoctrine()->getRepository(Reservation::class)->expensive($avg));
             $reservations1 =  intval( $this->getDoctrine()->getRepository(Reservation::class)->cheap($avg));
             //$dest = $this->getDoctrine()->getRepository(Reservation::class)->dest();
+            $tot = $this->getDoctrine()->getRepository(Reservation::class)->tot();
+            $sa=$tot/12;
 
             $pieChart = new PieChart();
         $pieChart->getData()->setArrayToDataTable(
@@ -144,6 +146,9 @@ class ReservationController extends AbstractController
             'reservations1' => $reservations1,
             'heb' => $heb,
             'dest' => $dest,
+            'avg' => $avg,
+            'tot' => $tot,
+            'sa' => $sa,
             'piechart' => $pieChart ]);
     }
 
@@ -157,6 +162,9 @@ class ReservationController extends AbstractController
         $heb = $this->getDoctrine()->getRepository(Reservation::class)->heber();
         $dest = $this->getDoctrine()->getRepository(Reservation::class)->dest();
         $avg = $this->getDoctrine()->getRepository(Reservation::class)->avg();
+        $tot = $this->getDoctrine()->getRepository(Reservation::class)->tot();
+        $sa=$tot/12;
+
 
             $dateFormat = new DateTime();
 
@@ -167,7 +175,23 @@ class ReservationController extends AbstractController
             'dest' => $dest ,
             'avg' => $avg ,
             'heb' => $heb ,
+            'tot' => $tot,
+            'sa' => $sa,
             'date'=> $dateFormat]);
+    }
+
+    /**
+     * @Route("/aff", name="aff", methods={"GET", "POST"})
+     */
+    public function aff(EntityManagerInterface $entityManager): Response
+    {
+       
+        
+          
+
+        return $this->render('reservation/iheb.html.twig', [
+            
+            ]);
     }
 
 
