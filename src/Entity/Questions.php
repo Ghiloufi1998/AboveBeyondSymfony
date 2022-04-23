@@ -63,6 +63,17 @@ class Questions
      */
     private $sondage;
 
+     /**
+      * @var \Doctrine\Common\Collections\ArrayCollection $reponse
+     * @ORM\OneToMany(targetEntity="Reponses", mappedBy="questions", orphanRemoval=true)
+     */
+    private $reponse;
+
+    public function __construct()
+    {
+        $this->reponse = new ArrayCollection();
+    }
+
     public function getQuestionId(): ?int
     {
         return $this->questionId;
@@ -105,6 +116,28 @@ class Questions
     }
     public function __toString() {
         return $this->question;}
+
+
+        
+/**
+ *  @return \Doctrine\Common\Collections\ArrayCollection
+ */
+    public function getReponses(): Collection
+    {
+        return $this->reponse;
+    }
+
+    public function addReponse(Reponses $reponse): self
+    {
+        if (!$this->Reponses->contains($reponse)) {
+            $this->Reponses[] = $reponse;
+            $reponse->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+
 
 
 

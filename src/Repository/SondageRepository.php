@@ -42,12 +42,25 @@ class SondageRepository extends ServiceEntityRepository
     
     public function findOneBySomeField($value): ?Sondage
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        return $this->createQueryBuilder('nbr')
+        -> join ('nbr.Question','c')
+        ->addSelect ('c')
+        ->andWhere('c.sondageId = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getArrayResult()
+    ;
         ;
     }
+
+    public function findByNbrRep():?sondage
+    {
+        $entityManager=$this->getEntityManager();
+        $query=$entityManager
+            ->createQuery("SELECT count(nbr) FROM APP\Entity\sondage and APP\Entity\Questions and APP\Entity\Reponses WHERE réponses.Question_id=questions.Question_id and questions.sondage_id=sondage.sondage_id GROUP BY sondage.sujet")
+          ;
+        return $query->getResult();
+    }
+
     
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Questions;
 use App\Form\QuestionsType;
 use App\Repository\QuestionsRepository;
+use App\Repository\ReponsesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,6 +96,8 @@ class QuestionsController extends AbstractController
         return $this->redirectToRoute('app_questions_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    
+
       /**
      * @Route("/display/{sondageId}" , name="app_sondage_display")
      */
@@ -109,4 +112,6 @@ class QuestionsController extends AbstractController
             
         ]);
     }
+
+   
 }

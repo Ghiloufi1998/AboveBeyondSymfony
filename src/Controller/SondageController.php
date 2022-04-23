@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Sondage;
+use App\Entity\Questions;
 use App\Entity\Reponses;
 use App\Form\SondageType;
 use App\Repository\SondageRepository;
+use App\Repository\ReponsesRepository;
+use App\Repository\QuestionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +50,41 @@ class SondageController extends AbstractController
         ]);
     }
 
+    
+     /**
+     * @Route("/stat", name="app_sondage_stat")
+     */
+    public function statistique(SondageRepository $repo, ReponsesRepository $rep): Response
+    {
+        $sondages = $repo->findAll();
+        foreach($sondages as $sondage){
+        $sondNom[]= $sondage->getSujet();
+        $question[]=$sondage->getQuestion();
+       // dd($question);
+        // dd($sondNom);
+
+         foreach($sondage->getQuestion() as $qst){
+            $qstId=$qst->getQuestionId();
+            $reponse=$rep->findByQstId($qstId);
+            $repCount[]=count($reponse);
+        
+     } 
+        $nbrQst[]=count($sondage->getQuestion());
+       // $nbrRep[]=($repCount/$nbrQst);
+     }
+        
+         
+      return $this->render('reponses/showRepStat.html.twig',[
+          'sondNom'=> json_encode($sondNom),
+          'repCount'=> json_encode($repCount),
+          'sondages' => $sondages
+      ]);
+    }  
+
+    
+    
+
+
 
     /**
      * @Route("/new", name="app_sondage_new", methods={"GET", "POST"})
@@ -69,6 +107,10 @@ class SondageController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
+     
+
 
     /**
      * @Route("/{sondageId}", name="app_sondage_show", methods={"GET"})
@@ -113,8 +155,75 @@ class SondageController extends AbstractController
         return $this->redirectToRoute('app_sondage_index', [], Response::HTTP_SEE_OTHER);
     }
 
+     /**
+     * @Route("/stat/{sondageId}/{questionId}", defaults={"questionId" = 0 },name="app_reponses_stat")
+     */
+    public function repStatic (SondageRepository $srepo,QuestionsRepository $repo, ReponsesRepository $rep, $sondageId,$questionId): Response
+    {
+        $questions = $repo->findById($sondageId);
+        $sondage=$srepo->find($sondageId);
+        if ($questionId===0){
+            return $this->render('reponses/showReponse.html.twig', [
+                'questions' => $questions,
+                'questionId'=>$questionId
+            ]);
+          
+                   }else{
+                    $qst=$repo->find($questionId);
+        
+                    //   dd($qst);
+                      
+                      $type=$qst->getType();
+                      $question=$qst->getQuestion();
+                       if ($type === "YES/NO"){
+                          
+                           $nbrYes=count($rep->findByYes($questionId));
+                           $nbrNon=count($rep->findByNo($questionId));
+                           return $this->render('reponses/showReponse.html.twig', [
+                            'questions' => $questions,
+                            'nbrYes' =>json_encode($nbrYes),
+                            'nbrNon' =>json_encode($nbrNon),
+                            'question'=>json_encode($question),
+                            'questionId'=>$questionId,
+                            'type'=>$type
+                        ]);
 
-/**
+                        }else if ($type === "Text"){
+                            $repText[]= $rep->findByText($questionId);
+                            return $this->render('reponses/showReponse.html.twig', [
+                                'questions' => $questions,
+                                'repText'=>$repText,
+                                'question'=>$question,
+                                'questionId'=>$questionId,
+                                'type'=>$type
+                            ]);
+                   }else if ($type === "Rate"){
+                    $star1=count($rep->findByStar1($questionId));
+                    $star2=count($rep->findByStar2($questionId));
+                    $star3=count($rep->findByStar3($questionId));
+                    $star4=count($rep->findByStar4($questionId));
+                    $star5=count($rep->findByStar5($questionId));
+                    return $this->render('reponses/showReponse.html.twig', [
+                        'questions' => $questions,
+                        'star1'=>json_encode($star1),
+                        'star2'=>json_encode($star2),
+                        'star3'=>json_encode($star3),
+                        'star4'=>json_encode($star4),
+                        'star5'=>json_encode($star5),
+                        'question'=>json_encode($question),
+                        'questionId'=>$questionId,
+                        'type'=>$type
+                    ]);
+           
+                   }
+        }
+       
+        //dd($data);
+    
+    }
+
+
+     /**
      * @Route("/{sondageId}/showsurvey", name="app_sondage_showsurvey", methods={"GET","POST"})
      */
     public function showAction($sondageId,Request $request)
@@ -194,9 +303,6 @@ class SondageController extends AbstractController
                
             }
             
-           /* $reponse=new Reponses( $dataRep,$entity->getQuestion());
-            $em->persist($reponse);
-                    $em->flush();*/
             return $this->redirectToRoute('app_sondage_user', [], Response::HTTP_SEE_OTHER);
 
         }

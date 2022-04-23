@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Reponses;
 use App\Form\ReponsesType;
+use App\Repository\ReponsesRepository;
+use App\Repository\QuestionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +29,18 @@ class ReponsesController extends AbstractController
         return $this->render('reponses/index.html.twig', [
             'reponses' => $reponses,
         ]);
+    }
+     /**
+     * @Route("/statt", name="app_reponses_stat", methods={"GET"})
+     */
+   public function statistique(ReponsesRepository $repo): Response
+    {
+           $reponses = $repo->findAll();
+           foreach($reponses as $reponse){
+           $sondNom[]= $reponse->getQuestion()->getSondage()->getSujet();
+           $question[]=$reponse->getQuestion();
+           dd($reponse);}
+
     }
 
 
@@ -52,6 +66,9 @@ class ReponsesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
+    
 
     /**
      * @Route("/{reponsesId}", name="app_reponses_show", methods={"GET"})
@@ -95,4 +112,5 @@ class ReponsesController extends AbstractController
 
         return $this->redirectToRoute('app_reponses_index', [], Response::HTTP_SEE_OTHER);
     }
+  
 }
