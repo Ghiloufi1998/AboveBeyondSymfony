@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twilio\Rest\Client;
 
 use App\Services\QrcodeService;
 
@@ -242,11 +243,42 @@ class ReservationController extends AbstractController
 
             return $this->redirectToRoute('reserv_indiv', [], Response::HTTP_SEE_OTHER);
         }
+        
 
         return $this->render('reservation/reserver.html.twig', [
             'reservation' => $reservation,
             
             'form' => $form->createView(),
+            
+        ]);
+    }
+
+    
+    /**
+     * @Route("/sms/{revId}", name="sms", methods={"GET"})
+     */
+    public function sms(Reservation $reservation, QrcodeService $qrcodeService): Response
+    {
+        $qrCode = null;
+        $qrCode = $qrcodeService->qrcode('iheb',$reservation);
+
+
+            $sid    = "AC3ea871badadca7b42b05c6fea7f9ae84"; 
+            $token  = "192f0d827eced01bf4061c5390f6d46c"; 
+            $twilio = new Client($sid, $token); 
+            
+            $message = $twilio->messages 
+                            ->create("+21650480316", // to 
+                                    array(  
+                                        "messagingServiceSid" => "MG87f9e03c88406cbd61c654d2db8eab04",      
+                                        "body" => "Voici votre Réservation:  ".$reservation
+                                    ) 
+                            ); 
+            
+            print($message->sid);
+        return $this->render('reservation/show.html.twig', [
+            'reservation' => $reservation,
+            'qrCode' => $qrCode,
         ]);
     }
 

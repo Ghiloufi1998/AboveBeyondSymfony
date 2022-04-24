@@ -55,7 +55,7 @@
                 {% endif %}
             </tr>
 
-           
+          
                 
                 
                 
@@ -64,10 +64,11 @@
 
    <div class="buttons">
     <a class ="bton" href="{{ path('app_reservation_edit', {'revId': reservation.revId}) }}">edit</a>
+    <a class ="bton" href="{{ path('sms', {'revId': reservation.revId}) }}">sms</a>
 
     {{ include('reservation/_delete_form.html.twig') }}
     </div>
 
-    </div>
+    </div> 
     </div>
 {% endblock %}
