@@ -1,62 +1,48 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="body-form" >
-    
 
-        <div id="div_chart"></div>
-       
-           
-                {% if piechart is defined %}
-                    <script type="text/javascript" src="{{ asset('https://www.gstatic.com/charts/loader.js') }}"></script>
-                    <script type="text/javascript">
-                        
-                    {{ gc_draw(piechart, 'div_chart') }}
+
+
+<div class="container">
+<div class="container1" >
+    
+    <div  class="form1">
+    {% for dest in dest %}
+    {% for heb in heb %}   
+                <tr>
+                
+                Nbre_d <input type="text " value="{{ dest.Destnbr|number_format }}" disabled id='4' >
+                Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled id='5' >
+                    
+                </tr>
+            
 
             
-        </script>
-        {% endif %}
+                <tr>
+                
+                Nbre_h <input type="text " value="{{ heb.nbrh|number_format }}" disabled id='1' >
+                Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled id="2" >
 
-         <div class="body-form1" >
-    <div  class="form1">
- {% for dest in dest %}
- {% for heb in heb %}   
-            <tr>
-             
-             Nbre_d <input type="text " value="{{ dest.Destnbr|number_format }}" disabled id='4' >
-             Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled id='5' >
-                 
-            </tr>
+
+                Prix moyen de réservation <input type="text " value="{{ avg }}" disabled id='6' >
+                Nbre expensive  <input type="text " value="{{ reservations }}" disabled id="7" >
+                Nbre cheap  <input type="text " value="{{ reservations1}}" disabled id="8" >
+                Total revenue  <input type="text " value="{{ tot ~'.000 Dt' }}" disabled id="9" >          
+                
+                    
+                </tr>
+    {% endfor %}
+    {% endfor %}
         
-
-        
-            <tr>
-             
-             Nbre_h <input type="text " value="{{ heb.nbrh|number_format }}" disabled id='1' >
-             Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled id="2" >
-
-
-             Prix moyen de réservation <input type="text " value="{{ avg }}" disabled id='6' >
-             Nbre expensive  <input type="text " value="{{ reservations }}" disabled id="7" >
-              Nbre cheap  <input type="text " value="{{ reservations1}}" disabled id="8" >
-              Total revenue  <input type="text " value="{{ tot ~'.000 Dt' }}" disabled id="9" >          
-             
-                 
-            </tr>
-
-       
-   
-</div>
+    
+    </div>
 
         
-</div> </div> </div> 
+  
+    <div class="graphe">
 
-<canvas id='myChart'></canvas>
+            <canvas class="chart" id='myChart'></canvas>
 
- in the div
-
-</div>
-
-<div class="graphe">
                     <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
 
                     <script>
@@ -108,12 +94,28 @@
                     });
 
                     </script>
-</div>
+    </div>
 
+</div> 
 
+<div >
+<div class="pie" id="div_chart"></div>
        
-        {% endfor %}
-        {% endfor %}
+           
+                {% if piechart is defined %}
+                    <script type="text/javascript" src="{{ asset('https://www.gstatic.com/charts/loader.js') }}"></script>
+                    <script type="text/javascript">
+                        
+                    {{ gc_draw(piechart, 'div_chart') }}
+
+            
+        </script>
+        {% endif %}
+
+</div>
+</div>
+       
+        
                 
 {% endblock %}
    
