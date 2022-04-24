@@ -97,6 +97,7 @@
                 <td><small>{{ sondage.categorie }}</small></td>
                 <td>
                     <a href="{{ path('app_reponses_stat', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary btn-sm"><small>Details</small></button></a>
+                    <a href="{{path('app_sondage_excel', {'sondageId':sondage.sondageId}) }}"> <button type="button" class="btn btn-success btn-sm"><small>Export To Excel</small></button></a>
                     
                 </td>
             </tr>

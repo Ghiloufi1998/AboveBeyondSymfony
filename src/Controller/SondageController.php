@@ -17,6 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints as Assert; 
+use Gregwar\CaptchaBundle\Type\CaptchaType;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 
 /**
@@ -283,6 +287,8 @@ class SondageController extends AbstractController
 
                
              }
+
+             $builder->add('captcha', CaptchaType::class);
               
         
 
@@ -313,6 +319,32 @@ class SondageController extends AbstractController
         ));
     }
 
+     /**
+     * @Route("/excel/{sondageId}", name="app_sondage_excel")
+     */
 
+      public function exportToExcel($sondageId,SondageRepository $srepo,QuestionsRepository $repo, ReponsesRepository $rep ):Response
+      {
+        $spreadsheet = new Spreadsheet();
+        
+        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Hello World !');
+        $sheet->setTitle("My First Worksheet");
+        
+        // Create your Office 2007 Excel (XLSX Format)
+        $writer = new Xlsx($spreadsheet);
+        
+        // In this case, we want to write the file in the public directory
+       // $publicDirectory = $this->get('kernel')->getProjectDir() . '/public';
+        // e.g /var/www/project/public/my_first_excel_symfony4.xlsx
+        $excelFilepath =  'C:\Users\user\Desktop\my_first_excel_symfony4.xlsx';
+        
+        // Create the file
+        $writer->save($excelFilepath);
+        
+        // Return a text response to the browser saying that the excel was succesfully created
+        return new Response("Excel generated succesfully");
+      }
   
 }
