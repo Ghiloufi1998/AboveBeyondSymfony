@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Controller;
-
+use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\LoginType;
 use App\Repository\UserRepository;
 
-
+use App\Form\RecuperermotdepasseType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,21 +36,11 @@ class UsersController extends AbstractController
             'session'=>$session,
         ]);
     }
-     /**
-     * @Route("/a", name="a")
-     */
-    public function indexx(SessionInterface $session): Response
-    {
-        return $this->render('base.html.twig', [
-            'controller_name' => 'UsersController',
-            'session'=>$session,
-        ]);
-    }
 
     /**
      * @Route("/register", name="register")
      */
-    public function inscrit(Request $request )
+    public function inscrit(Request $request ,\Swift_Mailer $mailer)
     {
         $User = new User();
         $form=$this->createForm(UserType::Class,$User);
@@ -58,7 +48,6 @@ class UsersController extends AbstractController
 
         $form->handleRequest($request);
 
-        
        if ($form->isSubmitted()&& $form->isValid()){
            //$User=$form->getData();
            $file=$User->getImage();
@@ -68,14 +57,47 @@ class UsersController extends AbstractController
            $em=$this->getDoctrine()->getManager();
            $em->persist($User);
            $em->flush();
-          
+           $message = (new \Swift_Message('User'))
+                ->setFrom('taabaniagency@gmail.com')
+                ->setTo($User->getEmail())
+                ->setBody("Bienvenue à Tabaani Travel Agency");
+            $mailer->send($message) ;
            return $this->redirectToRoute('login');
         }
         return $this->render('users/register.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-    
+    /**
+     * @Route("/pdf", name="PDF", methods={"GET"})
+     */
+    public function pdf(UserRepository $UserRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('users/pdfusers.html.twig', [
+            'users' => $UserRepository->findAll(),
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
  /**
      * @Route("/listUser", name="listUser")
      */
@@ -107,7 +129,7 @@ class UsersController extends AbstractController
     $Users=$repository->findAll();
     $users = $paginator->paginate(
         $Users,
-        $request->query->getInt('page',1),
+        $request->query->getInt('page',1),4
        
     );
 
@@ -196,7 +218,38 @@ else{
 
     }
 
+/**
+     * @Route("/TrierParDate", name="TrierParDate")
+     */
+    public function TrierParDate(Request $request , PaginatorInterface $paginator): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $Users = $repository->findByDate();
+        $Users = $paginator->paginate(
+            $Users,
+            $request->query->getInt('page',1),4
+        );
+        return $this->render('users/listusers.html.twig', [
+            'Users' => $Users,
+        ]);
+    }
 
+    /**
+     * @Route("/TrierParDate2", name="TrierParDate2")
+     */
+    public function TrierParDate2(Request $request , PaginatorInterface $paginator): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $Users = $repository->findByDate2();
+        $Users = $paginator->paginate(
+            $Users,
+            $request->query->getInt('page',1),4
+        );
+        return $this->render('users/listusers.html.twig', [
+            'Users' => $Users,
+        ]);
+    }
+    
   /**
      * @Route("/login", name="login")
      */
@@ -208,6 +261,33 @@ else{
 
         $connexionform->add('Login',SubmitType::class);
         $connexionform->handleRequest($request);
+
+        $recupererform=$this->createForm(RecuperermotdepasseType::class, $userlogin);
+        $recupererform->add('Reset',SubmitType::class);
+        $recupererform->handleRequest($request);
+
+        if ($recupererform->isSubmitted() && $recupererform->isValid()){
+            $em=$this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->findOneBy(array('email'=>$userlogin->getEmail()));
+            if(is_null($user)){
+                return $this->redirectToRoute('login', [
+                    'form' => $connexionform->createView(),
+                ]);
+            }
+            else{
+                $message = (new \Swift_Message('User'))
+                ->setFrom('taabaniesprit@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody("votre mot de passe :".$user->getPassword());
+                    $mailer->send($message) ;
+
+                return $this->redirectToRoute('login', [
+                  
+                ]);
+            }
+
+        }
+
         if ($connexionform->isSubmitted() && $connexionform->isValid()){
             $em=$this->getDoctrine()->getManager();
             $user = $em->getRepository(User::class)->findOneBy(array('email'=>$userlogin->getEmail(),'password'=>$userlogin->getPassword()));
@@ -215,7 +295,7 @@ else{
             if(is_null($user)){
                 return $this->redirectToRoute('login', [
                     'form' => $connexionform->createView(),
-                   
+                    'formrec' => $recupererform->createView(),
                 ]);
             }
             else{
@@ -228,7 +308,7 @@ else{
         else{
             return $this->render('users/login.html.twig', [
                 'form' => $connexionform->createView(),
-               
+                'formrec' => $recupererform->createView(),
             ]);
         }
     }

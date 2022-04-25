@@ -14,7 +14,7 @@
         <form method="post" ><label>Chercher</label>
         <input type="text" name="AfficherClasse" onkeyup="myFunction()" placeholder="Nom (EX:DHIA) "  id="myInput" >
         </form >
-        
+        <br> </br>   
     <table class="table" id="mytable">
         <thead>
             <tr>
@@ -51,23 +51,24 @@
         {% else %}
             <tr>
                 <td colspan="9">no records found</td>
-            </tr>
+                 </tr> 
+    </tbody>
         {% endfor %}
         </tbody>
     </table>
 <script>
         function myFunction() {
-            var input, filter, table, tr, td, i,j, txtValue;
+            var input, filter, table, tr,tp, td, i,j, txtValue;
             input = document.getElementById("myInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("mytable");
             tr = table.getElementsByTagName("tr");
 //   alert(td.length);
             for (i = 0; i < tr.length; i++) {
-                td= tr[i].getElementsByTagName("td")[1];
-
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
+                td= tr[i].getElementsByTagName("td")[0];
+                tp= tr[i].getElementsByTagName("td")[1];
+                if ((td)||(tp)) {
+                    txtValue = td.textContent || td.innerText||tp.textContent || tp.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
                         tr[i].style.display = "";
                     } else {
@@ -76,10 +77,15 @@
                 }
             }
         }
+        
         </script>
         
     <a href="{{ path('admin_new') }}">Create new</a>
-    </div>
+   </table>   
+
+
+</div>
+</div>
 </div>
 </section>
 {% endblock %}

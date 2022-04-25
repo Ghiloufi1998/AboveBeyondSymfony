@@ -24,6 +24,7 @@ class ReclamationController extends AbstractController
      */
     public function reclamation(Request $request,SessionInterface $session,UserRepository $userRepository)
     {
+        
         $Reclamation = new Reclamation();
         $form=$this->createForm(ReclamationType::Class,$Reclamation);
         $form->add('Send', SubmitType::class);
@@ -31,7 +32,7 @@ class ReclamationController extends AbstractController
 
         $form->handleRequest($request);
 
-
+        $Reclamation->setDate( new \DateTime());
         $Reclamation->setUser($user);
        if ($form->isSubmitted()){
         $Reclamation = $form->getData();
