@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cours{% endblock %}
+{% block title %}Cours de Guide{% endblock %}
 
 {% block body %}
 <div class="body">  
     <div class="tab">
-    <div class="tab-header" > <h1> Reservation info </h1>    <p class="create"> <a href="{{ path('app_cours_index') }}" class="btn btn-primary"  style="margin-bottom:10px;     width: 100%;">Retour a la liste </a>
+   
  </p>  </div>
+ <div class="row">
+ {% for cour in cours %}
+
+  <div class="col-sm-3">
  <div class="card" style="width: 18rem;margin-left: 15px;">
   <img src="{{ asset('uploads/'~cour.image) }}" class="card-img-top" alt="...">
   <div class="card-body">
@@ -18,8 +22,11 @@
      {{ include('cours/_delete_form.html.twig') }}
   </div>
 </div>
+  </div>
+ {% endfor %}
      </div>
 
-    </div>
-    </div>
+   
+  
+   
 {% endblock %}

@@ -168,7 +168,4 @@ class Exercices
 
         return $this;
     }
-  
-
-
 }

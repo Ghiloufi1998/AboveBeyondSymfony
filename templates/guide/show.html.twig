@@ -1,39 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Guide{% endblock %}
+{% block title %}Guides{% endblock %}
+
+
 
 {% block body %}
 <div class="body">  
     <div class="tab">
-    <div class="tab-header" > <h1> Reservation info </h1>    <p class="create">  <a href="{{ path('app_exercices_index') }}">back to list</a>
+    <div class="tab-header" > <h1> Guide info </h1>    <p class="create"> <a href="{{ path('app_guide_index') }}" class="btn btn-primary"  style="margin-bottom:10px;     width: 100%;">Retour a la liste </a>
  </p>  </div>
-    <table class="table">
-        <tbody>
-          
-            <tr>
-                <th>Titre</th>
-                <td>{{ guide.titre }}</td>
-            </tr>
-            <tr>
-                <th>Pays</th>
-                <td>{{ guide.pays }}</td>
-            </tr>
-            <tr>
-                <th>Level</th>
-                <td>{{ guide.level }}</td>
-            </tr>
-             <tr>
-                <th>Image</th>
-                <td><img src="{{ asset('uploads/'~guide.image) }}"width="150"height="120"alt="" ></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_guide_index') }}">back to list</a>
-
-    <a href="{{ path('app_guide_edit', {'idG': guide.idG}) }}">edit</a>
-
-    {{ include('guide/_delete_form.html.twig') }}
+ <div class="card" style="width: 25rem;margin-left: 15px;">
+  <img src="{{ asset('uploads/'~guide.image) }}" class="card-img-top"  alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ guide.titre }}</h5>
+    <p class="card-text">Pays : {{ guide.pays }}</p>
+    <p class="card-text">Niveau : {{ guide.level }}</p>
+     <a href="{{ path('coursidg', {'idG': guide.idG}) }}" class="btn btn-primary"  style="margin-bottom:10px;width: 100%;">Afficher les Cours </a>
+    <a href="{{ path('app_guide_edit', {'idG': guide.idG}) }}" class="btn btn-success" style="margin-bottom:10px;width: 100%;">Modifier</a>
+     {{ include('guide/_delete_form.html.twig') }}
+  </div>
+</div>
      </div>
 
     </div>

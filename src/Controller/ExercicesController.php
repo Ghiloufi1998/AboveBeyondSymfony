@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/exercices")
@@ -71,16 +73,37 @@ class ExercicesController extends AbstractController
     /**
      * @Route("/consulter/exercices/{idCrs}", name="exercicebyidc", methods={"GET"})
      */
-    public function consulter(EntityManagerInterface $entityManager,$idCrs): Response
+    public function consulter(EntityManagerInterface $entityManager,$idCrs,SessionInterface $session): Response
     {
+       
+        $note=$session->get('note');
+      
+        
         $exercices = $entityManager
             ->getRepository(Exercices::class)
             ->findByIdCrs($idCrs);
 
         return $this->render('exercices/consulterbycours.html.twig', [
             'exercices' => $exercices,
+            'note' => $note
         ]);
     }
+     /**
+     * @Route("/showc/{idCrs}", name="exerciceidc", methods={"GET"})
+     */
+    public function consulterhe(EntityManagerInterface $entityManager,$idCrs): Response
+    {
+        
+        $exercices = $entityManager
+            ->getRepository(Exercices::class)
+            ->findByIdCrs($idCrs);
+
+        return $this->render('exercices/exercicesbyidc.html.twig', [
+            'exercices' => $exercices,
+            
+        ]);
+    }
+    
     /**
      * @Route("/take/{idEx}/take", name="exercicetake", methods={"GET", "POST"})
      */
@@ -143,7 +166,7 @@ class ExercicesController extends AbstractController
     /**
      * @Route("/take/{idEx}/take", name="exercicetake", methods={"GET", "POST"})
      */
-    public function showAction($idEx,Request $request,EntityManagerInterface $entityManager)
+    public function showAction($idEx,Request $request,EntityManagerInterface $entityManager,SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -178,40 +201,36 @@ class ExercicesController extends AbstractController
             ]);
         }
 
-               
-             
-              
-        
-
         $form = $builder->getForm();
         $form->handleRequest($request);
+        
+        $note=$session->get('note');
       
         if ($form->isSubmitted() && $form->isValid()) {
            
                 $data=$form->getData();
                 if ($data['Question'.$exercice->getIdEx()] === $exercice->getReponse()){
+                    $note2=$note+50;
+                    $session->set('note', $note2);
                     $this->get('session')->getFlashBag()->add(
                         'notice',
                         'Bravo ! +50 points'
                     );
                 }else {
+                    $note3=$note-20;
+                    $session->set('note', $note3);
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Ressayer stp ! -50 points'
+                        'Ressayer stp ! - 20 points'
                     );
-
+ 
                 }
-                
-               
-        
-            
-
-
         }
-
         return $this->render('exercices/exercicetake.html.twig', array(
-            'entity' => $exercice,
-            'form' => $form->createView()
+            
+            'exercice' => $exercice,
+            'form' => $form->createView(),
+            'note' => $note
         ));
 }
 }

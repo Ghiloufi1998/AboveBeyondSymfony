@@ -13,10 +13,12 @@
           
 		</script>
 	</div>
-    
+    <div style="text-align:right; margin-right:70px;">
+         <a href="{{ path('exercicebyidc', {'idCrs': exercice.getIdCrs.idCrs}) }}" class="btn btn-success" style="margin-bottom:10px;">Continuer avec autres Exercices</a>
+    </div>
 <div class="body-form" >
     <div  class="form">
-    <h1>Répondre au question    </h1>
+    <h1>Répondre au question </h1>
     {{ include('exercices/_form.html.twig') }}
 
 
@@ -29,6 +31,7 @@
   
 {% endfor %}
    
+
 	
 </div>
     </div>

@@ -26,7 +26,7 @@ class ExercicesType extends AbstractType
             ->add('reponse',TextType::class)
             ->add('hint',TextType::class)
             ->add('image',FileType::class,array('data_class'=>null,'required'=>false))
-            ->add('idCrs')
+            ->add('idCrs',null,array('label' => 'Titre du Cours'))
         ;
     }
 

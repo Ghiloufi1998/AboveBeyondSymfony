@@ -43,6 +43,19 @@ class CoursController extends AbstractController
         ]);
     }
     /**
+     * @Route("/showg/{idG}", name="coursidg", methods={"GET"})
+     */
+    public function consulterg(EntityManagerInterface $entityManager,$idG): Response
+    {
+        $cours = $entityManager
+            ->getRepository(Cours::class)
+            ->findByIdG($idG);
+
+        return $this->render('cours/coursidg.html.twig', [
+            'cours' => $cours,
+        ]);
+    }
+    /**
      * @Route("/listeguide/prendre/{idCrs}", name="prendrecours", methods={"GET"})
      */
     public function prendre(EntityManagerInterface $entityManager,$idCrs): Response

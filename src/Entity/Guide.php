@@ -25,6 +25,7 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="Titre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un titre")
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
@@ -145,6 +146,4 @@ class Guide
     public function __toString() {
         return $this->titre;
     }
-    
-
 }

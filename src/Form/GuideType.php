@@ -22,7 +22,7 @@ class GuideType extends AbstractType
             ->add('pays', CountryType::class)
             ->add('level',TextType::class)
             ->add('image',FileType::class,array('data_class'=>null,'required'=>false))
-            ->add('idVol')
+            ->add('idVol',null,array('label' => 'Destination de Vol'))
         ;
     }
 

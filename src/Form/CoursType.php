@@ -26,7 +26,7 @@ class CoursType extends AbstractType
             ->add('titre',TextType::class)
             ->add('contenu',TextType::class)
             ->add('image',FileType::class,array('data_class'=>null,'required'=>false))
-            ->add('idG')
+            ->add('idG',null,array('label' => 'Titre du guide'))
         ;
     }
 

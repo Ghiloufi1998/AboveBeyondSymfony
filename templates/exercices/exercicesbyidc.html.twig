@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Exercices{% endblock %}
-
-
+{% block title %}Exercices de Cours{% endblock %}
 
 {% block body %}
 <div class="body">  
     <div class="tab">
-    <div class="tab-header" > <h1> Exercices info </h1>    <p class="create"> <a href="{{ path('app_exercices_index') }}" class="btn btn-primary"  style="margin-bottom:10px;     width: 100%;">Retour a la liste </a>
+   
  </p>  </div>
- <div class="card" style="width: 18rem;margin-left: 15px;">
+ <div class="row" >
+ {% for exercice in exercices %}
+
+  <div class="col-sm-3">
+ <div class="card" style="width: 18rem; margin-left: 15px;">
   <img src="{{ asset('uploads/'~exercice.image) }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ exercice.question }}</h5>
-    <p class="card-text">Reponse : {{ exercice.reponse }}</p>
-    <p class="card-text">Type du Cours : {{ exercice.type }}</p>
+    <p class="card-text">Réponse : {{ exercice.reponse }}</p>
+    <p class="card-text">Type du Exercices : {{ exercice.type }}</p>
+   
     <a href="{{ path('app_exercices_edit', {'idEx': exercice.idEx}) }}" class="btn btn-success" style="margin-bottom:10px;width: 100%;">Modifier</a>
      {{ include('exercices/_delete_form.html.twig') }}
   </div>
 </div>
+  </div>
+ {% endfor %}
      </div>
 
-    </div>
-    </div>
+   
+  
+   
 {% endblock %}
