@@ -11,8 +11,9 @@
     {% for heb in heb %}   
                 <tr>
                 
-                Nbre_d <input type="text " value="{{ dest.Destnbr|number_format }}" disabled id='4' >
+                
                 Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled id='5' >
+                Nbre de réservations <input type="text " value="{{ dest.Destnbr|number_format }}" disabled id='4' >
                     
                 </tr>
             
@@ -20,8 +21,9 @@
             
                 <tr>
                 
-                Nbre_h <input type="text " value="{{ heb.nbrh|number_format }}" disabled id='1' >
+                
                 Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled id="2" >
+                Nbre de réservations <input type="text " value="{{ heb.nbrh|number_format }}" disabled id='1' >
 
 
                 Prix moyen de réservation <input type="text " value="{{ avg }}" disabled id='6' >

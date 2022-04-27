@@ -54,6 +54,13 @@ class ReservationRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByuser($val)
+    {
+        $em=$this->getEntityManager();
+        $query=$em->createQuery('select r from App\Entity\Reservation r, App\Entity\User u where r.idUser = u.id and u.id= ?1 ')
+        ->setParameter(1,$val);
+        return $query->getResult();   
+    }
 
     public function avg(){
         $em=$this->getEntityManager();

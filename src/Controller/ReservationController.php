@@ -58,7 +58,7 @@ class ReservationController extends AbstractController
             //->orderbyprix();
             ->findAll();*/
           
-            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByuser(13);
             
             //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
             
@@ -147,7 +147,7 @@ class ReservationController extends AbstractController
                 ['Expensive',  $reservations1]
             ]
         );
-        $pieChart->getOptions()->setTitle('Reponse');
+        $pieChart->getOptions()->setTitle('Classification des réservation');
             $pieChart->getOptions()->setHeight(500);
             $pieChart->getOptions()->setWidth(900);
             $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
@@ -342,10 +342,13 @@ class ReservationController extends AbstractController
     /**
      * @Route("/{revId}/editfront", name="app_reservation_edit_front", methods={"GET", "POST"})
      */
-    public function customize(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    public function customize(Request $request, Reservation $reservation, EntityManagerInterface $entityManager, QrcodeService $qrcodeService): Response
     {
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
+
+        $qrCode = null;
+        $qrCode = $qrcodeService->qrcode('iheb',$reservation);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
@@ -356,6 +359,7 @@ class ReservationController extends AbstractController
         return $this->render('reservation/customize.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
+            'qrcode'=> $qrCode,
         ]);
     }
     
