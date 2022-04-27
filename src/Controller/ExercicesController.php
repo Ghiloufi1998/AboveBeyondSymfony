@@ -21,6 +21,7 @@ use Flasher\Pnotify\Prime\PnotifyFactory;
 use Flasher\Prime\FlasherInterface;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
+use blackknight467\StarRatingBundle\Form\RatingType;
 /**
  * @Route("/exercices")
  */
@@ -82,6 +83,7 @@ class ExercicesController extends AbstractController
     {
        
         $note=$session->get('note');
+        $rate=$session->get('rating');
       
         
         $exercices = $entityManager
@@ -90,7 +92,8 @@ class ExercicesController extends AbstractController
 
         return $this->render('exercices/consulterbycours.html.twig', [
             'exercices' => $exercices,
-            'note' => $note
+            'note' => $note,
+            'rate' => $rate
         ]);
     }
      /**
@@ -196,7 +199,9 @@ class ExercicesController extends AbstractController
                 'attr'=>[
                     'style'=> 'margin:15px; display : flex; flex-direction: row-reverse; align-items: flex-start; justify-content : center; ',
                 ]
-             ]) 
+             ])
+             ->add('rating', RatingType::class, [
+    	    'label' => 'Rating' ])
              ;
             
            } else {
@@ -209,6 +214,7 @@ class ExercicesController extends AbstractController
 
         $form = $builder->getForm();
         $form->handleRequest($request);
+        $rate=$form["rating"]->getData();
         
         $note=$session->get('note');
       
@@ -217,11 +223,14 @@ class ExercicesController extends AbstractController
                 $data=$form->getData();
                 if ($data['Question'.$exercice->getIdEx()] === $exercice->getReponse()){
                     $note2=$note+50;
+                    
                     $session->set('note', $note2);
+                    $session->set('rating', $rate);
                     $toastrFactory->addSuccess('Bravo ! Vous Avez Obtenu +50 Points');
                 }else {
                     $note3=$note-20;
                     $session->set('note', $note3);
+                    $session->set('rating', 0);
                     $toastrFactory->addError('Ressayer ! Vous Avez Perdu -20 Points');
  
                 }
@@ -230,7 +239,8 @@ class ExercicesController extends AbstractController
             
             'exercice' => $exercice,
             'form' => $form->createView(),
-            'note' => $note
+            'note' => $note,
+            'rate' => $rate
         ));
 }
 }

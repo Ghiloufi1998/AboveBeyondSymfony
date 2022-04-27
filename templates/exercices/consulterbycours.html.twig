@@ -11,15 +11,19 @@
 		  $('.marquee').marquee({ pauseOnHover: true });
 		  //@ sourceURL=pen.js
 		</script>
+		 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
 	</div>
-	
 	<div class="banner-bottom">
 		<div class="container">
 			<div class="banner-bottom-info">
 				<h3>Liste des Exercices</h3>
 			</div>
-			<div class="banner-top-info" style="text-align:right; color:#3993dd;">
+			<div class="banner-top-info" style="text-align:right;font-family:'FontAwesome'; color:#3993dd;">
 				<h3>Mes Points :  {{note}} </h3>
+				<h3>Mon Rating :  {{ rate |rating(5, "fa-3x") }}</h3>
 			</div>
             {% for exercice in exercices %}
 			<div class="banner-bottom-grids">
@@ -32,11 +36,7 @@
 								<div class="deals-grids">
 									<div class="col-md-8 deals-rating">
 										<h3>{{ exercice.Type }}</h3>
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+										 
 									</div>
 									<div class="col-md-4 deals-price">
 										<p class="now"></p>

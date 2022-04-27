@@ -5,7 +5,12 @@
 {% block body %}
 
  <div class="move-text">
-		
+ 
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
         <script>
 		  $('.marquee').marquee({ pauseOnHover: true });
@@ -19,9 +24,12 @@
 <div class="body-form" >
     <div  class="form">
     <h1>Répondre au question </h1>
-    
+     <div style="font-family:'FontAwesome';">
     {{ include('exercices/_form.html.twig') }}
-
+     </div>
+        <div style="font-family:'FontAwesome';">
+ {{ rate|rating(5, "fa-3x") }}
+ </div>
 
  {% for flashMessage in app.session.flashbag.get('notice') %}
 
@@ -29,7 +37,7 @@
     {{ flashMessage }}
 </div>
 
-  
+ 
 {% endfor %}
    
 
