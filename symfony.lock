@@ -126,6 +126,9 @@
     "league/oauth2-google": {
         "version": "4.0.0"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
     "monolog/monolog": {
         "version": "1.26.0"
     },

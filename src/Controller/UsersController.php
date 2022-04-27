@@ -69,7 +69,7 @@ class UsersController extends AbstractController
         ]);
     }
     /**
-     * @Route("/pdf", name="PDF", methods={"GET"})
+     * @Route("/pdf", name="PDFuser", methods={"GET"})
      */
     public function pdf(UserRepository $UserRepository): Response
     {

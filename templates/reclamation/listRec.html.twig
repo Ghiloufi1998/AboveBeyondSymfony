@@ -8,7 +8,7 @@
                 {% endif %}
 {% endblock %}
 {% block body %}
-
+ <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 <div class="container">
 <div class="col-md-8 banner-right">
 				<div class="sap_tabs">	
@@ -57,5 +57,9 @@
 </div>
 
 {{ knp_pagination_render(Reclamations) }}
+<!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 {% endblock %}
 

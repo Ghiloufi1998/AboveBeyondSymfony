@@ -1,5 +1,5 @@
 {% extends 'base2.html.twig' %}
-
+{% block f2 %} class="active" {% endblock %}
 {% block body %}
 <section id="main-content">
       <section class="wrapper">
@@ -12,12 +12,10 @@
 
   <br> </br>  
   <th>Trier : </th>
-  
   <a href="{{path('TrierParDate2') }}"> ASC</a>   
   <a href="{{path('TrierParDate') }}">  DESC</a>
   
-  <a class="btn btn-success" href="{{path('PDF') }}">  PDF </a>
-  
+  <a class="btn btn-success" href="{{path('PDFuser') }}">  PDF </a>
 <br> </br>    
   <table class="table table-striped">
     <thead>
@@ -51,7 +49,7 @@
        </td> <td>
      {{ User.password}}
        </td> <td>
-<a href="{{ path('listUser', {'id': User.id}) }}"><img src="{{ asset (  'uploads/' ~  User.image) }}" alt=""height="80px" width="80px"></a>
+<a href="{{ path('listUser', {'id': User.id}) }}"><img src="{{ asset ('uploads/' ~ User.image) }}" alt=""height="80px" width="80px"></a>
  
      <a href="{{path('showUser', {'id': User.id}) }}"> Consulter</a>
         &nbsp;&nbsp;
@@ -69,5 +67,46 @@
 </section>
 {{ knp_pagination_render(Users) }}
 
+
+  <div class="">
+
+
+
+    {% if male is defined %}
+    <br> </br>
+    <br> </br>
+    <h2> <center>Statistics </center></h2>
+
+
+    <!--CUSTOM CHART START -->
+    <div class="border-head">
+      <h3>Gender Statistics</h3>
+    </div>
+
+    {% set total= male|length + female|length %}
+
+    {% set male= ( male|length *100 )/ total %}
+    {% set female= ( female|length *100 )/ total %}
+
+    <div class="custom-bar-chart">
+      <ul class="y-axis">
+        <li><span>100%</span></li></span>
+        <li><span>80%</span></li></span>
+        <li><span>60%</span></li></span>
+        <li><span>40%</span></li></span>
+        <li><span>20%</span></li></span>
+
+      </ul>
+      <div class="bar">
+        <div class="title">Male %</div>
+        <div class="value tooltips"  data-toggle="tooltip" data-placement="top">{{ male }}%</div>
+      </div>
+      <div class="bar">
+        <div class="title">female %</div>
+        <div class="value tooltips" data-toggle="tooltip" data-placement="top">{{ female }}%</div>
+      </div>
+
+    </div>
+    {% endif %}
 {% endblock %}
 

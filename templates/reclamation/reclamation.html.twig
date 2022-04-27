@@ -6,11 +6,15 @@
                 {% else %}
                   <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                 {% endif %}
+                
 {% endblock %}
 
 {% block body %}
+ <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     <div class="send-message">
       <div class="container">
+     
+    
         <div class="row">
         
         <div class="col-md-12">
@@ -56,4 +60,9 @@
               {{ form_end(form) }}
             </div>
           </div>
+          <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 {% endblock %}

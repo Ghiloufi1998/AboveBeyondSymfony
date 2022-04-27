@@ -6,10 +6,10 @@ use App\Entity\Reclamation;
 use App\Form\ReclamationType;
 use App\Repository\UserRepository;
 use App\Repository\ReclamationRepository;
-
+use App\filter_profanity;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
-
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,9 +22,9 @@ class ReclamationController extends AbstractController
      /**
      * @Route("/reclamation", name="reclamation")
      */
-    public function reclamation(Request $request,SessionInterface $session,UserRepository $userRepository)
+    public function reclamation(Request $request,SessionInterface $session,UserRepository $userRepository,FlashyNotifier $flashy)
     {
-        
+       
         $Reclamation = new Reclamation();
         $form=$this->createForm(ReclamationType::Class,$Reclamation);
         $form->add('Send', SubmitType::class);
@@ -34,15 +34,23 @@ class ReclamationController extends AbstractController
 
         $Reclamation->setDate( new \DateTime());
         $Reclamation->setUser($user);
+       
        if ($form->isSubmitted()){
+        
         $Reclamation = $form->getData();
+     
         $em=$this->getDoctrine()->getManager();
+       
 
         $em->persist($Reclamation);
         $em->flush();
+      
         return $this->redirectToRoute('listRec');
 }
+
+
            return $this->render('reclamation/reclamation.html.twig', [
+               
             'form' => $form->createView(),
             'session' => $session,
         ]);
@@ -78,7 +86,7 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/updatereclamation/{id}", name="updatereclamation")
      */
-    public function updatereclamation(Request $request, $id)
+    public function updatereclamation(Request $request, $id,FlashyNotifier $flashy)
     {
         $em=$this->getDoctrine()->getManager();
         $Reclamation = $em->getRepository(Reclamation::class)->find($id);
@@ -91,8 +99,9 @@ class ReclamationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em->flush();
-
+            $flashy->mutedDark('modification avec succes');
             return $this->redirectToRoute('listRec');
+
         }
 
         return $this->render('reclamation/updateReclamation.html.twig', [
@@ -103,16 +112,17 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/deletereclamation/{id}", name="deletereclamation")
      */
-    public function deleteReclamation($id)
+    public function deleteReclamation($id,FlashyNotifier $flashy)
     {
-      
+        
         $em=$this->getDoctrine()->getManager();
         $Reclamation = $em->getRepository(Reclamation::class)->find($id);
         $em->Remove($Reclamation);
          $em->flush();
+         $flashy->success('reclamation supprime avec succes!');
 
            return $this->redirectToRoute('listRec');
-
+           $flashy->success('reclamation supprime avec succes');
     }
 
     /**
@@ -163,16 +173,16 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/deletereclamationBack/{id}", name="deletereclamationBack")
      */
-    public function deletereclamationBack($id)
+    public function deletereclamationBack($id,FlashyNotifier $flashy)
     {
       
         $em=$this->getDoctrine()->getManager();
         $Reclamation = $em->getRepository(Reclamation::class)->find($id);
         $em->Remove($Reclamation);
          $em->flush();
-
+         $flashy->success('reclamation supprime avec succes!');
            return $this->redirectToRoute('listrecBack');
-
+           $flashy->success('reclamation supprime avec succes!');
     }
     
    

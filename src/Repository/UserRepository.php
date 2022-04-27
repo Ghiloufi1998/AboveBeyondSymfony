@@ -19,6 +19,8 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+  
+    
     public function findByDate()
     {
         return $this->createQueryBuilder('User')
@@ -31,6 +33,25 @@ class UserRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('User')
             ->orderBy('User.birthday','ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findMale()
+    {
+        return $this->createQueryBuilder('User')
+            ->where('User.gender Like :gender')
+            ->setParameter('gender', '%Male%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function findFemale()
+    {
+        return $this->createQueryBuilder('User')
+            ->where('User.gender Like :gender')
+            ->setParameter('gender', '%Female%')
             ->getQuery()
             ->getResult()
             ;
