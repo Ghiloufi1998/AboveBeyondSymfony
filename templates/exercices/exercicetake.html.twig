@@ -19,6 +19,7 @@
 <div class="body-form" >
     <div  class="form">
     <h1>Répondre au question </h1>
+    
     {{ include('exercices/_form.html.twig') }}
 
 
@@ -35,5 +36,5 @@
 	
 </div>
     </div>
-    
+    {{ flasher_render() }}
 {% endblock %}

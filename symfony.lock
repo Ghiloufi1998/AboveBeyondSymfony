@@ -103,6 +103,18 @@
     "phar-io/version": {
         "version": "3.2.1"
     },
+    "php-flasher/flasher": {
+        "version": "dev-main"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "dev-main"
+    },
+    "php-flasher/flasher-toastr": {
+        "version": "v0.9.8"
+    },
+    "php-flasher/flasher-toastr-symfony": {
+        "version": "dev-main"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },

@@ -15,7 +15,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Flasher\Noty\Prime\NotyFactory;
+use Flasher\Notyf\Prime\NotyfFactory;
+use Flasher\Pnotify\Prime\PnotifyFactory;
+use Flasher\Prime\FlasherInterface;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
+use Flasher\Toastr\Prime\ToastrFactory;
 /**
  * @Route("/exercices")
  */
@@ -166,7 +171,8 @@ class ExercicesController extends AbstractController
     /**
      * @Route("/take/{idEx}/take", name="exercicetake", methods={"GET", "POST"})
      */
-    public function showAction($idEx,Request $request,EntityManagerInterface $entityManager,SessionInterface $session)
+    public function showAction($idEx,Request $request,EntityManagerInterface $entityManager,SessionInterface $session,FlasherInterface $flasher,
+    ToastrFactory $toastrFactory)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -212,17 +218,11 @@ class ExercicesController extends AbstractController
                 if ($data['Question'.$exercice->getIdEx()] === $exercice->getReponse()){
                     $note2=$note+50;
                     $session->set('note', $note2);
-                    $this->get('session')->getFlashBag()->add(
-                        'notice',
-                        'Bravo ! +50 points'
-                    );
+                    $toastrFactory->addSuccess('Bravo ! Vous Avez Obtenu +50 Points');
                 }else {
                     $note3=$note-20;
                     $session->set('note', $note3);
-                    $this->get('session')->getFlashBag()->add(
-                        'notice',
-                        'Ressayer stp ! - 20 points'
-                    );
+                    $toastrFactory->addError('Ressayer ! Vous Avez Perdu -20 Points');
  
                 }
         }
