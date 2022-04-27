@@ -1,0 +1,70 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Mes Réservations {% endblock %}
+
+{% block body %}
+
+<div class="move-text">
+		<div class="marquee">Register your hotel with us free of cost.<a href="{{ path('reserv_indiv') }}">Here</a></div>
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+		</script>
+	</div>
+	
+	<div class="banner-bottom">
+		<div class="container">
+
+                    <div class="tab">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>DateDeb</th>
+                                    <th>DateFin</th>
+                                    <th>Type</th>
+                                    <th>NbrAdultes</th>
+                                    <th>NbrEnfants</th>
+                                    <th>Destination</th>
+                                    <th>Hebergement</th>
+                                    <th>Vol</th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for reservation in reservations %}
+                                <tr>
+                                
+                                    <td>{{ reservation.dateDeb ? reservation.dateDeb|date('Y-m-d') : '' }}</td>
+                                    <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d') : '' }}</td>
+                                    <td>{{ reservation.type }}</td>
+                                    <td>{{ reservation.nbrAdultes }}</td>
+                                    <td>{{ reservation.nbrEnfants }}</td>
+                                    <td>{{ reservation.destination }}</td>
+                                    <td>{{ reservation.hebergement }}</td>
+                                    <td>{{ reservation.vol }}</td>
+                                    <td>
+                                        <a href="{{ path('front_delete', {'revId': reservation.revId}) }}">edit</a>
+                        <form method="post" action="{{ path('front_delete', {'revId': reservation.revId}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.revId) }}">
+                                <button class="bton">Annuler</button>
+                        </form>
+
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>    
+    
+   
+   
+
+
+{% endblock %}

@@ -267,8 +267,12 @@ html{
 .sort{
   
   
-  padding-bottom: 20px;
-  margin-left: 93%;
+  margin-top: 10px;
+  display: inline-block;
+  padding-right: 15px;
+  padding-bottom: 22px;
+  padding-left: 35px;
+
 
 
 }
@@ -386,7 +390,7 @@ textarea{
   z-index: 1000;
 
   }
-  .container {
+  .container00 {
     align-items: center;
     max-width: calc(100% - 270px);
     display: flex;
@@ -398,6 +402,9 @@ textarea{
     max-width: 100%;
     height: fit-content;
     gap: 30px;
+    padding-left: 35px;
+    padding-right: 15px;
+    padding-top: 15px;
     
     
   }
@@ -408,6 +415,7 @@ textarea{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
   }
   .pie{
+    
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
     

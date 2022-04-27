@@ -6,7 +6,8 @@
         
     </div>
      <button  >  {{ button_label|default('Réserver') }}  </button>
-    
+    <br> <br> 
+    Consulter  <a href="{{ path('consulter') }}"> {{ button_label|default('mes réservations ') }}  </a> 
     
 {{ form_end(form) }}
 

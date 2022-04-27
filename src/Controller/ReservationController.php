@@ -47,6 +47,29 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * @Route("/mesres", name="consulter", methods={"GET"})
+     */
+    public function consulter(EntityManagerInterface $entityManager): Response
+    {
+       /* $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            //->orderbyprix();
+            ->findAll();*/
+          
+            $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findByType('Individuelle');
+            
+            //$reservations =   $this->getDoctrine()->getRepository(Reservation::class)->orderbyprix();
+            
+           // $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findAll();
+            
+
+        return $this->render('reservation/consulter.html.twig', [
+            'reservations' => $reservations,
+        ]);
+    }
+
     /**
      * @Route("/sort", name="sorted", methods={"GET"})
      */
@@ -315,6 +338,28 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * @Route("/{revId}/editfront", name="app_reservation_edit_front", methods={"GET", "POST"})
+     */
+    public function customize(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('consulter', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('reservation/customize.html.twig', [
+            'reservation' => $reservation,
+            'form' => $form->createView(),
+        ]);
+    }
+    
+
     /**
      * @Route("/{revId}", name="app_reservation_delete", methods={"POST"})
      */
@@ -328,6 +373,18 @@ class ReservationController extends AbstractController
         return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    
+    /**
+     * @Route("/{revId}/delete", name="front_delete", methods={"POST"})
+     */
+    public function deletefront(Request $request, Reservation $reservation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reservation->getRevId(), $request->request->get('_token'))) {
+            $entityManager->remove($reservation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('consulter', [], Response::HTTP_SEE_OTHER);
+    }
+
     
 }

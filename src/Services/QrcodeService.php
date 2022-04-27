@@ -80,7 +80,7 @@ $qrCode = QrCode::create($qr)
     ->setBackgroundColor(new Color(255, 255, 255));
 
 // Create generic logo
-$logo = Logo::create($path.'img/logo.png')
+$logo = Logo::create($path.'img/abv.png')
     ->setResizeToWidth(50);
 
 // Create generic label
