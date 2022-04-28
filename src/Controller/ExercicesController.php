@@ -273,7 +273,7 @@ class ExercicesController extends AbstractController
         $dompdf->setHttpContext($contxt);
         $html = $this->renderView('exercices/certifpdf.html.twig', [
             'note' => $note,
-            'idCrs' => $idCrs,
+            
         ]);
         
         $dompdf->loadHtml($html);
@@ -289,7 +289,7 @@ class ExercicesController extends AbstractController
      */
     function messageAction(Request $request,SessionInterface $session)
     {
-       
+        
         DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
 
         
@@ -303,10 +303,10 @@ class ExercicesController extends AbstractController
             $bot->reply('Bonjour !');
         });
         $botman->hears('(aide|help|hint)', function (BotMan $bot) {
-            $hint=$session->get('hint');
-            $bot->say('Ma indice pour ce exercie est : '.$hint);
+            
+            $bot->reply('Ma indice pour ce exercie est : kapppaaajsdfnokdsaa');
         });
-
+ 
       
         $botman->fallback(function (BotMan $bot) {
             $bot->reply('Désole, Jai pas compris.');
