@@ -105,6 +105,12 @@ class User
     {
         return $this->id;
     }
+    public function setId(?int $Id): self
+    {
+        $this->id = $Id;
+
+        return $this;
+    }
 
     public function getNom(): ?string
     {

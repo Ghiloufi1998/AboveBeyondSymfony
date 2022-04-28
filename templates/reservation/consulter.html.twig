@@ -46,7 +46,8 @@
                                     <td>{{ reservation.hebergement }}</td>
                                     <td>{{ reservation.vol }}</td>
                                     <td>
-                                        <a href="{{ path('app_reservation_edit_front', {'revId': reservation.revId}) }}">edit</a>
+                                    <div class="x"> <button type="button" class="btn btn-secondary btn-lg" >
+ <a href="{{ path('app_reservation_edit_front', {'revId': reservation.revId}) }}"> Modifier </a> </button>  </div> 
                         <form method="post" action="{{ path('front_delete', {'revId': reservation.revId}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reservation.revId) }}">
                                 <small> <button class="bton">Annuler</button> </small>

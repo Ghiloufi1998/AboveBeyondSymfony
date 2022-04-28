@@ -316,6 +316,7 @@ button.bton, a.bton{
   button.bton{
     background-color:rgba(255, 0, 0, 0.626)!important;
     }
+    
   a.bton{
     height:47px;
     margin-top: 3px;
@@ -426,3 +427,5 @@ textarea{
   .qrc{
   padding: 50px 30px;
   }
+  
+  

@@ -81,6 +81,14 @@ class Reservation
      */
     private $nbrEnfants;
 
+     /**
+     * 
+     * @var int
+     *
+     * @ORM\Column(name="ID_user", type="integer", nullable=true)
+     */
+    private $ID_user;
+
     /**
      * @var string
      *
@@ -189,6 +197,12 @@ class Reservation
     public function setNbrAdultes(int $nbrAdultes): self
     {
         $this->nbrAdultes = $nbrAdultes;
+
+        return $this;
+    }
+    public function setID_user(int $x): self
+    {
+        $this->ID_user = $x;
 
         return $this;
     }

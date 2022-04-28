@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\User;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationType;
@@ -24,6 +25,39 @@ class ReservationController extends AbstractController
 {
 
 
+    /**
+     * @Route("/weather", name="weather" , methods={"GET", "POST"})
+     */
+    public function weather(): Response
+    {
+             // Url de l'API
+
+             $ville=$_POST["tame"];
+
+    $url = "https://api.openweathermap.org/data/2.5/weather?q=".$ville."&lang=fr&units=metric&appid=7dc20536ba29bf30592defd78bc8ce10";
+
+    // On get les resultat
+    $raw = file_get_contents($url);
+    // Décode la chaine JSON
+    $json = json_decode($raw);
+
+    // Nom de la ville
+    $name = $json->name;
+    
+    // Météo
+    $weather = $json->weather[0]->main;
+    $desc = $json->weather[0]->description;
+
+    // Températures
+    $temp = $json->main->temp;
+    $feel_like = $json->main->feels_like;
+
+    // Vent
+    $speed = $json->wind->speed;
+    $deg = $json->wind->deg;
+
+        return $this->render('reservation/weather.html.twig' , ['raw'=>$raw,'json'=>$json,'name'=>$name,'weather'=>$weather,'desc'=>$desc,'temp'=>$temp,'feel_like'=>$feel_like,'speed'=>$speed,'deg'=>$deg]);
+    }
     
     /**
      * @Route("/", name="app_reservation_index", methods={"GET"})
@@ -259,6 +293,7 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $reservation->setDestination($form["vol"]->getData());
+            $reservation->setIdUser($this->getDoctrine()->getRepository(User::class)->find(13));
             $entityManager->persist($reservation);
             $entityManager->flush();
            
@@ -287,7 +322,7 @@ class ReservationController extends AbstractController
 
 
             $sid    = "AC3ea871badadca7b42b05c6fea7f9ae84"; 
-            $token  = "192f0d827eced01bf4061c5390f6d46c"; 
+            $token  = "298ab71eb0413ee94b4be74b5988caac"; 
             $twilio = new Client($sid, $token); 
             
             $message = $twilio->messages 
@@ -298,7 +333,7 @@ class ReservationController extends AbstractController
                                     ) 
                             ); 
             
-            print($message->sid);
+           // print($message->sid);
         return $this->render('reservation/show.html.twig', [
             'reservation' => $reservation,
             'qrCode' => $qrCode,
@@ -362,6 +397,8 @@ class ReservationController extends AbstractController
             'qrcode'=> $qrCode,
         ]);
     }
+
+     
     
 
     /**
