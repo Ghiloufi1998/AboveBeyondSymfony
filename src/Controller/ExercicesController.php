@@ -22,6 +22,11 @@ use Flasher\Prime\FlasherInterface;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Flasher\Toastr\Prime\ToastrFactory;
 use blackknight467\StarRatingBundle\Form\RatingType;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use BotMan\BotMan\BotMan;
+use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Drivers\DriverManager;
 /**
  * @Route("/exercices")
  */
@@ -93,7 +98,8 @@ class ExercicesController extends AbstractController
         return $this->render('exercices/consulterbycours.html.twig', [
             'exercices' => $exercices,
             'note' => $note,
-            'rate' => $rate
+            'rate' => $rate,
+            'idCrs' => $idCrs,
         ]);
     }
      /**
@@ -212,9 +218,12 @@ class ExercicesController extends AbstractController
             ]);
         }
 
+
         $form = $builder->getForm();
         $form->handleRequest($request);
         $rate=$form["rating"]->getData();
+        $hint=$exercice->getHint();
+        $session->set('hint', $hint);
         
         $note=$session->get('note');
       
@@ -223,7 +232,6 @@ class ExercicesController extends AbstractController
                 $data=$form->getData();
                 if ($data['Question'.$exercice->getIdEx()] === $exercice->getReponse()){
                     $note2=$note+50;
-                    
                     $session->set('note', $note2);
                     $session->set('rating', $rate);
                     $toastrFactory->addSuccess('Bravo ! Vous Avez Obtenu +50 Points');
@@ -240,7 +248,81 @@ class ExercicesController extends AbstractController
             'exercice' => $exercice,
             'form' => $form->createView(),
             'note' => $note,
-            'rate' => $rate
+            'rate' => $rate,
+            'hint' => $hint
         ));
-}
+    }
+   /**
+     * @Route("/certifpdf/{idCrs}/pdf", name="certif", methods={"GET","POST"})
+     */
+    public function certifpdf(SessionInterface $session,EntityManagerInterface $entityManager,$idCrs)
+    {
+        $note=$session->get('note');
+    
+        $pdfOptions = new Options();
+        $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('isHtml5ParserEnabled', true);
+        $dompdf = new Dompdf($pdfOptions);
+        $contxt = stream_context_create([ 
+            'ssl' => [ 
+                'verify_peer' => FALSE, 
+                'verify_peer_name' => FALSE,
+                'allow_self_signed'=> TRUE
+            ] 
+        ]);
+        $dompdf->setHttpContext($contxt);
+        $html = $this->renderView('exercices/certifpdf.html.twig', [
+            'note' => $note,
+            'idCrs' => $idCrs,
+        ]);
+        
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('legal', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false,
+            
+        ]);
+    }
+   /**
+     * @Route("/bot/message", name="message")
+     */
+    function messageAction(Request $request,SessionInterface $session)
+    {
+       
+        DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
+
+        
+        $config = [];
+
+        
+        $botman = BotManFactory::create($config);
+
+        
+        $botman->hears('(Bonjour|Salut|Bonsoir|slt)', function (BotMan $bot) {
+            $bot->reply('Bonjour !');
+        });
+        $botman->hears('(aide|help|hint)', function (BotMan $bot) {
+            $hint=$session->get('hint');
+            $bot->say('Ma indice pour ce exercie est : '.$hint);
+        });
+
+      
+        $botman->fallback(function (BotMan $bot) {
+            $bot->reply('Désole, Jai pas compris.');
+        });
+
+       
+        $botman->listen();
+
+        return new Response();
+    }
+        
+   /**
+     * @Route("/bot/chatframe", name="chatframe")
+     */
+    public function chatframeAction(Request $request)
+    {
+        return $this->render('exercices/chat_frame.html.twig');
+    }
 }

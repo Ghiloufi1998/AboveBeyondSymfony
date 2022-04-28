@@ -16,5 +16,6 @@ return [
     Flasher\Symfony\FlasherSymfonyBundle::class => ['all' => true],
     Flasher\Toastr\Symfony\FlasherToastrSymfonyBundle::class => ['all' => true],
     blackknight467\StarRatingBundle\StarRatingBundle::class => ['all' => true],
-    Knp\Bundle\SnappyBundle\KnpSnappyBundle::class => ['all' => true],
+    Nucleos\DompdfBundle\NucleosDompdfBundle::class => ['all' => true],
+    GAS\BotmanBundle\GASBotmanBundle::class => ['all' => true],
 ];

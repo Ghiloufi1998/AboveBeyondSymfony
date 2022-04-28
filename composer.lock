@@ -4,8 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52ad02f535a2018ad5ce10b22efac4da",
+    "content-hash": "3be27acc27c18d456ca622b616e3fcdd",
     "packages": [
+        {
+            "name": "basster/twig-base64-extension",
+            "version": "2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Basster/twig-base64-extension.git",
+                "reference": "3e207a67ddd249b8641248ee5cf5ca9820458615"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Basster/twig-base64-extension/zipball/3e207a67ddd249b8641248ee5cf5ca9820458615",
+                "reference": "3e207a67ddd249b8641248ee5cf5ca9820458615",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/serializer": "^3.1|^4.0|^5.0",
+                "twig/twig": "^2.0|^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Basster\\TwigBase64\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ole Rößner",
+                    "email": "oroessner@gmail.com"
+                }
+            ],
+            "description": "Convert images to base64 in twig",
+            "support": {
+                "issues": "https://github.com/Basster/twig-base64-extension/issues",
+                "source": "https://github.com/Basster/twig-base64-extension/tree/master"
+            },
+            "time": "2020-08-13T15:11:17+00:00"
+        },
         {
             "name": "blackknight467/star-rating-bundle",
             "version": "dev-master",
@@ -61,6 +107,147 @@
                 "source": "https://github.com/blackknight467/StarRatingBundle/tree/master"
             },
             "time": "2017-03-23T19:14:35+00:00"
+        },
+        {
+            "name": "botman/botman",
+            "version": "2.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/botman/botman.git",
+                "reference": "127f7dc0aef5bc0561f8a2a8a3b246fe951b63e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/botman/botman/zipball/127f7dc0aef5bc0561f8a2a8a3b246fe951b63e7",
+                "reference": "127f7dc0aef5bc0561f8a2a8a3b246fe951b63e7",
+                "shasum": ""
+            },
+            "require": {
+                "mpociot/pipeline": "^1.0.2",
+                "opis/closure": "^2.3 || ^3.0",
+                "php": ">=7.1",
+                "psr/container": "^1.0",
+                "react/socket": "~1.0",
+                "spatie/macroable": "^1.0",
+                "symfony/http-foundation": "^2.8 || ^3.0 || ^4.0 || ^5.0",
+                "tightenco/collect": "^5.0 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "codeigniter/framework": "~3.0",
+                "doctrine/cache": "^1.6",
+                "ext-curl": "*",
+                "mockery/mockery": "^1.1",
+                "orchestra/testbench": "^3.4 || ^4.0 || ^5.0 || ^6.0",
+                "phpunit/phpunit": "^6.0 || ^7.0 || ^8.0",
+                "symfony/cache": "^3.4.35 || ^4.3.7 || ^5.0"
+            },
+            "suggest": {
+                "doctrine/cache": "Use any Doctrine cache driver for cache",
+                "symfony/cache": "Use any Symfony cache driver for cache"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "BotMan\\BotMan\\BotManServiceProvider"
+                    ],
+                    "aliases": {
+                        "BotMan": "BotMan\\BotMan\\Facades\\BotMan"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BotMan\\BotMan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "m.pociot@gmail.com"
+                }
+            ],
+            "description": "Create messaging bots in PHP with ease.",
+            "homepage": "http://github.com/botman/botman",
+            "keywords": [
+                "Botman",
+                "bot",
+                "chatbot"
+            ],
+            "support": {
+                "issues": "https://github.com/botman/botman/issues",
+                "source": "https://github.com/botman/botman/tree/2.6.1"
+            },
+            "time": "2020-09-10T04:44:03+00:00"
+        },
+        {
+            "name": "botman/driver-web",
+            "version": "1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/botman/driver-web.git",
+                "reference": "7399fd2994ee4c6c14c0a69268269e81fd2cd7f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/botman/driver-web/zipball/7399fd2994ee4c6c14c0a69268269e81fd2cd7f6",
+                "reference": "7399fd2994ee4c6c14c0a69268269e81fd2cd7f6",
+                "shasum": ""
+            },
+            "require": {
+                "botman/botman": "~2.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "botman/driver-facebook": "dev-master",
+                "botman/studio-addons": "~1.0",
+                "ext-curl": "*",
+                "illuminate/contracts": "~5.5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BotMan\\Drivers\\Web\\Providers\\WebServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BotMan\\Drivers\\Web\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "m.pociot@gmail.com"
+                }
+            ],
+            "description": "Web driver for BotMan",
+            "homepage": "http://github.com/botman/driver-web",
+            "keywords": [
+                "Botman",
+                "bot",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/botman/driver-web/issues",
+                "source": "https://github.com/botman/driver-web/tree/1.0"
+            },
+            "time": "2018-03-27T10:19:41+00:00"
         },
         {
             "name": "components/font-awesome",
@@ -441,12 +628,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "e23112857459ee766f82345e8325c34c92324cda"
+                "reference": "2d9cf57ea62b4ae05e6e49e86b8c0b0d4f102dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e23112857459ee766f82345e8325c34c92324cda",
-                "reference": "e23112857459ee766f82345e8325c34c92324cda",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2d9cf57ea62b4ae05e6e49e86b8c0b0d4f102dfe",
+                "reference": "2d9cf57ea62b4ae05e6e49e86b8c0b0d4f102dfe",
                 "shasum": ""
             },
             "require": {
@@ -544,7 +731,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-26T09:10:51+00:00"
+            "time": "2022-04-27T14:41:18+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -1482,6 +1669,73 @@
             "time": "2021-11-07T15:30:51+00:00"
         },
         {
+            "name": "dompdf/dompdf",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "c6dfd9bb8b0040609f04754f729d4cb3016e0575"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/c6dfd9bb8b0040609f04754f729d4cb3016e0575",
+                "reference": "c6dfd9bb8b0040609f04754f729d4cb3016e0575",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-mbstring": "*",
+                "phenx/php-font-lib": "^0.5.4",
+                "phenx/php-svg-lib": "^0.3.3 || ^0.4.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3",
+                "phpunit/phpunit": "^7.5 || ^8 || ^9",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "suggest": {
+                "ext-gd": "Needed to process images",
+                "ext-gmagick": "Improves image processing performance",
+                "ext-imagick": "Improves image processing performance",
+                "ext-zlib": "Needed for pdf stream compression"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                },
+                {
+                    "name": "Brian Sweeney",
+                    "email": "eclecticgeek@gmail.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
+            "support": {
+                "issues": "https://github.com/dompdf/dompdf/issues",
+                "source": "https://github.com/dompdf/dompdf/tree/v1.2.1"
+            },
+            "time": "2022-03-24T12:57:42+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "3.x-dev",
             "source": {
@@ -1549,6 +1803,53 @@
                 }
             ],
             "time": "2022-02-18T15:25:29+00:00"
+        },
+        {
+            "name": "evenement/evenement",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorw/evenement.git",
+                "reference": "531bfb9d15f8aa57454f5f0285b18bec903b8fb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/531bfb9d15f8aa57454f5f0285b18bec903b8fb7",
+                "reference": "531bfb9d15f8aa57454f5f0285b18bec903b8fb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Evenement": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                }
+            ],
+            "description": "Événement is a very simple event dispatching library for PHP",
+            "keywords": [
+                "event-dispatcher",
+                "event-emitter"
+            ],
+            "support": {
+                "issues": "https://github.com/igorw/evenement/issues",
+                "source": "https://github.com/igorw/evenement/tree/master"
+            },
+            "time": "2017-07-23T21:35:13+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
@@ -1634,114 +1935,34 @@
             "time": "2022-03-02T09:29:19+00:00"
         },
         {
-            "name": "knplabs/knp-snappy",
+            "name": "gasciences/botman-bundle",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/KnpLabs/snappy.git",
-                "reference": "5126fb5b335ec929a226314d40cd8dad497c3d67"
+                "url": "https://github.com/Gillu13/BotmanBundle.git",
+                "reference": "8a8164516a568fb94b27414e16abe90993be7339"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/5126fb5b335ec929a226314d40cd8dad497c3d67",
-                "reference": "5126fb5b335ec929a226314d40cd8dad497c3d67",
+                "url": "https://api.github.com/repos/Gillu13/BotmanBundle/zipball/8a8164516a568fb94b27414e16abe90993be7339",
+                "reference": "8a8164516a568fb94b27414e16abe90993be7339",
                 "shasum": ""
             },
             "require": {
+                "botman/botman": "^2.6",
+                "botman/driver-web": "^1.5",
                 "php": ">=7.1",
-                "psr/log": "^1.0||^2.0||^3.0",
-                "symfony/process": "~3.4||~4.3||~5.0||~6.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16||^3.0",
-                "pedrotroller/php-cs-custom-fixer": "^2.19",
-                "phpstan/phpstan": "^0.12.7",
-                "phpstan/phpstan-phpunit": "^0.12.6",
-                "phpunit/phpunit": "~7.4||~8.5"
-            },
-            "suggest": {
-                "h4cc/wkhtmltoimage-amd64": "Provides wkhtmltoimage-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltoimage-i386": "Provides wkhtmltoimage-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-amd64": "Provides wkhtmltopdf-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-i386": "Provides wkhtmltopdf-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "wemersonjanuario/wkhtmltopdf-windows": "Provides wkhtmltopdf executable for Windows, use version `~0.12` as dependency"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Snappy\\": "src/Knp/Snappy"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KNP Labs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
-                }
-            ],
-            "description": "PHP library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
-            "homepage": "http://github.com/KnpLabs/snappy",
-            "keywords": [
-                "knp",
-                "knplabs",
-                "pdf",
-                "snapshot",
-                "thumbnail",
-                "wkhtmltopdf"
-            ],
-            "support": {
-                "issues": "https://github.com/KnpLabs/snappy/issues",
-                "source": "https://github.com/KnpLabs/snappy/tree/v1.4.1"
-            },
-            "time": "2022-01-07T13:03:38+00:00"
-        },
-        {
-            "name": "knplabs/knp-snappy-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "da11c2d083f5d8586c9bd59d2948ab7d39d57b34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/da11c2d083f5d8586c9bd59d2948ab7d39d57b34",
-                "reference": "da11c2d083f5d8586c9bd59d2948ab7d39d57b34",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/knp-snappy": "^1.2",
-                "php": ">=7.4",
-                "symfony/framework-bundle": "^4.4|^5.1|^6.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.11",
-                "symfony/asset": "^4.4|^5.1|^6.0",
-                "symfony/finder": "^4.4|^5.1|^6.0",
-                "symfony/phpunit-bridge": "^4.4|^5.1|^6.0",
-                "symfony/security-csrf": "^4.4|^5.1|^6.0",
-                "symfony/templating": "^4.4|^5.1|^6.0",
-                "symfony/validator": "^4.4|^5.1|^6.0",
-                "symfony/yaml": "^4.4|^5.1|^6.0"
+                "symfony/cache": "^3.4|^4.0",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/http-foundation": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0"
             },
             "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
-                    "Knp\\Bundle\\SnappyBundle\\": "src/"
+                    "GAS\\BotmanBundle\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1750,28 +1971,22 @@
             ],
             "authors": [
                 {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/KnpSnappyBundle/contributors"
+                    "name": "Gilles Aouizerate",
+                    "email": "gilles@gasciences.com"
                 }
             ],
-            "description": "Easily create PDF and images in Symfony by converting Twig/HTML templates.",
-            "homepage": "http://github.com/KnpLabs/KnpSnappyBundle",
+            "description": "BotMan Symfony bundle",
             "keywords": [
+                "Botman",
                 "bundle",
-                "knp",
-                "knplabs",
-                "pdf",
-                "snappy"
+                "chatbot",
+                "symfony"
             ],
             "support": {
-                "issues": "https://github.com/KnpLabs/KnpSnappyBundle/issues",
-                "source": "https://github.com/KnpLabs/KnpSnappyBundle/tree/v1.9.0"
+                "issues": "https://github.com/Gillu13/BotmanBundle/issues",
+                "source": "https://github.com/Gillu13/BotmanBundle/tree/master"
             },
-            "time": "2022-01-05T15:50:51+00:00"
+            "time": "2020-06-23T20:49:37+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -1925,6 +2140,297 @@
                 }
             ],
             "time": "2022-03-13T20:29:46+00:00"
+        },
+        {
+            "name": "mpociot/pipeline",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpociot/pipeline.git",
+                "reference": "3584db4a0de68067b2b074edfadf6a48b5603a6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpociot/pipeline/zipball/3584db4a0de68067b2b074edfadf6a48b5603a6b",
+                "reference": "3584db4a0de68067b2b074edfadf6a48b5603a6b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mpociot\\Pipeline\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "m.pociot@gmail.com"
+                }
+            ],
+            "description": "Simple PHP middleware pipeline",
+            "homepage": "http://github.com/mpociot/pipeline",
+            "keywords": [
+                "middleware",
+                "pipeline"
+            ],
+            "support": {
+                "issues": "https://github.com/mpociot/pipeline/issues",
+                "source": "https://github.com/mpociot/pipeline/tree/1.0.2"
+            },
+            "time": "2017-04-21T13:22:05+00:00"
+        },
+        {
+            "name": "nucleos/dompdf-bundle",
+            "version": "3.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nucleos/NucleosDompdfBundle.git",
+                "reference": "f39a14d99a84d304918a0824b0fa45c1a0431e29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nucleos/NucleosDompdfBundle/zipball/f39a14d99a84d304918a0824b0fa45c1a0431e29",
+                "reference": "f39a14d99a84d304918a0824b0fa45c1a0431e29",
+                "shasum": ""
+            },
+            "require": {
+                "dompdf/dompdf": "^0.7 || ^0.8 || ^1.0.0",
+                "php": "^7.3 || ^8.0",
+                "symfony/config": "^4.2 || ^5.0",
+                "symfony/dependency-injection": "^4.2 || ^5.0",
+                "symfony/event-dispatcher-contracts": "^1.1 || ^2.0",
+                "symfony/expression-language": "^4.2 || ^5.0",
+                "symfony/framework-bundle": "^4.2 || ^5.0",
+                "symfony/http-foundation": "^4.2 || ^5.0",
+                "symfony/http-kernel": "^4.2 || ^5.0"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.3",
+                "ergebnis/composer-normalize": "^2.0.1",
+                "symfony/browser-kit": "^4.4 || ^5.0"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": "If you need to modify the PDF rendering"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nucleos\\DompdfBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Gripp",
+                    "email": "mail@core23.de"
+                }
+            ],
+            "description": "This bundle provides a wrapper for using dompdf inside symfony.",
+            "homepage": "https://nucleos.rocks",
+            "keywords": [
+                "bundle",
+                "dompdf",
+                "pdf",
+                "symfony",
+                "wrapper"
+            ],
+            "support": {
+                "issues": "https://github.com/nucleos/NucleosDompdfBundle/issues",
+                "source": "https://github.com/nucleos/NucleosDompdfBundle/tree/3.1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/core23",
+                    "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/core23",
+                    "type": "ko-fi"
+                },
+                {
+                    "url": "https://opencollective.com/core23",
+                    "type": "opencollective"
+                },
+                {
+                    "url": "https://donate.core23.de",
+                    "type": "other"
+                }
+            ],
+            "time": "2021-02-07T19:03:53+00:00"
+        },
+        {
+            "name": "opis/closure",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opis/closure.git",
+                "reference": "3d81e4309d2a927abbe66df935f4bb60082805ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opis/closure/zipball/3d81e4309d2a927abbe66df935f4bb60082805ad",
+                "reference": "3d81e4309d2a927abbe66df935f4bb60082805ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "jeremeamia/superclosure": "^2.0",
+                "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.6.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "functions.php"
+                ],
+                "psr-4": {
+                    "Opis\\Closure\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marius Sarca",
+                    "email": "marius.sarca@gmail.com"
+                },
+                {
+                    "name": "Sorin Sarca",
+                    "email": "sarca_sorin@hotmail.com"
+                }
+            ],
+            "description": "A library that can be used to serialize closures (anonymous functions) and arbitrary objects.",
+            "homepage": "https://opis.io/closure",
+            "keywords": [
+                "anonymous functions",
+                "closure",
+                "function",
+                "serializable",
+                "serialization",
+                "serialize"
+            ],
+            "support": {
+                "issues": "https://github.com/opis/closure/issues",
+                "source": "https://github.com/opis/closure/tree/3.6.3"
+            },
+            "time": "2022-01-27T09:35:39+00:00"
+        },
+        {
+            "name": "phenx/php-font-lib",
+            "version": "0.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/php-font-lib.git",
+                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/php-font-lib/zipball/dd448ad1ce34c63d09baccd05415e361300c35b4",
+                "reference": "dd448ad1ce34c63d09baccd05415e361300c35b4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "^3 || ^4 || ^5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FontLib\\": "src/FontLib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/PhenX/php-font-lib",
+            "support": {
+                "issues": "https://github.com/dompdf/php-font-lib/issues",
+                "source": "https://github.com/dompdf/php-font-lib/tree/0.5.4"
+            },
+            "time": "2021-12-17T19:44:54+00:00"
+        },
+        {
+            "name": "phenx/php-svg-lib",
+            "version": "0.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/php-svg-lib.git",
+                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/php-svg-lib/zipball/4498b5df7b08e8469f0f8279651ea5de9626ed02",
+                "reference": "4498b5df7b08e8469f0f8279651ea5de9626ed02",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.1 || ^7.2 || ^7.3 || ^7.4 || ^8.0",
+                "sabberworm/php-css-parser": "^8.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Svg\\": "src/Svg"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/PhenX/php-svg-lib",
+            "support": {
+                "issues": "https://github.com/dompdf/php-svg-lib/issues",
+                "source": "https://github.com/dompdf/php-svg-lib/tree/0.4.1"
+            },
+            "time": "2022-03-07T12:52:04+00:00"
         },
         {
             "name": "php-flasher/flasher",
@@ -2604,6 +3110,625 @@
             "time": "2021-05-03T11:20:27+00:00"
         },
         {
+            "name": "react/cache",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/cache.git",
+                "reference": "b3b669a2ed8df0979acb7cc6abcfc51a5e5c6c10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/cache/zipball/b3b669a2ed8df0979acb7cc6abcfc51a5e5c6c10",
+                "reference": "b3b669a2ed8df0979acb7cc6abcfc51a5e5c6c10",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "react/promise": "^3.0 || ^2.0 || ^1.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "Async, Promise-based cache interface for ReactPHP",
+            "keywords": [
+                "cache",
+                "caching",
+                "promise",
+                "reactphp"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/cache/issues",
+                "source": "https://github.com/reactphp/cache/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-15T19:07:55+00:00"
+        },
+        {
+            "name": "react/dns",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/dns.git",
+                "reference": "2bc106d3055c8b3d267cbbce3f7716d8078c1932"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/dns/zipball/2bc106d3055c8b3d267cbbce3f7716d8078c1932",
+                "reference": "2bc106d3055c8b3d267cbbce3f7716d8078c1932",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "react/cache": "^1.0 || ^0.6 || ^0.5",
+                "react/event-loop": "^1.2",
+                "react/promise": "^3.0 || ^2.7 || ^1.2.1",
+                "react/promise-timer": "^1.8"
+            },
+            "require-dev": {
+                "clue/block-react": "^1.2",
+                "phpunit/phpunit": "^9.3 || ^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Dns\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "Async DNS resolver for ReactPHP",
+            "keywords": [
+                "async",
+                "dns",
+                "dns-resolver",
+                "reactphp"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/dns/issues",
+                "source": "https://github.com/reactphp/dns/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-19T15:42:39+00:00"
+        },
+        {
+            "name": "react/event-loop",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/event-loop.git",
+                "reference": "1fd1d01c45fcf8764b00a58cc2e35283c5fd5978"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/1fd1d01c45fcf8764b00a58cc2e35283c5fd5978",
+                "reference": "1fd1d01c45fcf8764b00a58cc2e35283c5fd5978",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35"
+            },
+            "suggest": {
+                "ext-event": "~1.0 for ExtEventLoop",
+                "ext-pcntl": "For signal handling support when using the StreamSelectLoop",
+                "ext-uv": "* for ExtUvLoop"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\EventLoop\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "ReactPHP's core reactor event loop that libraries can use for evented I/O.",
+            "keywords": [
+                "asynchronous",
+                "event-loop"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/event-loop/issues",
+                "source": "https://github.com/reactphp/event-loop/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-15T19:06:55+00:00"
+        },
+        {
+            "name": "react/promise",
+            "version": "2.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "77aa8761f0fd5e85d27082649b06499ccd30d038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/77aa8761f0fd5e85d27082649b06499ccd30d038",
+                "reference": "77aa8761f0fd5e85d27082649b06499ccd30d038",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.36"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/promise/issues",
+                "source": "https://github.com/reactphp/promise/tree/2.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-15T19:08:52+00:00"
+        },
+        {
+            "name": "react/promise-timer",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise-timer.git",
+                "reference": "00faadc8e81b235c2baee00fabab93487647aed2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise-timer/zipball/00faadc8e81b235c2baee00fabab93487647aed2",
+                "reference": "00faadc8e81b235c2baee00fabab93487647aed2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "react/event-loop": "^1.2",
+                "react/promise": "^3.0 || ^2.7.0 || ^1.2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
+                "psr-4": {
+                    "React\\Promise\\Timer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "A trivial implementation of timeouts for Promises, built on top of ReactPHP.",
+            "homepage": "https://github.com/reactphp/promise-timer",
+            "keywords": [
+                "async",
+                "event-loop",
+                "promise",
+                "reactphp",
+                "timeout",
+                "timer"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/promise-timer/issues",
+                "source": "https://github.com/reactphp/promise-timer/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-15T19:06:18+00:00"
+        },
+        {
+            "name": "react/socket",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/socket.git",
+                "reference": "ccca66876461f64da3b89c222327fbdf9f4e7df1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/ccca66876461f64da3b89c222327fbdf9f4e7df1",
+                "reference": "ccca66876461f64da3b89c222327fbdf9f4e7df1",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
+                "php": ">=5.3.0",
+                "react/dns": "^1.8",
+                "react/event-loop": "^1.2",
+                "react/promise": "^2.6.0 || ^1.2.1",
+                "react/promise-timer": "^1.8",
+                "react/stream": "^1.2"
+            },
+            "require-dev": {
+                "clue/block-react": "^1.5",
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35",
+                "react/promise-stream": "^1.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Socket\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "Async, streaming plaintext TCP/IP and secure TLS socket server and client connections for ReactPHP",
+            "keywords": [
+                "Connection",
+                "Socket",
+                "async",
+                "reactphp",
+                "stream"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/socket/issues",
+                "source": "https://github.com/reactphp/socket/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-19T15:43:41+00:00"
+        },
+        {
+            "name": "react/stream",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/stream.git",
+                "reference": "d1ae7a30e12b3be57870b50bc3d27af81189455e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/d1ae7a30e12b3be57870b50bc3d27af81189455e",
+                "reference": "d1ae7a30e12b3be57870b50bc3d27af81189455e",
+                "shasum": ""
+            },
+            "require": {
+                "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
+                "php": ">=5.3.8",
+                "react/event-loop": "^1.2"
+            },
+            "require-dev": {
+                "clue/stream-filter": "~1.2",
+                "phpunit/phpunit": "^9.3 || ^5.7 || ^4.8.35"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "React\\Stream\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Lück",
+                    "email": "christian@clue.engineering",
+                    "homepage": "https://clue.engineering/"
+                },
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "reactphp@ceesjankiewiet.nl",
+                    "homepage": "https://wyrihaximus.net/"
+                },
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com",
+                    "homepage": "https://sorgalla.com/"
+                },
+                {
+                    "name": "Chris Boden",
+                    "email": "cboden@gmail.com",
+                    "homepage": "https://cboden.dev/"
+                }
+            ],
+            "description": "Event-driven readable and writable streams for non-blocking I/O in ReactPHP",
+            "keywords": [
+                "event-driven",
+                "io",
+                "non-blocking",
+                "pipe",
+                "reactphp",
+                "readable",
+                "stream",
+                "writable"
+            ],
+            "support": {
+                "issues": "https://github.com/reactphp/stream/issues",
+                "source": "https://github.com/reactphp/stream/tree/1.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/WyriHaximus",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/clue",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-04-15T19:05:56+00:00"
+        },
+        {
+            "name": "sabberworm/php-css-parser",
+            "version": "8.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "reference": "e41d2140031d533348b2192a83f02d8dd8a71d30",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=5.6.20"
+            },
+            "require-dev": {
+                "codacy/coverage": "^1.4",
+                "phpunit/phpunit": "^4.8.36"
+            },
+            "suggest": {
+                "ext-mbstring": "for parsing UTF-8 CSS"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sabberworm\\CSS\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Schweikert"
+                }
+            ],
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "https://www.sabberworm.com/blog/2010/6/10/php-css-parser",
+            "keywords": [
+                "css",
+                "parser",
+                "stylesheet"
+            ],
+            "support": {
+                "issues": "https://github.com/sabberworm/PHP-CSS-Parser/issues",
+                "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
+            },
+            "time": "2021-12-11T13:40:54+00:00"
+        },
+        {
             "name": "sensio/framework-extra-bundle",
             "version": "v5.6.1",
             "source": {
@@ -2682,6 +3807,56 @@
                 "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v5.6.1"
             },
             "time": "2020-08-25T19:10:18+00:00"
+        },
+        {
+            "name": "spatie/macroable",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/macroable.git",
+                "reference": "7a99549fc001c925714b329220dea680c04bfa48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/macroable/zipball/7a99549fc001c925714b329220dea680c04bfa48",
+                "reference": "7a99549fc001c925714b329220dea680c04bfa48",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0|^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Macroable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to dynamically add methods to a class",
+            "homepage": "https://github.com/spatie/macroable",
+            "keywords": [
+                "macroable",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/macroable/issues",
+                "source": "https://github.com/spatie/macroable/tree/1.0.1"
+            },
+            "time": "2020-11-03T10:15:05+00:00"
         },
         {
             "name": "symfony/asset",
@@ -3145,7 +4320,7 @@
             "description": "Provides tools to ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/debug/tree/4.4"
+                "source": "https://github.com/symfony/debug/tree/v4.4.41"
             },
             "funding": [
                 {
@@ -4457,12 +5632,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "e1515dd53920dce8ae4e866b5086b98e911c8c73"
+                "reference": "b1e5131358d323745fd2cb81c4ef9eec5c61fd1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/e1515dd53920dce8ae4e866b5086b98e911c8c73",
-                "reference": "e1515dd53920dce8ae4e866b5086b98e911c8c73",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b1e5131358d323745fd2cb81c4ef9eec5c61fd1d",
+                "reference": "b1e5131358d323745fd2cb81c4ef9eec5c61fd1d",
                 "shasum": ""
             },
             "require": {
@@ -4553,7 +5728,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-12T15:19:55+00:00"
+            "time": "2022-04-27T17:19:01+00:00"
         },
         {
             "name": "symfony/inflector",
@@ -4721,12 +5896,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mailer.git",
-                "reference": "7b14bae81d6bca0693f07866fce34d95a7aad65c"
+                "reference": "62d909879078b31f338b26a2701c8f8802343769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mailer/zipball/7b14bae81d6bca0693f07866fce34d95a7aad65c",
-                "reference": "7b14bae81d6bca0693f07866fce34d95a7aad65c",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/62d909879078b31f338b26a2701c8f8802343769",
+                "reference": "62d909879078b31f338b26a2701c8f8802343769",
                 "shasum": ""
             },
             "require": {
@@ -4794,7 +5969,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-15T18:40:11+00:00"
+            "time": "2022-04-27T04:12:05+00:00"
         },
         {
             "name": "symfony/mime",
@@ -7727,6 +8902,60 @@
             "time": "2022-01-24T20:11:01+00:00"
         },
         {
+            "name": "tightenco/collect",
+            "version": "v8.83.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tighten/collect.git",
+                "reference": "7275c1b5f6bfc539d72bb5984d3b9a89e47e27c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tighten/collect/zipball/7275c1b5f6bfc539d72bb5984d3b9a89e47e27c9",
+                "reference": "7275c1b5f6bfc539d72bb5984d3b9a89e47e27c9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0",
+                "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0 || ^6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "nesbot/carbon": "^2.23.0",
+                "phpunit/phpunit": "^8.3"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Collect/Support/helpers.php",
+                    "src/Collect/Support/alias.php"
+                ],
+                "psr-4": {
+                    "Tightenco\\Collect\\": "src/Collect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "Collect - Illuminate Collections as a separate package.",
+            "keywords": [
+                "collection",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/tighten/collect/issues",
+                "source": "https://github.com/tighten/collect/tree/v8.83.8"
+            },
+            "time": "2022-04-15T20:31:14+00:00"
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "3.x-dev",
             "source": {
@@ -10231,7 +11460,8 @@
     "stability-flags": {
         "blackknight467/star-rating-bundle": 20,
         "components/font-awesome": 20,
-        "knplabs/knp-snappy-bundle": 20,
+        "gasciences/botman-bundle": 20,
+        "nucleos/dompdf-bundle": 20,
         "php-flasher/flasher-toastr-symfony": 20
     },
     "prefer-stable": false,

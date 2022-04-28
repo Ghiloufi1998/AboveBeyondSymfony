@@ -45,4 +45,17 @@
 </div>
     </div>
     {{ flasher_render() }}
+ 
+        <script>
+            var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("message") }}',
+            introMessage: 'Bonjour, Je suis la pour vous aidez ',
+            title: 'Above & beyond Bot ', 
+            mainColor: '#3993dd',
+            bubbleBackground: '#3993dd',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 {% endblock %}

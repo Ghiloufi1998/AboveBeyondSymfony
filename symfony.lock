@@ -1,6 +1,21 @@
 {
+    "basster/twig-base64-extension": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "0a0762c7d5acf2449f9f7f330a514c666e8d0b92"
+        }
+    },
     "blackknight467/star-rating-bundle": {
         "version": "dev-master"
+    },
+    "botman/botman": {
+        "version": "2.6.1"
+    },
+    "botman/driver-web": {
+        "version": "1.5.1"
     },
     "components/font-awesome": {
         "version": "dev-master"
@@ -85,14 +100,20 @@
     "doctrine/sql-formatter": {
         "version": "1.2.x-dev"
     },
+    "dompdf/dompdf": {
+        "version": "v1.2.1"
+    },
     "egulias/email-validator": {
         "version": "3.1.2"
+    },
+    "evenement/evenement": {
+        "version": "v3.0.1"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
-    "knplabs/knp-snappy": {
-        "version": "1.x-dev"
+    "gasciences/botman-bundle": {
+        "version": "dev-master"
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
@@ -100,17 +121,38 @@
     "monolog/monolog": {
         "version": "1.27.0"
     },
+    "mpociot/pipeline": {
+        "version": "1.0.2"
+    },
     "myclabs/deep-copy": {
         "version": "1.11.0"
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "nucleos/dompdf-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "3.1",
+            "ref": "ac77a0c751bdccab42ddc73d7290719b31ecb691"
+        }
+    },
+    "opis/closure": {
+        "version": "3.6.x-dev"
+    },
     "phar-io/manifest": {
         "version": "2.0.3"
     },
     "phar-io/version": {
         "version": "3.2.1"
+    },
+    "phenx/php-font-lib": {
+        "version": "0.5.4"
+    },
+    "phenx/php-svg-lib": {
+        "version": "0.4.1"
     },
     "php-flasher/flasher": {
         "version": "dev-main"
@@ -177,6 +219,30 @@
     "psr/log": {
         "version": "1.1.4"
     },
+    "react/cache": {
+        "version": "1.x-dev"
+    },
+    "react/dns": {
+        "version": "1.x-dev"
+    },
+    "react/event-loop": {
+        "version": "1.x-dev"
+    },
+    "react/promise": {
+        "version": "2.x-dev"
+    },
+    "react/promise-timer": {
+        "version": "1.x-dev"
+    },
+    "react/socket": {
+        "version": "1.x-dev"
+    },
+    "react/stream": {
+        "version": "1.x-dev"
+    },
+    "sabberworm/php-css-parser": {
+        "version": "8.4.0"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
@@ -236,6 +302,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/macroable": {
+        "version": "1.0.1"
     },
     "symfony/asset": {
         "version": "v4.4.37"
@@ -599,6 +668,9 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
+    },
+    "tightenco/collect": {
+        "version": "v8.83.8"
     },
     "twig/extra-bundle": {
         "version": "v3.3.8"
