@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Reservation
- *
+ * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
  * @ORM\Table(name="reservation", indexes={@ORM\Index(name="PK_vol", columns={"vol_ID"}), @ORM\Index(name="PK_heb", columns={"Hebergement_id"}), @ORM\Index(name="Fk", columns={"ID_user"})})
- * @ORM\Entity
+ * 
  */
 class Reservation
 {

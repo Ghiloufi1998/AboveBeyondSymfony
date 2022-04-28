@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Entity\Offres;
 use App\Repository\VolRepository;
 use App\Entity\Vol;
+use App\Entity\Reservation;
+use App\Repository\ReservationRepository;
 use App\Repository\OffersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,4 +27,16 @@ class OffresUserController extends AbstractController
             'off' => $facts,
         ]);
     }
+   /**
+     * @Route("/offresuser/{destination}", name="app_offresdestination")
+     */
+    public function offre($destination,EntityManagerInterface $entityManager): Response
+    {  
+        $facts = $entityManager->getRepository(Reservation::class)->Country($destination);
+        dump($facts);
+        return $this->render('offres_user/vol.html.twig', [
+            'off' => $facts,
+        ]);
+    }
+  
 }

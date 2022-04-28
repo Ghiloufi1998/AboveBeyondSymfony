@@ -24,13 +24,19 @@ class Facture
     /**
      * @var \DateTime|null
      * @Assert\NotBlank
-     * @ORM\Column(name="Date_ech", type="date", nullable=true, options={"default"="NULL"})
+     *  
+     * @Assert\GreaterThanOrEqual("today")
+     * 
+     * @ORM\Column(name="Date_ech", type="date", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $dateEch ;
+   
 
     /**
      * @var int|null
      * @Assert\NotBlank
+     * @Assert\Positive
+     * @Assert\GreaterThan(0)
      * @ORM\Column(name="Montant_ttc", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $montantTtc = NULL;
@@ -43,6 +49,7 @@ class Facture
      *     match=false,
      *     message="cannot contain a number"
      * )
+     * 
      * @ORM\Column(name="Etat", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $etat ;
@@ -52,7 +59,7 @@ class Facture
      *
      * @ORM\ManyToOne(targetEntity="Reservation")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rev_ID", referencedColumnName="rev_ID")
+     *   @ORM\JoinColumn(name="rev_ID", referencedColumnName="rev_ID",onDelete="CASCADE")
      * })
      */
     private $rev;

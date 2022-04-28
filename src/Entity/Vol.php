@@ -33,7 +33,7 @@ class Vol
      *
      * @ORM\Column(name="Départ", type="string", length=255, nullable=false)
      */
-    private $départ;
+    private $depart;
 
     /**
      * @var string

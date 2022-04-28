@@ -17,8 +17,9 @@ class FactureType extends AbstractType
             ->add('montantTtc')
             ->add('etat', ChoiceType::class, array(
                 'choices' => array(
-                    'payee'   => 'payee',
-                    'non payee' => 'non payee',
+                    'non payer' => 'non payer',
+                    'payer'   => 'payer'
+                   
                     
                 )))
             //->add('pai')

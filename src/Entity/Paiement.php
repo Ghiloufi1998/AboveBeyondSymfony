@@ -23,16 +23,15 @@ class Paiement
 
     /**
      * @var \DateTime
-     *@Assert\NotBlank
-     * @ORM\Column(name="Date", type="date", nullable=true, options={"default"="NULL"})
+     *@Assert\GreaterThanOrEqual("today")
+     * @ORM\Column(name="Date", type="date", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
      */
     private $date ;
-
+   
     /**
-     * @var string|null
-     * @Assert\NotBlank
-     *  
-     * @ORM\Column(name="Montant", type="integer", length=65535, nullable=true, options={"default"="NULL"})
+     * @var int
+     * @Assert\Positive
+     * @ORM\Column(name="Montant", type="integer", length=65535, nullable=true, options={"default"="0"})
      */
     private $montant ;
 
@@ -42,6 +41,9 @@ class Paiement
      * @ORM\Column(name="Mode_Pay", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $modePay ;
+    public function __construct(){
+        $this->setdate(new \DateTime());
+    }
 
     public function getPaiId(): ?int
     {

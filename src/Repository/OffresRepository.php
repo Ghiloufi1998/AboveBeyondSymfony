@@ -1,19 +1,16 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\Facture;
+use Doctrine\ORM\EntityRepository;
+use App\Entity\Reservation;
+use App\Entity\Hebergement;
 use App\Entity\Offres;
+use App\Entity\Vol;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
-
-/**
- * @method Offres|null find($id, $lockMode = null, $lockVersion = null)
- * @method Offres|null findOneBy(array $criteria, array $orderBy = null)
- * @method Offres[]    findAll()
- * @method Offres[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class OffresRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,10 +18,7 @@ class OffresRepository extends ServiceEntityRepository
         parent::__construct($registry, Offres::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
+ 
     public function add(Offres $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -33,10 +27,6 @@ class OffresRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
     public function remove(Offres $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
@@ -44,7 +34,6 @@ class OffresRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
     // /**
     //  * @return Offres[] Returns an array of Offres objects
     //  */

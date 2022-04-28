@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Paiement;
 use App\Entity\Facture;
+
+use App\Repository\FactureRepository;
+use App\Repository\PaiementRepository;
+
 use App\Form\FactureType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +27,7 @@ class FactureController extends AbstractController
         $factures = $entityManager
             ->getRepository(Facture::class)
             ->findAll();
-
+           
         return $this->render('facture/index.html.twig', [
             'factures' => $factures,
         ]);
@@ -84,13 +88,14 @@ class FactureController extends AbstractController
     /**
      * @Route("/{idFac}", name="app_facture_delete", methods={"POST"})
      */
-    public function delete(Request $request, Facture $facture, EntityManagerInterface $entityManager): Response
+    public function delete($idFac,Request $request, Facture $facture, EntityManagerInterface $entityManager,FactureRepository $FR,PaiementRepository $PaiementRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$facture->getIdFac(), $request->request->get('_token'))) {
-            $entityManager->remove($facture);
-            $entityManager->remove($$paiement);
+           $x=$PaiementRepository->find($idFac);
+
+           $entityManager->remove($facture);
+            $entityManager->remove($x);
             $entityManager->flush();
-        }
+        
 
         return $this->redirectToRoute('app_facture_index', [], Response::HTTP_SEE_OTHER);
     }

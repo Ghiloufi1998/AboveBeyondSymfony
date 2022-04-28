@@ -6,7 +6,7 @@
     background-color:#fff;
 }
 </style>
-{% for c in factures %}
+{% for c in off %}
 <div class="container"style="max-width:700px;">
 	<div class="row">
     
@@ -15,7 +15,7 @@
 			<article class="card-wrapper">
 				<div class="image-holder">
 					<a href="#" class="image-holder__link"></a>
-					<img src="{{asset(c.Image)}}">
+					<img src="">
 					
 				</div>
 
@@ -23,8 +23,8 @@
 					<!-- title -->
 					<h1 class="product-description__title">
 						<a href="#">						
-							{{c.Destination}}
-                            {{c.Départ}}
+							{{c.destination}}
+                           
 							</a>
 					</h1>
 
@@ -34,7 +34,7 @@
 						
 						</div>
 						<div class="col-xs-12 col-sm-4 product-description__price">
-							{{c.prix - 20 }} prix
+							{{c.getprix() - 20 }} prix
 						</div>
 					</div>
 

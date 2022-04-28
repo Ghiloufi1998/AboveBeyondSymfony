@@ -696,8 +696,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div id="cycler">   
 									
 									<div class="date-text">
-										<a href="single.html">July 08,2015</a>
-										<p>{{c.description}}   {{c.nbPointReq}} {{c.destination}}</p>
+										<a href="{{ path('app_offresdestination', {'destination':c.destination }) }}">Offer {{c.destination}} </a>
+										<p>Description : {{c.description}}  <br> Nombre des points :{{c.nbPointReq}} <br> reduction jusqu'a :{{c.NbPointReq}}%</p>
 									</div>
 								<!--	<script>
 									function cycle($item, $cycler){

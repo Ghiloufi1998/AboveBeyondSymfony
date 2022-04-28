@@ -6,11 +6,13 @@
                   <table class="table">
                      <thead>
                       <tr>
-                       <th>IdFac</th>
-                       <th>DateEch</th>
-                       <th>MontantTtc</th>
+                       <th>Numero Facture</th>
+                       <th>Date echance</th>
+                       <th>Montant</th>
                        <th>Etat</th>
-                       <th>actions</th>
+                       <th>Numero Paiment</th>
+                       <th>Numero Reservation</th>
+                       <th>actions<th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -20,6 +22,8 @@
                        <td>{{ facture.DateEch ? facture.DateEch |date('Y-m-d') : '' }}</td>
                        <td>{{ facture.getMontantTtc() }}</td>
                        <td>{{ facture.getEtat() }}</td>
+                       <td ><a href="{{ path('app_paiement_show', {'paiId': facture.getPai().paiId  }) }}">{{ facture.getPai().paiId}}</a> </td>
+                     <td ><a href="{{ path('app_paiement_show', {'paiId': facture.getRev().revId  }) }}">{{ facture.getRev().revId }}</a> </td> 
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
