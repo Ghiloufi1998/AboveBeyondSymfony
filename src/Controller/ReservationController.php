@@ -322,7 +322,7 @@ class ReservationController extends AbstractController
 
 
             $sid    = "AC3ea871badadca7b42b05c6fea7f9ae84"; 
-            $token  = "298ab71eb0413ee94b4be74b5988caac"; 
+            $token  = "a5b25dd5479380d50c077832ad28a851"; 
             $twilio = new Client($sid, $token); 
             
             $message = $twilio->messages 
