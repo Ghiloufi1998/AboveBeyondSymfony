@@ -29,7 +29,7 @@
                 <td>{{ exercice.reponse }}</td>
                 
                 <td>{{ exercice.hint }}</td>
-                <td> <img src="{{ asset('uploads/'~exercice.image) }}"width="150"height="120"alt="" > </td>
+                <td> <img src="{{ asset(''~exercice.image) }}"width="150"height="120"alt="" > </td>
                 <td style="text-align:center">
                     <a href="{{ path('app_exercices_show', {'idEx': exercice.idEx}) }}"><button type="button" class="btn btn-primary">Afficher</button></a>
                     <br>

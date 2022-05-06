@@ -80,8 +80,8 @@ class CoursController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $cour->setImage($fileName);
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $cour->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
             $entityManager->persist($cour);
            
             $entityManager->flush();
@@ -116,8 +116,8 @@ class CoursController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $cour->setImage($fileName);
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $cour->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);

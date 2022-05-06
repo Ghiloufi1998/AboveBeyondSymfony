@@ -58,8 +58,10 @@ class ExercicesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $exercice->setImage($fileName);
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $exercice->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
+          //  $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+         //   $exercice->setImage($fileName);
             $entityManager->persist($exercice);
             $entityManager->flush();
 
@@ -152,8 +154,10 @@ class ExercicesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $exercice->setImage($fileName);
+              $file->move ($this->getParameter('images_directory'),$fileName);
+            $exercice->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
+       //   $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
+         //   $exercice->setImage($fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_exercices_index', [], Response::HTTP_SEE_OTHER);
@@ -273,7 +277,7 @@ class ExercicesController extends AbstractController
         $dompdf->setHttpContext($contxt);
         $html = $this->renderView('exercices/certifpdf.html.twig', [
             'note' => $note,
-            
+            'idCrs' => $idCrs,
         ]);
         
         $dompdf->loadHtml($html);
@@ -304,7 +308,7 @@ class ExercicesController extends AbstractController
         });
         $botman->hears('(aide|help|hint)', function (BotMan $bot) {
             
-            $bot->reply('Ma indice pour ce exercie est : kapppaaajsdfnokdsaa');
+            $bot->reply('Ma indice pour ce exercie est : ');
         });
  
       

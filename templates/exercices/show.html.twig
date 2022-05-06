@@ -10,7 +10,7 @@
     <div class="tab-header" > <h1> Exercices info </h1>    <p class="create"> <a href="{{ path('app_exercices_index') }}" class="btn btn-primary"  style="margin-bottom:10px;     width: 100%;">Retour a la liste </a>
  </p>  </div>
  <div class="card" style="width: 18rem;margin-left: 15px;">
-  <img src="{{ asset('uploads/'~exercice.image) }}" class="card-img-top" alt="...">
+  <img src="{{ asset(''~exercice.image) }}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ exercice.question }}</h5>
     <p class="card-text">Reponse : {{ exercice.reponse }}</p>

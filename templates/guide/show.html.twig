@@ -10,7 +10,7 @@
     <div class="tab-header" > <h1> Guide info </h1>    <p class="create"> <a href="{{ path('app_guide_index') }}" class="btn btn-primary"  style="margin-bottom:10px;     width: 100%;">Retour a la liste </a>
  </p>  </div>
  <div class="card" style="width: 25rem;margin-left: 15px;">
-  <img src="{{ asset('uploads/'~guide.image) }}" class="card-img-top"  alt="...">
+  <img src="{{ asset(''~guide.image) }}" class="card-img-top"  alt="...">
   <div class="card-body">
     <h5 class="card-title">{{ guide.titre }}</h5>
     <p class="card-text">Pays : {{ guide.pays }}</p>

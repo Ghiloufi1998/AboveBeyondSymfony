@@ -25,7 +25,7 @@
                 <td>{{ guide.titre }}</td>
                 <td>{{ guide.pays }}</td>
                 <td>{{ guide.level }}</td>
-                 <td> <img src="{{ asset('uploads/'~guide.image) }}"width="150"height="120"alt="" > </td>
+                 <td> <img src="{{ asset(''~guide.image) }}"width="150"height="120"alt="" > </td>
                 <td style="text-align:center">
                     <a href="{{ path('app_guide_show', {'idG': guide.idG}) }}"><button type="button" class="btn btn-primary">Afficher</button></a>
 

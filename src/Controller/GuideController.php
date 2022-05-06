@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Guide;
 use App\Entity\Cours;
 use App\Repository\CoursRepository;
+use App\Repository\GuideRepository;
 use App\Form\GuideType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,25 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonRespImageonse;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/guide")
  */
 class GuideController extends AbstractController
 {
+    /**
+     * @Route("/AllGuide", name="AllGuide",methods={"GET"})
+     */
+
+    public function AllGuide(NormalizerInterface $Normalizer)
+    {
+        $repo=$this->getDoctrine()->getRepository(Guide::class);
+        $guides=$repo->findAll();
+        $jsonContent = $Normalizer->normalize($guides , 'json',['guides'=>'post:read']);
+        return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+     }
     /**
      * @Route("/", name="app_guide_index", methods={"GET"})
      */
@@ -59,8 +73,8 @@ class GuideController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $guide->setImage($fileName);
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $guide->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
             $entityManager->persist($guide);
             $entityManager->flush();
 
@@ -96,8 +110,8 @@ class GuideController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file=$form->get('image')->getData();
             $fileName=(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->getParameter('kernel.project_dir').'/public/uploads', $fileName);
-            $guide->setImage($fileName);
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $guide->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_guide_index', [], Response::HTTP_SEE_OTHER);

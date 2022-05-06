@@ -52,7 +52,6 @@
 				
 	</div>
     
-
 {% endfor %}
-    <a href="{{ path('certif', {'idCrs': idCrs}) }}" class="btn btn-success" style="margin-bottom:10px;margin-left: 200px; "{% if note < 150  %}disabled="disabled" {% endif %}>Obtenir mon Certif</a>
+    <a href="{{ path('certif', {'idCrs': idCrs}) }}" class="btn btn-success" style="margin-bottom:10px;margin-left: 200px; "{% if note < 30  %}disabled="disabled" {% endif %}>Obtenir mon Certif</a>
 {% endblock %}
