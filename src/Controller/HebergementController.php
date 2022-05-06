@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 
 
 /**
@@ -17,6 +19,95 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class HebergementController extends AbstractController
 {
+
+
+    /**
+     * @Route("/newJsonhbr/new", name="newJsonhbr")
+     */
+    public function newJsonres(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $hbr = new Hebergement();
+        
+
+            $hbr->setType($Request->get('type'));
+            $hbr->setDisponibilite($Request->get('dis'));
+            $hbr->setDescription($Request->get('desc'));
+            $hbr->setAdresse($Request->get('ad'));
+            $hbr->setImage($Request->get('im'));
+            $hbr->setPrix($Request->get('pr'));
+        
+            $entityManager->persist($hbr);
+            $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/updatejsonhbr/{hebergementId}", name="updatejsonhbr")
+     */
+    public function updatejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
+
+            $hbr->setType($Request->get('type'));
+            $hbr->setDisponibilite($Request->get('dis'));
+            $hbr->setDescription($Request->get('desc'));
+            $hbr->setAdresse($Request->get('ad'));
+            $hbr->setImage($Request->get('im'));
+            $hbr->setPrix($Request->get('pr'));
+            $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("/deletejsonhbr/{hebergementId}", name="deletejsonhbr")
+     */
+    public function deletejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
+
+        $entityManager->remove($hbr);
+        $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
+        return new Response("deleted".json_encode($jsonContent));
+    }
+
+
+
+    /**
+     * @Route("/Jsonhbr/{hebergementId}", name="json_hbr")
+     */
+    public function Jsonres($hebergementId, Request $Request, NormalizerInterface $Normalizer){
+        
+        //$em->this->getDoctrine()->getManager();
+        $h =   $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+
+
+     }
+
+    /**
+     * @Route("/Allhbr", name="Allhbr")
+     */
+
+    public function AllRes(NormalizerInterface $Normalizer){
+        $h =   $this->getDoctrine()->getRepository(Hebergement::class)->findAll();
+        $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+
+
+
+     }
     /**
      * @Route("/", name="app_hebergement_index", methods={"GET"})
      */

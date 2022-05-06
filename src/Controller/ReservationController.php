@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twilio\Rest\Client;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 use App\Services\QrcodeService;
 
@@ -24,7 +25,54 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class ReservationController extends AbstractController
 {
 
+     /**
+     * @Route("/newJsonres/new", name="newJsonres")
+     */
+    public function newJsonres(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $reservation = new Reservation();
+        $reservation->settype('Individuelle');
 
+            $reservation->setDestination($Request->get('dest'));
+            $reservation->setNbrEnfants($Request->get('nbre'));
+            $reservation->setNbrAdultes($Request->get('nbra'));
+            $reservation->setDateDeb($Request->get('dated'));
+            $reservation->setDateFin($Request->get('datef'));
+        
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($reservation,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+     /**
+     * @Route("/Jsonres/{revId}", name="json_res")
+     */
+    public function Jsonres($revId, Request $Request, NormalizerInterface $Normalizer){
+        
+        //$em->this->getDoctrine()->getManager();
+        $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->find($revId);
+        $jsonContent= $Normalizer->normalize($reservations,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+
+
+     }
+
+    /**
+     * @Route("/AllRes", name="AllRes")
+     */
+
+    public function AllRes(NormalizerInterface $Normalizer){
+        $reservations =   $this->getDoctrine()->getRepository(Reservation::class)->findAll();
+        $jsonContent= $Normalizer->normalize($reservations,'json' ,['groups' =>'post:read' ] );
+        return $this->render('reservation/allresjson.html.twig', [
+            'data' => $jsonContent
+           ]);
+
+
+     }
     /**
      * @Route("/weather", name="weather" , methods={"GET", "POST"})
      */
@@ -426,6 +474,9 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('consulter', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+
 
     
 }

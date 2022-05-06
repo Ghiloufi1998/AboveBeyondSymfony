@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -21,6 +22,7 @@ class Reservation
      * @ORM\Column(name="rev_ID", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $revId;
 
@@ -31,6 +33,7 @@ class Reservation
      * @Assert\GreaterThan ("today",message="Vérifier la date!")
      *
      * @ORM\Column(name="Date_Deb", type="date", nullable=false)
+     * @Groups("post:read")
      */
     private $dateDeb;
 
@@ -41,6 +44,7 @@ class Reservation
      * @Assert\GreaterThan ("today",message="Vérifier la date!")
      *
      * @ORM\Column(name="Date_Fin", type="date", nullable=false)
+     * @Groups("post:read")
      */
     private $dateFin;
 
@@ -57,6 +61,7 @@ class Reservation
      *
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $type;
 
@@ -68,6 +73,7 @@ class Reservation
      * @Assert\Positive(message="Le nombre d'adultes doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_adultes", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $nbrAdultes;
 
@@ -78,6 +84,7 @@ class Reservation
      * @Assert\Positive(message="Le nombre d'enfants doit etre positif ! ")
      *
      * @ORM\Column(name="Nbr_enfants", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $nbrEnfants;
 
@@ -86,6 +93,7 @@ class Reservation
      * @var int
      *
      * @ORM\Column(name="ID_user", type="integer", nullable=true)
+     * 
      */
     private $ID_user;
 
@@ -94,6 +102,7 @@ class Reservation
      *
      * 
      * @ORM\Column(name="Destination", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $destination;
 
@@ -123,6 +132,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Hebergement_id", referencedColumnName="Hebergement_id")
      * })
+     * 
      */
     private $hebergement;
 
@@ -135,6 +145,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Vol_id", referencedColumnName="Vol_id")
      * })
+     * 
      */
     private $vol;
 
@@ -145,6 +156,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_user", referencedColumnName="id")
      * })
+     * 
      */
     private $idUser;
 

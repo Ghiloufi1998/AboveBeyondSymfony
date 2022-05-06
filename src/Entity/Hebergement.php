@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -20,6 +21,7 @@ class Hebergement
      * @ORM\Column(name="Hebergement_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $hebergementId;
 
@@ -39,6 +41,7 @@ class Hebergement
      *   )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
+     * @Groups("post:read")
      */
     private $description;
 
@@ -58,6 +61,7 @@ class Hebergement
      *   )
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $type;
 
@@ -69,6 +73,7 @@ class Hebergement
      *
      * 
      * @ORM\Column(name="Disponibilité", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $Disponibilite;
 
@@ -78,6 +83,7 @@ class Hebergement
      * 
      *
      * @ORM\Column(name="Adresse", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $adresse;
 
@@ -87,6 +93,7 @@ class Hebergement
      * 
      * Assert\NotBlank(message="Champ image vide ! ")
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $image;
 
@@ -96,6 +103,7 @@ class Hebergement
      * @Assert\Positive(message="Le prix doit etre positif ! ")
      *
      * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
+     * @Groups("post:read")
      */
     private $prix = NULL;
 // Kamel getter w setters
