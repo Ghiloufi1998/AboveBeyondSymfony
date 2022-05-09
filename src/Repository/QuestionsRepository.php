@@ -36,17 +36,6 @@ class QuestionsRepository extends ServiceEntityRepository
         ;
     }
     
-    public function findTypeById($id)
-    {
-        return $this->createQueryBuilder('a')
-            -> join ('a.sondage','c')
-            ->addSelect ('c')
-            ->andWhere('c.sondageId = :val')
-            ->setParameter('val', $id)
-            ->getQuery()
-            ->getArrayResult()
-        ;
-    }
     
 
     

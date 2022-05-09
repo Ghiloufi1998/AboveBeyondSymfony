@@ -52,58 +52,5 @@ class Guide
      */
     private $idVol;
 
-    public function getIdG(): ?int
-    {
-        return $this->idG;
-    }
-
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $pays): self
-    {
-        $this->pays = $pays;
-
-        return $this;
-    }
-
-    public function getLevel(): ?int
-    {
-        return $this->level;
-    }
-
-    public function setLevel(int $level): self
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    public function getIdVol(): ?Vol
-    {
-        return $this->idVol;
-    }
-
-    public function setIdVol(?Vol $idVol): self
-    {
-        $this->idVol = $idVol;
-
-        return $this;
-    }
-
 
 }

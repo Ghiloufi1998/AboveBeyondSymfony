@@ -87,9 +87,9 @@ class User
     /**
      * @var int|null
      *
-     * @ORM\Column(name="nombre_de_points", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="nombre_de_points", type="integer", nullable=true)
      */
-    private $nombreDePoints = NULL;
+    private $nombreDePoints;
 
     /**
      * @var \Offres
@@ -100,143 +100,6 @@ class User
      * })
      */
     private $idOffre;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrã©nom(): ?string
-    {
-        return $this->prã©nom;
-    }
-
-    public function setPrã©nom(string $prã©nom): self
-    {
-        $this->prã©nom = $prã©nom;
-
-        return $this;
-    }
-
-    public function getSexe(): ?string
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(string $sexe): self
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    public function getDateDeNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateDeNaissance;
-    }
-
-    public function setDateDeNaissance(\DateTimeInterface $dateDeNaissance): self
-    {
-        $this->dateDeNaissance = $dateDeNaissance;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function setMotDePasse(string $motDePasse): self
-    {
-        $this->motDePasse = $motDePasse;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getNombreDePoints(): ?int
-    {
-        return $this->nombreDePoints;
-    }
-
-    public function setNombreDePoints(?int $nombreDePoints): self
-    {
-        $this->nombreDePoints = $nombreDePoints;
-
-        return $this;
-    }
-
-    public function getIdOffre(): ?Offres
-    {
-        return $this->idOffre;
-    }
-
-    public function setIdOffre(?Offres $idOffre): self
-    {
-        $this->idOffre = $idOffre;
-
-        return $this;
-    }
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+//use App\Entity\SearchData;
 use App\Entity\Sondage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +19,9 @@ class SondageRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Sondage::class);
+    
     }
+
 
      /**
       * @return Sondage[] Returns an array of Sondage objects
@@ -62,5 +65,28 @@ class SondageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    
+    /**
+     * @return Sondage[]
+     *
+     */
+
+    public function findBySearch($search,$sond): ?Sondage
+    {
+        $query= $this->createQueryBuilder('s');
+        //$query->where('s.active=1');
+
+        if(!empty($search)){
+            $query=$query
+            ->andWhere('s.sujet= :val')
+            ->setParameter('val', "%{$search}%");
+        }
+
+        if(!empty($sond)){
+            $query=$query
+            ->andWhere('s.categorie= :val1')
+            ->setParameter('val1', $sond);
+        }
+       
+       return $query->getQuery->getArrayResult();
+    }
 }

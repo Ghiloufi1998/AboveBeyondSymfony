@@ -52,58 +52,5 @@ class Cours
      */
     private $idG;
 
-    public function getIdCrs(): ?int
-    {
-        return $this->idCrs;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    public function getContenu(): ?string
-    {
-        return $this->contenu;
-    }
-
-    public function setContenu(string $contenu): self
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    public function getIdG(): ?Guide
-    {
-        return $this->idG;
-    }
-
-    public function setIdG(?Guide $idG): self
-    {
-        $this->idG = $idG;
-
-        return $this;
-    }
-
 
 }

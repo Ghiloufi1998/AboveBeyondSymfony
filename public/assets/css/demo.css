@@ -320,3 +320,62 @@ button.bton, a.bton{
 textarea{
   width: 100%;
 }
+
+.container00 {
+  align-items: center;
+  max-width: calc(100% - 270px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.listeSondage {
+  display: flex;
+  max-width: 100%;
+  height: fit-content;
+  gap: 30px;
+  
+  
+  
+  
+}
+
+.comment {
+  background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 500px;
+	max-width: 100%;
+  padding: 30px 40px;
+
+}
+
+.comment-body {
+
+  background-color:rgba(67, 89, 113, 0);;
+	font-family: 'Open Sans', sans-serif;
+	
+	align-items: center;
+	justify-content: center;
+	min-height: 50vh;
+	margin: 0;
+  width: 300%;
+  padding: 30px 10px;	
+  z-index: 1000;
+
+
+
+  }
+  .comment3 {
+    
+    align-items: center;
+	  justify-content: center;
+		min-height: 540px;
+    min-width: 300px;
+    width: 400px;
+    padding: 30px 10px;	
+     z-index: 1000;
+     margin: 0;
+     margin-left: auto;
+    margin-right: auto ;
+	}

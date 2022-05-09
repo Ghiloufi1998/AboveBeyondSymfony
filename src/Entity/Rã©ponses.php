@@ -5,12 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Rï¿½ponses
+ * Rã©ponses
  *
  * @ORM\Table(name="rÃ©ponses", indexes={@ORM\Index(name="Question_id", columns={"Question_id"})})
  * @ORM\Entity
  */
-class Rï¿½ponses
+class Rã©ponses
 {
     /**
      * @var int
@@ -19,14 +19,14 @@ class Rï¿½ponses
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $rï¿½ponsesId;
+    private $rã©ponsesId;
 
     /**
      * @var string
      *
      * @ORM\Column(name="rÃ©ponse", type="string", length=50, nullable=false)
      */
-    private $rï¿½ponse;
+    private $rã©ponse;
 
     /**
      * @var \Questions
@@ -37,35 +37,6 @@ class Rï¿½ponses
      * })
      */
     private $question;
-
-    public function getRï¿½ponsesId(): ?int
-    {
-        return $this->rï¿½ponsesId;
-    }
-
-    public function getRï¿½ponse(): ?string
-    {
-        return $this->rï¿½ponse;
-    }
-
-    public function setRï¿½ponse(string $rï¿½ponse): self
-    {
-        $this->rï¿½ponse = $rï¿½ponse;
-
-        return $this;
-    }
-
-    public function getQuestion(): ?Questions
-    {
-        return $this->question;
-    }
-
-    public function setQuestion(?Questions $question): self
-    {
-        $this->question = $question;
-
-        return $this;
-    }
 
 
 }

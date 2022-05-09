@@ -11,6 +11,7 @@
         "doctrine/orm": "^2.11",
         "gregwar/captcha-bundle": "2.1",
         "knplabs/knp-paginator-bundle": "^5.8",
+        "mercuryseries/flashy-bundle": "3.0",
         "onurb/excel-bundle": "^1.0",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpoffice/phpspreadsheet": "^1.22",

@@ -4,10 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-/**
- * @ORMEntity(repositoryClass="AppRepositoryMyClassRepository")
- */
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Questions
@@ -20,9 +18,10 @@ class Questions
     /**
      * @var int
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(name="Question_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     *  @Groups("post:read")
      */
     private $questionId;
 
@@ -30,12 +29,7 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=50, nullable=false)
-     * @Assert\NotBlank(message="Veuillez entrer un question")
-     * @Assert\Type(
-     *     type="string",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * 
+     *  @Groups("post:read")
      */
     private $question;
 
@@ -43,15 +37,12 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=20, nullable=false)
-     * @Assert\NotBlank(message="Veuillez Choisir un type")
-     * @Assert\Type(
-     *     type="string",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     *    )
+     *  @Groups("post:read")
      */
     private $type;
 
-    /**
+
+     /**
      * @var \Sondage
      *
      * @ORM\ManyToOne(targetEntity="Sondage",inversedBy="Questions")
@@ -139,10 +130,4 @@ class Questions
 
 
 
-
-
-   
- 
 }
-
-

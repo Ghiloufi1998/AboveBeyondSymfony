@@ -11,8 +11,9 @@
 <br>
 
     
-     
-    {{ include('sondage/_form.html.twig') }}
+
+    {{ include('infousersondg/_form.html.twig') }}
+     <a href="{{ path('app_sondage_showsurvey', {'sondageId':sondageId}) }}"><button type="button" class="btn btn-success">Commencer</button></a>
     <br>
 <br>
 

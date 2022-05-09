@@ -112,6 +112,9 @@
     "markbaker/matrix": {
         "version": "3.0.0"
     },
+    "mercuryseries/flashy-bundle": {
+        "version": "v3.0.0"
+    },
     "monolog/monolog": {
         "version": "1.27.0"
     },

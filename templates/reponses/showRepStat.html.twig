@@ -4,7 +4,7 @@
 {% block body %}
 <div class="body">  
    <h1> Suivis des réponses </h1>
-   
+   <div class="container00">
     <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
@@ -16,13 +16,12 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                          <h5 class="card-title text-primary">Bienvenue! 🎉</h5>
                           <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
+                            Vous pouvez consulter les statistiques de chaque sondage par défférents critéres
                           </p>
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                          
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">
@@ -40,12 +39,15 @@
                   </div>
                 </div>
                   <!-- Order Statistics -->
-                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
+                  
+                  <div class= "listeSondage">
+                  
+                <div class="col-lg-6 ">
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                       <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Order Statistics</h5>
-                        <small class="text-muted">42.82k Total Sales</small>
+                        <h5 class="m-0 me-2">Statistique des réponses</h5>
+                        <small class="text-muted"></small>
                       </div>
                       <div class="dropdown">
                         <button
@@ -68,15 +70,15 @@
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="d-flex flex-column align-items-center gap-1">
-                          <h2 class="mb-2">8,258</h2>
-                          <span>Total Orders</span>
+                          <h2 class="mb-2"></h2>
+                          <span>suivis réponses</span>
                         </div>
                         <div id="orderStatisticsChart"></div>
                       </div>
                       <ul class="p-0 m-0">
                         <li class="d-flex mb-4 pb-1">
                          
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                         
                          <div class="tab">
 <div class="tab-header" > <h5> Liste des sondages </h5>   </div>
 
@@ -97,7 +99,6 @@
                 <td><small>{{ sondage.categorie }}</small></td>
                 <td>
                     <a href="{{ path('app_reponses_stat', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary btn-sm"><small>Details</small></button></a>
-                    <a href="{{path('app_sondage_excel', {'sondageId':sondage.sondageId}) }}"> <button type="button" class="btn btn-success btn-sm"><small>Export To Excel</small></button></a>
                     
                 </td>
             </tr>
@@ -109,170 +110,71 @@
         </tbody>
     </table>
     </div>       
-                          </div>
+                          
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
+                
 
                 <!-- Total Revenue -->
+                
                 <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
                   <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
+                        <h5 class="card-header m-0 me-2 pb-3">Sondage</h5>
                         <div  class="px-2">  <!-- Chart  -->
                 <canvas id="sondage" width="0.25" height="0.75"></canvas></div>
                       </div>
                       </div>
                       </div>
+                               </br>
+                           <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">Age</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="age" width="0.25" height="0.75"></canvas></div>
                       </div>
                       </div>
-                    <!--  <div class="col-md-4">
-                        <div class="card-body">
-                          <div class="text-center">
-                            <div class="dropdown">
-                              <button
-                                class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                type="button"
-                                id="growthReportId"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                2022
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                      </div>
+                      </div>
 
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2022</small>
-                              <h6 class="mb-0">$32.5k</h6>
-                            </div>
-                          </div>
-                          <div class="d-flex">
-                            <div class="me-2">
-                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                              <small>2021</small>
-                              <h6 class="mb-0">$41.2k</h6>
-                            </div>
-                          </div>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                  / Total Revenue 
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                  <div class="row">
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt4"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="d-block mb-1">Payments</span>
-                          <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                        </div>
                       </div>
-                    </div>
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt1"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-block mb-1">Transactions</span>
-                          <h3 class="card-title mb-2">$14,857</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-                        </div>
+                      
+                         </br>
+                   <div class="col-12 col-lg-6 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">sexe</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="sexe" width="0.25" height="0.75"></canvas></div>
                       </div>
-                    </div>
-                 
-                    <div class="col-12 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <small class="text-success text-nowrap fw-semibold"
-                                  ><i class="bx bx-chevron-up"></i> 68.2%</small
-                                >
-                                <h3 class="mb-0">$84,686k</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChart"></div>
-                          </div>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>-->
-                
-                <!-- Chart  -->
-                <canvas id="sondage" width="0.25" height="0.75"></canvas>
-                
-               
-                
+
+                   
+                     
+             </div>
+                   
+             </div>
+             
 </div>
+     </br>
+                   <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">PAY</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="pay" width="5" height="2"></canvas></div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
 
 
 <!-- config chart -->
@@ -284,8 +186,16 @@ var sondGraph = new Chart(ctx, {
     data: {
         labels: {{sondNom|raw}},
         datasets: [{
-            label: '# of Votes',
+            label: 'Nombre des réponses par catégorie',
             data: {{repCount|raw}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
           
         }]
     },
@@ -297,6 +207,91 @@ var sondGraph = new Chart(ctx, {
         }
     }
 });
+
+
+var ctx2 = document.getElementById('age').getContext('2d');
+var sondGraph2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: {{ageUser|raw}},
+        datasets: [{
+            label: 'Nombre Age',
+            data: {{nbrAge|raw}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+             borderWidth: 0.2,
+          
+        }]
+    },
+    options: {
+        
+        plugins :{
+          tooltip:{
+            yAlign:'botton'
+          }
+        },
+        indexAxis:'y',
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+var ctx3 = document.getElementById('sexe').getContext('2d');
+var sondGraph3 = new Chart(ctx3, {
+    type: 'pie',
+    data: {
+        labels: ['Femme','Homme'],
+        datasets: [{
+            label: 'Nombre de sexe',
+            data: [{{nbrFemme|raw}},{{nbrHomme|raw}}],
+             backgroundColor: [
+              'rgb(255, 99, 132)',
+               'rgb(54, 162, 235)'
+      
+    ],
+    hoverOffset: 4
+          
+        }]
+    },
+   
+});
+
+
+var ctx4 = document.getElementById('pay').getContext('2d');
+var sondGraph4 = new Chart(ctx4, {
+    type: 'line',
+    data: {
+        labels: {{pay_uni|raw}},
+        datasets: [{
+            label: 'Nombre de pay',
+            data: {{nbrPay|raw}},
+           fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+      
+ 
+   
+          
+        }]
+    },
+   
+});
+
+
+
+
+
+
+
 </script>
 {% endblock %}
 

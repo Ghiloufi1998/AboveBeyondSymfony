@@ -45,100 +45,23 @@ class Vol
     /**
      * @var int|null
      *
-     * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="Prix", type="integer", nullable=true)
      */
-    private $prix = NULL;
+    private $prix;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="x", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="x", type="float", precision=10, scale=0, nullable=true)
      */
-    private $x = NULL;
+    private $x;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="y", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="y", type="float", precision=10, scale=0, nullable=true)
      */
-    private $y = NULL;
-
-    public function getVolId(): ?int
-    {
-        return $this->volId;
-    }
-
-    public function getDestination(): ?string
-    {
-        return $this->destination;
-    }
-
-    public function setDestination(string $destination): self
-    {
-        $this->destination = $destination;
-
-        return $this;
-    }
-
-    public function getDã©part(): ?string
-    {
-        return $this->dã©part;
-    }
-
-    public function setDã©part(string $dã©part): self
-    {
-        $this->dã©part = $dã©part;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getPrix(): ?int
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(?int $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getX(): ?float
-    {
-        return $this->x;
-    }
-
-    public function setX(?float $x): self
-    {
-        $this->x = $x;
-
-        return $this;
-    }
-
-    public function getY(): ?float
-    {
-        return $this->y;
-    }
-
-    public function setY(?float $y): self
-    {
-        $this->y = $y;
-
-        return $this;
-    }
+    private $y;
 
 
 }

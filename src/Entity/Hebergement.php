@@ -59,86 +59,9 @@ class Hebergement
     /**
      * @var int|null
      *
-     * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="Prix", type="integer", nullable=true)
      */
-    private $prix = NULL;
-
-    public function getHebergementId(): ?int
-    {
-        return $this->hebergementId;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getDisponibilitã©(): ?int
-    {
-        return $this->disponibilitã©;
-    }
-
-    public function setDisponibilitã©(int $disponibilitã©): self
-    {
-        $this->disponibilitã© = $disponibilitã©;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getPrix(): ?int
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(?int $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
+    private $prix;
 
 
 }

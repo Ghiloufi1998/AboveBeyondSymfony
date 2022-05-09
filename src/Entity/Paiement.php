@@ -24,64 +24,23 @@ class Paiement
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="Date", type="date", nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="Date", type="date", nullable=true)
      */
-    private $date = 'NULL';
+    private $date;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Montant", type="text", length=65535, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="Montant", type="text", length=65535, nullable=true)
      */
-    private $montant = 'NULL';
+    private $montant;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Mode_Pay", type="string", length=255, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="Mode_Pay", type="string", length=255, nullable=true)
      */
-    private $modePay = 'NULL';
-
-    public function getPaiId(): ?int
-    {
-        return $this->paiId;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(?\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getMontant(): ?string
-    {
-        return $this->montant;
-    }
-
-    public function setMontant(?string $montant): self
-    {
-        $this->montant = $montant;
-
-        return $this;
-    }
-
-    public function getModePay(): ?string
-    {
-        return $this->modePay;
-    }
-
-    public function setModePay(?string $modePay): self
-    {
-        $this->modePay = $modePay;
-
-        return $this;
-    }
+    private $modePay;
 
 
 }

@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="body">  
-   <h1> Suivis des réponses </h1>
+   
      <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js') }}" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
    
@@ -19,36 +19,30 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                          <h5 class="card-title text-primary">Suivis réponses!</h5>
                           <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
+                            Cliquer sur différents questions pour pouvoir consulter ses réponses 
                           </p>
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">Allez !!</a>
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
+                         
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                   <!-- Order Statistics -->
+                  <div class="listeSondage">
                 <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
                       <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Order Statistics</h5>
-                        <small class="text-muted">42.82k Total Sales</small>
+                        <h5 class="m-0 me-2">Statistics</h5>
+                        <small class="text-muted"></small>
                       </div>
                       <div class="dropdown">
                         <button
@@ -71,8 +65,8 @@
                     <div class="card-body">
                       <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="d-flex flex-column align-items-center gap-1">
-                          <h2 class="mb-2">8,258</h2>
-                          <span>Total Orders</span>
+                          <h2 class="mb-2"></h2>
+                          <span>Totale des questions</span>
                          
                         </div>
                         <div id="orderStatisticsChart"></div>
@@ -82,7 +76,7 @@
                          
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                          <div class="tab">
-                        <div class="tab-header" > <h5> Liste des sondages </h5>   </div>
+                        <div class="tab-header" > <h5> Liste des questions </h5>   </div>
                      <table class="table">
                    <thead>
                 <tr>
@@ -108,7 +102,7 @@
                 </tr>
                   {% else %}
                   <tr>
-                   <td colspan="4">no records found</td>
+                   <td colspan="4"></td>
                       </tr>
                  {% endfor %}
                              </tbody>
@@ -127,7 +121,7 @@
                   <div class="card">
                     <div class="row row-bordered g-0">
                       <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Total Revenue </h5>
+                        <h5 class="card-header m-0 me-2 pb-3"> </h5>
                         <div  class="px-2"> 
                          <!-- Chart  -->
                        {% if questionId != 0 %}
@@ -170,7 +164,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: ['star1','star2','star3','star4','star5'],
         datasets: [{
-            label: '# of Votes',
+            label: 'Nombre des stars',
             data: [{{star1|raw}},{{star2|raw}},{{star3|raw}},{{star4|raw}},{{star5|raw}} ],
             backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
@@ -205,6 +199,46 @@ var chart = new Chart(ctx, {
 });
 </script>
                          {% endif %}
+                         {% if type is same as("Text") %}
+                          <div class="tab">
+                        <div class="tab-header" > <h5> Liste des sondages </h5>   </div>
+                     <table class="table">
+                   <thead>
+                <tr>
+                      <!-- <th>SondageId</th> -->
+                      
+                     <th><small>{{question|raw}}</small></th>
+                      
+                </tr>
+                  </thead>
+               <tbody>
+               {% for text in repText %}
+                    
+                      <tr>
+                      
+                    <td><small>{{ text|raw}}</small></td>
+                    
+                  
+                   
+               
+                </tr>
+                {% endfor %}
+                  {% else %}
+                  <tr>
+                   <td colspan="4">no records found</td>
+                      </tr>
+                 
+                             </tbody>
+                         </table>
+                          </div>       
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+
+                         {% endif %}
                          {% endif %}
 
                 
@@ -213,6 +247,7 @@ var chart = new Chart(ctx, {
                       </div>
                       </div>
                       </div>
+                   </div>
                    </div>
 
 
