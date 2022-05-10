@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Serializer\Annotation\Groups; 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -14,42 +14,47 @@ class Facture
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="ID_fac", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idFac;
 
     /**
      * @var \DateTime|null
      * @Assert\NotBlank
-     *  
+     *   @Groups("post:read")
      * @Assert\GreaterThanOrEqual("today")
      * 
      * @ORM\Column(name="Date_ech", type="date", nullable=true, options={"default": "CURRENT_TIMESTAMP"})
+     * 
      */
     private $dateEch ;
    
 
     /**
      * @var int|null
+     * @Groups("post:read")
      * @Assert\NotBlank
      * @Assert\Positive
      * @Assert\GreaterThan(0)
      * @ORM\Column(name="Montant_ttc", type="integer", nullable=true, options={"default"="NULL"})
+     * 
      */
     private $montantTtc = NULL;
 
     /**
+     *  
      * @var string|null
+     * 
      * @Assert\NotBlank
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
      *     message="cannot contain a number"
      * )
-     * 
+     * @Groups("post:read")
      * @ORM\Column(name="Etat", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
     private $etat ;
@@ -59,14 +64,14 @@ class Facture
      *
      * @ORM\ManyToOne(targetEntity="Reservation")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rev_ID", referencedColumnName="rev_ID",onDelete="CASCADE")
+     *  @ORM\JoinColumn(name="rev_ID", referencedColumnName="rev_ID",onDelete="CASCADE")
      * })
      */
     private $rev;
 
     /**
      * @var \Paiement
-     *
+     * 
      * @ORM\ManyToOne(targetEntity="Paiement")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Pai_ID", referencedColumnName="Pai_ID")

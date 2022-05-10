@@ -13,3 +13,4 @@ cancel_url:
     path: /cancel-url
     # the controller value has the format 'controller_class::method_name'
     controller: App\Controller\PaiementUserController::cancelUrl
+    

@@ -205,7 +205,7 @@ function countDown() {
         score++;  
         p.style.display="block"
         p.innerHTML+="<br>vous avez gagner "+score+" points<br> ";
-        var id= $("input[name=editId]").val();
+    
      $.ajax({
    type:'POST',
    enctype: 'multipart/form-data',

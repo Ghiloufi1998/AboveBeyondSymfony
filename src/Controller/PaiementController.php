@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Paiement;
 use App\Form\PaiementType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface; 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,41 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PaiementController extends AbstractController
 {
+     /**
+     * @Route("/getPaiementjson", name="AllPaiements")
+     */
+    public function getfacture( EntityManagerInterface $entityManager ,NormalizerInterface $normalizer)
+    {
+        $factures = $entityManager
+        ->getRepository(Paiement::class)
+        ->findAll();
+        $jsonContent=$normalizer->normalize($factures,'json',['groups'=>'post:read']);
+        
+        
+        return new Response(json_encode($jsonContent));
+
+
+    }
+    /**
+     * @Route("/getPaiementjson/new", name="NewPaiement")
+     */
+    public function AddFacture( Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
+    {
+        $facture = new Paiement();
+        $facture->setDateEch(new \DateTime($request->get("Date")));
+        $facture->setMontantTtc($request->get("Montant"));
+        $facture->setEtat($request->get("Etat"));
+        $entityManager->persist($facture);
+        $entityManager->flush();
+        $jsonContent=$normalizer->normalize($facture,'json',['groups'=>'post:read']);
+        
+       /* return $this->render('facture/Allstudents.html.twig', [
+            'data' => $jsonContent,
+        ]);*/
+        return new Response(json_encode($jsonContent));
+
+
+    }
     /**
      * @Route("/", name="app_paiement_index", methods={"GET"})
      */

@@ -37,7 +37,9 @@ class FactureUserController extends AbstractController
              if($des="versement" || $des="espéce"){
                 return $this->redirectToRoute('app_pdf', [], Response::HTTP_SEE_OTHER);
              }
+             else{
             return $this->redirectToRoute('app_pai_user', [], Response::HTTP_SEE_OTHER);
+             }
         }
 
         return $this->render('facture_user/index.html.twig', [
