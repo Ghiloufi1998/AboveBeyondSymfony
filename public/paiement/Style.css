@@ -23,7 +23,7 @@ h5 {
 
 .button {
   color: #ffffff;
-  background-color: #24cf5f;
+ /* background-color: #24cf5f;*/
   padding: 12px 25px;
   font-size: 12px;
   letter-spacing: 1px;
@@ -215,8 +215,10 @@ overflow-y: auto;
   .modal__content {
     -ms-flex: 3;
         flex: 3;
-    padding: 40px 30px; }
+    padding: 40px 30px;
+   /* margin-top:0px;*/
+   }
     .banner img{
-      width:1%}
+      width:100%}
 
   

@@ -28,17 +28,17 @@ class FactureUserController extends AbstractController
          $paiement = new Paiement();
         $form = $this->createForm(PaiementType::class, $paiement);
         $form->handleRequest($request);
-      $des=$form["modePay"]->getData();
+        $des=$form["modePay"]->getData();
         if ($form->isSubmitted() && $form->isValid()) {
            
             $entityManager->persist($paiement);
             
             $entityManager->flush();
-             if($des="versement" || $des="espéce"){
-                return $this->redirectToRoute('app_pdf', [], Response::HTTP_SEE_OTHER);
+             if($des=="versement" || $des=="espéce"){
+             return $this->redirectToRoute('app_pdf', [], Response::HTTP_SEE_OTHER);
              }
              else{
-            return $this->redirectToRoute('app_pai_user', [], Response::HTTP_SEE_OTHER);
+                return  $this->redirectToRoute('app_pai_user', [], Response::HTTP_SEE_OTHER);
              }
         }
 

@@ -15,62 +15,62 @@ var timeLimit = 120;
 var color=[
     {
 	   title:"Country/brazil-flag-small.png", 
-	   question:" trouver le chiffre cachée dans les points",
+	   question:" trouver pays",
        options:["Brazil","Argentine","Mexic","Venzula"],
        answer: "Brazil"
     },
 	
 	{
 		title:"Country/france-flag-small.png", 
-		question:" trouver le chiffre cachée dans les points",
+		question:" trouver pays",
 		options:["belgique","France","Italie","Russia"],
 		answer: "France"
     },
 	{
 		title:"Country/spain-flag-small.png",
-    	question:"trouver le chiffre cachée dans les points",
+    	question:"trouver pays",
 		options:["Slovakia","Serbia","Portugal","Spain"],
 		answer: "5"
     },
 	{
 		title:"Country/morocco-flag-small.png", 
-	    question:"trouver le chiffre cachée dans les points",
+	    question:"trouver pays",
 		options:["Morocco","Tuis","Algerie","libiya"],
 		answer: "Morocco"
     },
 	{
 		title:"Country/switzerland-flag-small.png", 
-		question:"essayez de trouver le chiffre cachée dans les points",
-		options:["Australia","Netherlands","switzerland","5"],
+		question:"essayez de trouver pays",
+		options:["Australia","Netherlands","switzerland","Luxembourg"],
 		answer: "switzerland"
     },
 	{
 		title:"Country/united-kingdom-flag-small.png",
-		question:"trouver le chiffre cachée dans les points",
-		options:["England","united-kingdom","Norway",""],
-		answer: "united-kingdom"
+		question:"trouver pays",
+		options:["England","United-kingdom","Norway","Luxembourg"],
+		answer: "United-kingdom"
     },
 	{
 		title:"Country/italy-flag-small.png",
-	    question:"trouver le chiffre cachée dans les points",
+	    question:"trouver pays",
 		options:["Hungary","Italy","Ireland","France"],
 		answer: "Italy"
     },
 	{
 		title:"Country/greece-flag-small.png",
-		question:"trouver le chiffre cachée dans les points",
+		question:"trouver pays",
 		options:["Cyprus","Turkey","Greece","Sweden"],
 		answer: "Greece"
 	}
 	,
 	{
 		title:"Country/malta-flag-small.png",
-		question:"trouver le chiffre cachée dans les points",
-		options:["16","15","","Malta"],
-		answer: "16"
+		question:"trouver pays",
+		options:["Island","Mali","switzerland","Malta"],
+		answer: "Malta"
 	},{
 		title:"Country/monaco-flag-small.png",
-		question:"trouver le chiffre cachée dans les points",
+		question:"trouver pays",
 		options:["Monaco","Poland","Austria","10"],
 		answer: "Monaco"
 	}
