@@ -1,0 +1,23 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Edit Reservation{% endblock %}
+
+{% block body %}
+    <div class="body-form" >
+    <div  class="form">
+    <h1></h1>
+
+    {{ include('reservation/_form1.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('consulter') }}">Mes Réservations</a>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+    <div class="qrc"
+     {% if qrcode %}
+                    <td><img src="{{ asset('assets/' ~ qrcode ) }}" alt="qr-code"></td>
+                    
+                {% endif %}
+    </div>            
+    </div>
+    </div>
+{% endblock %}

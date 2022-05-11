@@ -1,0 +1,38 @@
+{% extends 'front.html.twig' %}
+{% block body %}
+<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+<style>.example-wrapper { display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:50%;
+    margin: auto;
+    background-color: white;
+    border-radius: 30px;
+    padding: 1rem;
+    box-shadow: 1px 0px 30px rgb(0 0 0 / 20%); }</style>
+    <div  class="example-wrapper">
+    <div class="body-form" >
+    <div  class="form">
+    <h1>Merci pour Votre Paiement</h1>
+    <p>
+        Nous vous remercions de votre confiance !
+        Si vous avez des questions, veuillez envoyer un courriel à
+        <a href="mailto:orders@example.com">pidevarcane@gmail.com</a>.
+    </p>
+    </br>
+    </br>
+    <h3>Pour toute réclamation veuillez <a href=""> Cliquer Ici </a></h3>
+    </div>
+</div></div>
+<div>
+
+</div>
+{% block javascripts %}
+<!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    {% endblock %}
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+{% endblock %}

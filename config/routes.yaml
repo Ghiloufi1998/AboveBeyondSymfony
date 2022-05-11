@@ -1,0 +1,15 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+app_check_user:
+    path: /checkout
+    # the controller value has the format 'controller_class::method_name'
+    controller: App\Controller\PaiementUserController::checkout
+success_url:
+    path: /success-url
+    # the controller value has the format 'controller_class::method_name'
+    controller: App\Controller\PaiementUserController::successUrl
+cancel_url:
+    path: /cancel-url
+    # the controller value has the format 'controller_class::method_name'
+    controller: App\Controller\PaiementUserController::cancelUrl

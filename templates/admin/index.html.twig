@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Above And Beyond{% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Admins </h1>    <p class="create"> </p>  </div>
+     
+    <table class="table" id="mytable">
+        <thead>
+            <tr>
+                <th>Adminname</th>
+                <th>Lastname</th>
+                <th>Birthday</th>
+                <th>Gender</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for admin in admins %}
+            <tr>
+               
+                <td>{{ admin.adminname }}</td>
+                <td>{{ admin.lastname }}</td>
+                <td>{{ admin.birthday|date("m/d/y") }}</td>
+                <td>{{ admin.gender }}</td>
+                <td>{{ admin.tel }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.password }}</td>
+                <td>
+                <a href="{{ path('admin_index', {'id': admin.id}) }}"><img src="{{ asset ('uploads/' ~ admin.image) }}" alt=""height="80px" width="80px"></a>
+                </td>
+                <td>
+                    <a href="{{ path('admin_show', {'id': admin.id}) }}">show</a>
+                    <a href="{{ path('admin_edit', {'id': admin.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+                 </tr> 
+    </tbody>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+    <a href="{{ path('admin_new') }}">Create new</a>
+   </table>   
+
+
+</div>
+
+</div>
+</div>
+</section>
+<script>
+        function myFunction() {
+            var input, filter, table, tr,tp, td, i,j, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("mytable");
+            tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+            for (i = 0; i < tr.length; i++) {
+                td= tr[i].getElementsByTagName("td")[0];
+                tp= tr[i].getElementsByTagName("td")[1];
+                if ((td)||(tp)) {
+                    txtValue = td.textContent || td.innerText||tp.textContent || tp.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        
+        </script>
+{% endblock %}

@@ -1,0 +1,97 @@
+
+{% extends 'front.html.twig' %}
+
+{% block title %} Méteo {% endblock %}
+
+{% block body %}
+
+
+
+<div class="move-text">
+	
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+		</script>
+	</div>
+	            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+							<link rel="stylesheet" href="{{asset('assets/css/wth.css')}}" />
+<div class="container text-center py-5">
+                <h1>Météo du jour à <strong>{{name}}</strong></h1>
+
+                <div class="row justify-content-center align-items-center">
+
+
+	{% if weather == 'Clear' %}
+    <div class="icon sunny">
+                <div class="sun">
+                	<div class="rays"></div>
+                 </div>
+            </div> 
+	{% endif %}
+    {% if weather == 'Drizzle' %}
+
+    
+                                <div class="icon sun-shower">
+                                    <div class="cloud"></div>
+                                        <div class="sun">
+                                            <div class="rays"></div>
+                                    </div>
+                                        <div class="rain"></div>
+                                </div>
+	{% endif %}
+	{% if weather == 'Rain' %}						
+    
+			<div class="icon rainy">
+                                    <div class="cloud"></div>
+                                    <div class="rain"></div>
+            </div>
+	{% endif %}			
+	{% if weather == 'Clouds' %}						
+    
+       <div class="icon cloudy">
+                                    <div class="cloud"></div>
+                                    <div class="cloud"></div>
+                                </div>
+	{% endif %}			
+	{% if weather == 'Thunderstorm' %}						
+	
+          <div class="icon thunder-storm">
+                                    <div class="cloud"></div>
+                                        <div class="lightning">
+                                            <div class="bolt"></div>
+                                            <div class="bolt"></div>
+                                    </div>
+                                </div>
+	{% endif %}		
+
+	{% if weather == 'Snow' %}						
+
+		<div class="icon flurries">
+                                    <div class="cloud"></div>
+                                        <div class="snow">
+                                            <div class="flake"></div>
+                                            <div class="flake"></div>
+                                    </div>
+        </div>
+	{% endif %}		
+
+
+
+                        
+                    
+                        <div class="meteo_desc text-left">
+                            <h2>
+                                {{temp ~ '°C / Ressenti' ~ feel_like ~ '°C' }} <br />
+                               {{speed ~ 'Km/h -' ~ deg  ~ '°'}} <br /> 
+                                {{desc}}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+    {% endblock %}

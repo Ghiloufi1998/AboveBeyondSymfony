@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Reservation index </h1>    <p class="create"> <a href="{{ path('app_reservation_new') }}">Create new</a> </p>  </div>
+<div class="sort"> <a href="{{ path('app_reservation_index') }}"> Index </a> </div>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>DateDeb</th>
+                <th>DateFin</th>
+                <th>Type</th>
+                <th>NbrAdultes</th>
+                <th>NbrEnfants</th>
+                <th>Destination</th>
+                <th>Hebergement</th>
+                <th>Vol</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+               
+                <td>{{ reservation.dateDeb ? reservation.dateDeb|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.dateFin ? reservation.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.type }}</td>
+                <td>{{ reservation.nbrAdultes }}</td>
+                <td>{{ reservation.nbrEnfants }}</td>
+                <td>{{ reservation.destination }}</td>
+                <td>{{ reservation.hebergement }}</td>
+                <td>{{ reservation.vol }}</td>
+                <td>{{ reservation.vol.prix ~ '.00 Dt' }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'revId': reservation.revId}) }}">show</a>
+                    <a href="{{ path('app_reservation_edit', {'revId': reservation.revId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>    
+    
+   <div class="create"> <a href="{{ path('app_reservation_new') }}">Create new</a> </div>
+   
+</div>    
+
+{% endblock %}

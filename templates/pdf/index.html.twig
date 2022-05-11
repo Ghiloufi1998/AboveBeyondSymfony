@@ -1,0 +1,30 @@
+
+{% extends 'front.html.twig' %}
+
+{% block body %}
+  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <link rel="stylesheet" href="{{asset('paiement/Style.css')}}" />
+ 
+
+
+ <div class="modal__container" style="margin-left:20%;margin-top:5%;">
+    <div class="modal__featured">
+     <a href="{{asset('/user')}}">
+        <button type="button"  class="button--transparent button--close">
+          <svg class="nc-icon glyph" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+            <g><path fill="#ffffff" d="M1.293,15.293L11,5.586L12.414,7l-8,8H31v2H4.414l8,8L11,26.414l-9.707-9.707 C0.902,16.316,0.902,15.684,1.293,15.293z"></path> </g></svg>
+          <span class="visuallyhidden">Return to Product Page</span>
+        </button>
+        </a>
+         <div class="modal__circle"></div>
+          <img src="pngfind.com-cross-hairs-png-6793329.png"style="position:absolute" class="modal__product"  />
+        </div>
+       <div class="modal__content">
+      <h2 style=" margin-left:50px;margin-top:100px;">Télecharger Votre Facture:</h2>
+     <button style=" margin-left:100px;margin-top:50px;"><img src="pdf.png" style="width:50px;">   <a href="{{ path('pdf')}}"> export pdf</a></button>  </div>
+     </div>
+ <script src="{{asset('https://js.stripe.com/v3/')}}"></script>
+      
+  
+  
+{% endblock %}

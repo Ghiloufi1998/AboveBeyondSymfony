@@ -1,0 +1,28 @@
+ {% for dest in dest %}
+            <tr>
+             
+             Nbre_d <input type="text " value="{{ dest.Destnbr }}" disabled >
+             Meilleur Destination <input type="text " value="{{ dest.BestDestination }}" disabled >
+                 
+            </tr>
+        {% endfor %}
+
+        {% for heb in heb %}
+            <tr>
+             
+             Nbre_h <input type="text " value="{{ heb.nbrh }}" disabled >
+             Meilleur Hebergement  <input type="text " value="{{ heb.BestHebergement }}" disabled >
+                 
+            </tr>
+        {% endfor %}
+        
+           
+             
+             <input type="text " value="{{ tot }}" disabled >          
+             <input type="text " value="{{ sa }}" disabled >
+
+             
+           
+                
+            
+        {{ avg }}

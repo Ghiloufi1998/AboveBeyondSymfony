@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+
+<section id="main-content">
+      <section class="wrapper">
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+<div class="container">
+
+  <h2> <center>Consulter réclamation</h2>
+
+  <br></br>
+
+<div class="container">
+<p>Sujet : </p>
+  <div class="well">{{ Reclamation.sujet }}</div>
+  
+</div>
+
+
+  
+<div class="container">
+ <p>Date : </p>
+  <div class="well">{{ Reclamation.date|date("m/d/y")}}</div>
+ 
+</div>
+<div class="container">
+   <p>Description : </p>
+  <div class="well well-lg">{{ Reclamation.description}}</div>
+  
+  
+</div>
+  <br></br>
+  
+          <div class="col-md-12">
+            <div class="section-heading">
+              <a href="{{path('deletereclamationBack', {'id': Reclamation.id}) }}"> Supprimer</a>
+              &nbsp;&nbsp;
+        <a href="{{path('listrecBack', {'id': Reclamation.id}) }}"> Annuler</a>
+            </div>
+          </div>
+
+     
+
+ </div>
+ 
+</div>
+</div>
+</section>
+</div>
+</div>
+{% endblock %}
+

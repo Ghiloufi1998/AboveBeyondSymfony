@@ -1,0 +1,50 @@
+{% extends 'front.html.twig' %}
+ {% block body %}
+  <style>.container {
+	padding-top: 25px;
+	padding-bottom: 25px;
+    background-color:#fff;
+}
+</style>
+{% for c in off %}
+<div class="container"style="max-width:700px;">
+	<div class="row">
+    
+
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<article class="card-wrapper">
+				<div class="image-holder">
+					<a href="#" class="image-holder__link"></a>
+					<img src="">
+					
+				</div>
+
+				<div class="product-description">
+					<!-- title -->
+					<h1 class="product-description__title">
+						<a href="#">						
+							{{c.destination}}
+                           
+							</a>
+					</h1>
+
+					<!-- category and price -->
+					<div class="row">
+						<div class="col-xs-12 col-sm-8 product-description__category secondary-text">
+						
+						</div>
+						<div class="col-xs-12 col-sm-4 product-description__price">
+							{{c.getprix() - 20 }} prix
+						</div>
+					</div>
+
+
+					<!-- divider -->
+				
+		</div>
+	</div>
+    </div>
+    	</div>
+		{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,49 @@
+
+  <h2>Liste des Users</h2>
+
+  <br> </br>  
+{#   <th>Trier : </th>
+  <a href="{{path('TrierParDate2') }}"> ASC</a>   
+  <a href="{{path('TrierParDate') }}">  DESC</a>
+<br> </br>    
+ #}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>Birthday</th>
+        <th>Gender</th>
+        <th>Tel number</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+      <tr><td>
+       {{ user.name }}
+      </td>   <td>
+        {{ user.fname}}
+       </td> <td>
+     {{ user.birthday|date("m/d/y")}}
+       </td> <td>
+     {{ user.gender }}
+      </td>   <td>
+        {{ user.num}}
+       </td> <td>
+
+     {{ user.email}}
+       </td> <td>
+     {{ user.password}}
+       </td> <td>
+    </tr> 
+    </tbody>
+    {% endfor %}
+  </table>   
+
+
+</div>
+</div>
+</div>
+</section>

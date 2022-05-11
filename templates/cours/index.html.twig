@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours index{% endblock %}
+
+{% block body %}
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Cours </h1>    <p class="create">   <a href="{{ path('app_cours_new') }}">Creer un Nouveau Cours</a></p>  </div>
+ 
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Type</th>
+                <th>Titre</th>
+                <th>Contenu</th>
+                 <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour in cours %}
+            <tr>
+               
+                <td>{{ cour.type }}</td>
+                <td>{{ cour.titre }}</td>
+                <td>{{ cour.contenu }}</td>
+                 <td> <img src="{{ asset(''~cour.image) }}"width="150"height="120"alt="" > </td>
+                <td style="text-align:center">
+                    <a href="{{ path('app_cours_show', {'idCrs': cour.idCrs}) }}"><button type="button" class="btn btn-primary">Afficher</button></a>
+                    
+                    <a href="{{ path('app_cours_edit', {'idCrs': cour.idCrs}) }}" ><button type="button" class="btn btn-success">Modifier</button></a>
+                </td>
+            </tr> 
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ </div>
+</div>
+{% endblock %}
