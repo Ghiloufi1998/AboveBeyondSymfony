@@ -109,7 +109,7 @@ class QuestionsController extends AbstractController
      }
 
     /**
-     * @Route("/AllQuestion", name="allqst")
+     * @Route("/AllQuestion", name="allqst" )
      */
 
     public function AllQuestion(NormalizerInterface $Normalizer){

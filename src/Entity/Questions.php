@@ -21,7 +21,7 @@ class Questions
      * @ORM\Column(name="Question_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     *  @Groups("post:read")
+     * @Groups("post:read")
      */
     private $questionId;
 
@@ -29,7 +29,7 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="question", type="string", length=50, nullable=false)
-     *  @Groups("post:read")
+     * @Groups("post:read")
      */
     private $question;
 
@@ -37,7 +37,7 @@ class Questions
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=20, nullable=false)
-     *  @Groups("post:read")
+     * @Groups("post:read")
      */
     private $type;
 
@@ -51,12 +51,15 @@ class Questions
      *
      * })
      *  @Assert\NotBlank(message="Veuillez Choisir un sondage")
+     * @Groups("post:read")
      */
     private $sondage;
 
      /**
       * @var \Doctrine\Common\Collections\ArrayCollection $reponse
      * @ORM\OneToMany(targetEntity="Reponses", mappedBy="questions", orphanRemoval=true)
+     * 
+     * 
      */
     private $reponse;
 

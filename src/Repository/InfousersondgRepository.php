@@ -73,20 +73,20 @@ class InfousersondgRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findByFemme($id){
+    public function findByFemme(){
         $entityManager=$this->getEntityManager();
         $query=$entityManager
-            ->createQuery("SELECT r FROM APP\Entity\Infousersondg r JOIN r.sondage q WHERE r.sexe='Femme' and q.sondageId=:id")
-            ->setParameter('id', $id)
+            ->createQuery("SELECT r FROM APP\Entity\Infousersondg r JOIN r.sondage q WHERE r.sexe='Femme'")
+           // ->setParameter('id', $id)
           ;
         return $query->getResult();
      }
 
-     public function findByHomme($id){
+     public function findByHomme(){
         $entityManager=$this->getEntityManager();
         $query=$entityManager
-            ->createQuery("SELECT r FROM APP\Entity\Infousersondg r JOIN r.sondage q WHERE r.sexe='Homme'  and q.questionId=:id")
-            ->setParameter('id', $id)
+            ->createQuery("SELECT r FROM APP\Entity\Infousersondg r JOIN r.sondage q WHERE r.sexe='Homme' ")
+           // ->setParameter('id', $id)
           ;
         return $query->getResult();
      }

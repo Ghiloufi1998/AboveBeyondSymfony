@@ -2,7 +2,10 @@
 
 
 {% block body %}
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js') }}" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <div class="body">  
+
    <h1> Suivis des réponses </h1>
    <div class="container00">
     <!-- Content wrapper -->
@@ -100,6 +103,7 @@
                 <td>
                     <a href="{{ path('app_reponses_stat', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary btn-sm"><small>Details</small></button></a>
                     
+                    
                 </td>
             </tr>
         {% else %}
@@ -127,60 +131,8 @@
                         <h5 class="card-header m-0 me-2 pb-3">Sondage</h5>
                         <div  class="px-2">  <!-- Chart  -->
                 <canvas id="sondage" width="0.25" height="0.75"></canvas></div>
-                      </div>
-                      </div>
-                      </div>
-                               </br>
-                           <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Age</h5>
-                        <div  class="px-2">  <!-- Chart  -->
-                <canvas id="age" width="0.25" height="0.75"></canvas></div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-
-                      </div>
-                      </div>
-                      
-                         </br>
-                   <div class="col-12 col-lg-6 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">sexe</h5>
-                        <div  class="px-2">  <!-- Chart  -->
-                <canvas id="sexe" width="0.25" height="0.75"></canvas></div>
-                      </div>
-                      </div>
-
-                   
-                     
-             </div>
-                   
-             </div>
-             
-</div>
-     </br>
-                   <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">PAY</h5>
-                        <div  class="px-2">  <!-- Chart  -->
-                <canvas id="pay" width="5" height="2"></canvas></div>
-                      </div>
-                      </div>
-                      </div>
-                      </div>
-
-
-<!-- config chart -->
-<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js') }}" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-var ctx = document.getElementById('sondage').getContext('2d');
+                <script>
+                var ctx = document.getElementById('sondage').getContext('2d');
 var sondGraph = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -207,16 +159,26 @@ var sondGraph = new Chart(ctx, {
         }
     }
 });
-
-
-var ctx2 = document.getElementById('age').getContext('2d');
+</script>
+                      </div>
+                      </div>
+                      </div>
+                               </br>
+                           <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">Age</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="age" width="0.25" height="0.75"></canvas>
+                <script>
+                var ctx2 = document.getElementById('age').getContext('2d');
 var sondGraph2 = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: {{ageUser|raw}},
+        labels: [25,30,18,20,44],
         datasets: [{
             label: 'Nombre Age',
-            data: {{nbrAge|raw}},
+            data: [40,30,20,10],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -245,7 +207,26 @@ var sondGraph2 = new Chart(ctx2, {
     }
 });
 
-var ctx3 = document.getElementById('sexe').getContext('2d');
+                </script>
+                </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+
+                      </div>
+                      </div>
+                      
+                         </br>
+                   <div class="col-12 col-lg-6 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">sexe</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+               <canvas id="sexe" width="0.25" height="0.75"></canvas>
+               <script>
+               var ctx3 = document.getElementById('sexe').getContext('2d');
 var sondGraph3 = new Chart(ctx3, {
     type: 'pie',
     data: {
@@ -264,35 +245,46 @@ var sondGraph3 = new Chart(ctx3, {
     },
    
 });
-
-
-var ctx4 = document.getElementById('pay').getContext('2d');
-var sondGraph4 = new Chart(ctx4, {
-    type: 'line',
-    data: {
-        labels: {{pay_uni|raw}},
-        datasets: [{
-            label: 'Nombre de pay',
-            data: {{nbrPay|raw}},
-           fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1
-      
- 
-   
+ </script>
+           </div>
+                        </div>
+                      </div>
+                    </div>
+          </br>      
           
-        }]
-    },
-   
-});
+                   <div class="col-24 col-xl-24 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card1">
+                   <div class="row row-bordered g-0"> 
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">PAY</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="pay" width="200" height="100"></canvas>
+                <script>
+                var ctx4 = document.getElementById('pay').getContext('2d');
+                var sondGraph4 = new Chart(ctx4, {
+                  type: 'line',
+                   data: {
+                  labels: ['Tunisie','France','Malta','Mexique'],
+                  datasets: [{
+                   label: 'Nombre de pay',
+                   data: [33,55,44,65],
+                   fill: false,
+                   borderColor: 'rgb(75, 192, 192)',
+                   tension: 0.1
+                 }]
+                 },
+             });
+                </script>
+                </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+</div>
 
 
 
-
-
-
-
-</script>
+<!-- config chart -->
 {% endblock %}
 
 

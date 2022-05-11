@@ -24,7 +24,7 @@ class Sondage
      * @ORM\Column(name="sondage_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     *  @Groups("post:read")
+     * @Groups("post:read")
      */
     private $sondageId;
 
@@ -47,6 +47,7 @@ class Sondage
     /**
       * @var \Doctrine\Common\Collections\ArrayCollection $question
      * @ORM\OneToMany(targetEntity="Questions", mappedBy="sondage", orphanRemoval=true)
+     * 
      */
     private $question;
 

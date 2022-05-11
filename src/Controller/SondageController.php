@@ -47,25 +47,15 @@ class SondageController extends AbstractController
 {
     /**
      * 
-    * @Route("/", name="/")
+    * @Route("/", name="app_sondage_index",methods={"GET"})
      */
     public function index(SondageRepository $RepositorySondage, Request $request): Response
     {
         $sondages=$RepositorySondage->findAll();
-        $data = new SearchData();
-        $form = $this->createForm(SearchFormType::class,$data);
-        $data=$form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sondages=$RepositorySondage->findBySearch($data)->getData();
-        }
-      
         
-
-       
-        
- return $this->render('sondage/ListSondageUser.html.twig', [
-            'sondages' => $sondages,
-           'form_f'=>$form->createView(),
+ return $this->render('sondage/index.html.twig', [
+            'sondages' => $sondages
+           
         ]);
     }
 
@@ -109,7 +99,7 @@ class SondageController extends AbstractController
     }
 
     /**
-     * @Route("/deletejsonsond/{sondageId}", name="deletsondageId"?methods={"GET", "POST"})
+     * @Route("/deletejsonsond/{sondageId}", name="deletsondageId",methods={"GET", "POST"})
      */
     public function deletejsonsond($sondageId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
@@ -161,28 +151,7 @@ class SondageController extends AbstractController
         $sondages=$RepositorySondage->findAll();
         $comment=$repfeed->findAll();
         
-       /*$data = new SearchData();
-       $form = $this->createForm(SearchFormType::class,$data);
-       $form->handleRequest($request);
-       $data=$form->getData();
-       $search=$data->SearchBar;
-       $sond=$data->sondage;
-            if($form->isSubmitted() && $form->isValid()){
-                $flashy->success('Event created!');
-                $em = $this->getDoctrine()->getManager();
-                $sondages = $em->getRepository(Sondage::class)->findby(array('sujet' => $search,'categorie' => $sond));
-            }*/
-               // $sondage->$RepositorySondage->findby(array('sujet' => $search,'categorie' => $sond));
-              
-        
-            
-           
-          //  $sondages=$RepositorySondage->findBySearch($search,$sond);
-          /*  return $this->redirect($this->generateUrl('app_sondage_user', ['SearchBar' => $search,
-            'sondage'=>$sond
-        
-        
-        ]));*/
+      
  return $this->render('sondage/ListSondageUser.html.twig', [
             'sondages' => $sondages,
             'commentaire'=>$comment,
@@ -276,17 +245,18 @@ class SondageController extends AbstractController
     }
 
     $age_uni = array_unique($ageU);
-    
+           
 
     foreach($sexeUser as $sexe){
-        if($sexe !=""){
-            $SexeFemme=$repUser->findBy(array('sexe'=> $sexe));
-            $nbrFemme=count($SexeFemme);
-            $SexeHomme=$repUser->findBy(array('sexe'=> $sexe));
-            $nbrHomme=count($SexeHomme);
-        }else{
-            $nbrFemme=0;
-            $nbrHomme=0;
+        if ($sexe==="Femme"){
+            $Femme=$repUser->findByFemme($sexe);
+            $nbrFemme=count($Femme);
+          //  $payU[]=$pay;
+        }else if($sexe==="Homme"){
+            $Homme=$repUser->findByHomme();
+            $nbrHomme=count($Homme);
+        }
+       
         }
 
         foreach($payUser as $pay){
@@ -300,29 +270,21 @@ class SondageController extends AbstractController
 
     $pay_uni = array_unique($payU);
     
-
-        
-
-
-
-
-
-       
-            
     
-    }
     //dd($nbrFemme,$nbrHomme);
 } 
 return $this->render('reponses/showRepStat.html.twig',[
           'sondNom'=> json_encode($sondNom),
           'repCount'=> json_encode($repCount),
-          'sondages' => $sondages,
-          'ageUser'=>json_encode($age_uni),
-          'nbrAge'=>json_encode($nbrAge),
-          'nbrFemme'=>json_encode($nbrFemme),
-          'nbrHomme'=>json_encode($nbrHomme),
           'nbrPay'=>json_encode($nbrPay),
-          'pay_uni'=>json_encode($pay_uni)
+          'pay_uni'=>json_encode($pay_uni),
+          'nbrHomme'=>json_encode($nbrHomme),
+          'nbrFemme'=>json_encode($nbrFemme),
+          'nbrAge'=>json_encode($nbrAge),
+          'ageUser'=>json_encode($age_uni),
+          'sondages' => $sondages
+          
+        
       ]);
     }  
 
