@@ -21,4 +21,6 @@ return [
     Flasher\Symfony\FlasherSymfonyBundle::class => ['all' => true],
     Flasher\Toastr\Symfony\FlasherToastrSymfonyBundle::class => ['all' => true],
     blackknight467\StarRatingBundle\StarRatingBundle::class => ['all' => true],
+    Gregwar\CaptchaBundle\GregwarCaptchaBundle::class => ['all' => true],
+    Onurb\Bundle\ExcelBundle\OnurbExcelBundle::class => ['all' => true],
 ];

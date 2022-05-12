@@ -20,6 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -378,7 +379,7 @@ else{
     public function logout(SessionInterface $session){
         $session->remove('user');
         
-        return $this->redirectToRoute('users', [
+        return $this->redirectToRoute('login', [
           'session'=>$session,
         ]);
     }

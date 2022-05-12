@@ -32,36 +32,29 @@ use BotMan\BotMan\Drivers\DriverManager;
  */
 class ExercicesController extends AbstractController
 {
-   // /**
-   //  * @Route("/ByGuideJSON/{idG}", name="ByGuideJSON",methods={"GET"})
-   //  */
 
-   // public function ByGuideJSON(NormalizerInterface $Normalizer)
-   // {
-    //    $repo=$this->getDoctrine()->getRepository(Guide::class);
-    //    $guides=$repo->findAll();
-    //    $jsonContent = $Normalizer->normalize($guides , 'json',['groups'=>'post:read']);
-   //     return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-  //   }
     /**
      * @Route("/", name="app_exercices_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $exercices = $entityManager
             ->getRepository(Exercices::class)
             ->findAll();
 
         return $this->render('exercices/index.html.twig', [
             'exercices' => $exercices,
+            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/new", name="app_exercices_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $exercice = new Exercices();
         $form = $this->createForm(ExercicesType::class, $exercice);
         $form->handleRequest($request);
@@ -81,6 +74,7 @@ class ExercicesController extends AbstractController
 
         return $this->render('exercices/new.html.twig', [
             'exercice' => $exercice,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -88,10 +82,12 @@ class ExercicesController extends AbstractController
     /**
      * @Route("/{idEx}", name="app_exercices_show", methods={"GET"})
      */
-    public function show(Exercices $exercice): Response
+    public function show(Exercices $exercice,SessionInterface $session): Response
     {
+        $session->get('user');
         return $this->render('exercices/show.html.twig', [
             'exercice' => $exercice,
+            'session' => $session,
         ]);
     }
     /**
@@ -102,6 +98,7 @@ class ExercicesController extends AbstractController
        
         $note=$session->get('note');
         $rate=$session->get('rating');
+        $session->get('user');
       
         
         $exercices = $entityManager
@@ -112,6 +109,7 @@ class ExercicesController extends AbstractController
             'exercices' => $exercices,
             'note' => $note,
             'rate' => $rate,
+            'session' => $session,
             'idCrs' => $idCrs,
         ]);
     }
@@ -120,13 +118,14 @@ class ExercicesController extends AbstractController
      */
     public function consulterhe(EntityManagerInterface $entityManager,$idCrs): Response
     {
-        
+        $session->get('user');
         $exercices = $entityManager
             ->getRepository(Exercices::class)
             ->findByIdCrs($idCrs);
 
         return $this->render('exercices/exercicesbyidc.html.twig', [
             'exercices' => $exercices,
+            'session' => $session,
             
         ]);
     }
@@ -136,6 +135,7 @@ class ExercicesController extends AbstractController
      */
     public function take(Request $request, Exercices $exercice, EntityManagerInterface $entityManager): Response
     {
+        $session->get('user');
         $form = $this->createForm(ExercicesType::class, $exercice);
         $form->handleRequest($request);
 
@@ -151,14 +151,16 @@ class ExercicesController extends AbstractController
 
         return $this->render('exercices/exercicetake.html.twig', [
             'exercice' => $exercice,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
     /**
      * @Route("/{idEx}/edit", name="app_exercices_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Exercices $exercice, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Exercices $exercice, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $form = $this->createForm(ExercicesType::class, $exercice);
         $form->handleRequest($request);
 
@@ -176,6 +178,7 @@ class ExercicesController extends AbstractController
 
         return $this->render('exercices/edit.html.twig', [
             'exercice' => $exercice,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -183,8 +186,9 @@ class ExercicesController extends AbstractController
     /**
      * @Route("/{idEx}", name="app_exercices_delete", methods={"POST"})
      */
-    public function delete(Request $request, Exercices $exercice, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Exercices $exercice, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         if ($this->isCsrfTokenValid('delete'.$exercice->getIdEx(), $request->request->get('_token'))) {
             $entityManager->remove($exercice);
             $entityManager->flush();
@@ -198,6 +202,7 @@ class ExercicesController extends AbstractController
     public function showAction($idEx,Request $request,EntityManagerInterface $entityManager,SessionInterface $session,FlasherInterface $flasher,
     ToastrFactory $toastrFactory)
     {
+        $session->get('user');
         $em = $this->getDoctrine()->getManager();
 
         $exercice = $entityManager
@@ -263,6 +268,7 @@ class ExercicesController extends AbstractController
             'exercice' => $exercice,
             'form' => $form->createView(),
             'note' => $note,
+            'session' => $session,
             'rate' => $rate,
             'hint' => $hint
         ));
@@ -272,6 +278,7 @@ class ExercicesController extends AbstractController
      */
     public function certifpdf(SessionInterface $session,EntityManagerInterface $entityManager,$idCrs)
     {
+        $session->get('user');
         $note=$session->get('note');
     
         $pdfOptions = new Options();
@@ -288,6 +295,7 @@ class ExercicesController extends AbstractController
         $dompdf->setHttpContext($contxt);
         $html = $this->renderView('exercices/certifpdf.html.twig', [
             'note' => $note,
+            'session' => $session,
             'idCrs' => $idCrs,
         ]);
         
@@ -304,6 +312,7 @@ class ExercicesController extends AbstractController
      */
     function messageAction(Request $request,SessionInterface $session)
     {
+        
         
         DriverManager::loadDriver(\BotMan\Drivers\Web\WebDriver::class);
 

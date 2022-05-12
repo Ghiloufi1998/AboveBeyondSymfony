@@ -3,12 +3,15 @@
 {% block title %}New Vol{% endblock %}
 
 {% block body %}
-    <div class="body-form" >
-    <div  class="form">
-    <h1>Create new Vol</h1>
-     
-     {{ include('vol/_form.html.twig') }}
-     <a href="{{ path('app_vol_index') }}">back to list</a>
+<div class="body">  
+<div class="tab">
+<div class="tab-header" >  <h1>Create new Vol</h1>> <p class="create">   <a href="{{ path('app_vol_new') }}"><button type="button" class="btn btn-primary">Create new</button></a></p>  </div>
+ 
+   
+
+    {{ include('vol/_form.html.twig') }}
+
+    <a href="{{ path('app_vol_index') }}"><button type="button" class="btn btn-primary">back to list</button></a>
     </div>
     </div>
 {% endblock %}

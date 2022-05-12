@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonRespImageonse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/guide")
@@ -26,19 +28,35 @@ class GuideController extends AbstractController
      * @Route("/AllGuide", name="AllGuide",methods={"GET"})
      */
 
-    public function AllGuide(NormalizerInterface $Normalizer)
+    public function AllGuide(NormalizerInterface $Normalizer,SessionInterface $session)
     {
+        $session->get('user');
         $repo=$this->getDoctrine()->getRepository(Guide::class);
         $guides=$repo->findAll();
         $jsonContent = $Normalizer->normalize($guides , 'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
      }
-     
+        /**
+     * @Route("/AllGuideByVol", name="AllGuideByvol",methods={"GET"})
+     */
+
+    public function AllGuidevol(NormalizerInterface $Normalizer,SessionInterface $session)
+    {
+        $session->get('user');
+        $volid=$session->get('volid');
+        $repo=$this->getDoctrine()->getRepository(Guide::class);
+        $guides=$repo->findByidVol($volid);
+        return $this->render('guide/listeguide.html.twig', [
+            'guides' => $guides,
+            'session' => $session,
+        ]);
+    }
      /**
      * @Route("/newGuide/new", name="newGuide")
      */
-    public function newGuide(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function newGuide(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer,SessionInterface $session)
     {
+        $session->get('user');
         $guide = new Guide();
             $guide->setTitre($Request->get('titre'));
             $guide->setPays($Request->get('Pays'));
@@ -56,8 +74,9 @@ class GuideController extends AbstractController
      /**
      * @Route("/updateGuide/{idG}", name="updateGuide")
      */
-    public function updateGuide($idG,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function updateGuide($idG,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
+        $session->get('user');
         $guide = $this->getDoctrine()->getRepository(Guide::class)->find($idG);
         
 
@@ -75,8 +94,9 @@ class GuideController extends AbstractController
      /**
      * @Route("/deleteGuide/{idG}", name="deleteGuide")
      */
-    public function deleteGuide($idG,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function deleteGuide($idG,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
+        $session->get('user');
         $guide = $this->getDoctrine()->getRepository(Guide::class)->find($idG);
         
 
@@ -91,14 +111,16 @@ class GuideController extends AbstractController
     /**
      * @Route("/", name="app_guide_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $guides = $entityManager
             ->getRepository(Guide::class)
             ->findAll();
 
         return $this->render('guide/index.html.twig', [
             'guides' => $guides,
+            'session' => $session,
         ]);
     }
        
@@ -106,22 +128,25 @@ class GuideController extends AbstractController
     /**
      * @Route("/listeguide", name="listeguide", methods={"GET"})
      */
-    public function guides(EntityManagerInterface $entityManager): Response
+    public function guides(EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $guides = $entityManager
             ->getRepository(Guide::class)
             ->findAll();
 
         return $this->render('guide/listeguide.html.twig', [
             'guides' => $guides,
+            'session' => $session,
         ]);
     }
     
     /**
      * @Route("/new", name="app_guide_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $guide = new Guide();
         $form = $this->createForm(GuideType::class, $guide);
         $form->handleRequest($request);
@@ -139,6 +164,7 @@ class GuideController extends AbstractController
 
         return $this->render('guide/new.html.twig', [
             'guide' => $guide,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -146,10 +172,12 @@ class GuideController extends AbstractController
     /**
      * @Route("/{idG}", name="app_guide_show", methods={"GET"})
      */
-    public function show(Guide $guide): Response
+    public function show(Guide $guide,SessionInterface $session): Response
     {
+        $session->get('user');
         return $this->render('guide/show.html.twig', [
             'guide' => $guide,
+            'session' => $session,
         ]);
     }
     
@@ -158,8 +186,9 @@ class GuideController extends AbstractController
     /**
      * @Route("/{idG}/edit", name="app_guide_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Guide $guide, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Guide $guide, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $form = $this->createForm(GuideType::class, $guide);
         $form->handleRequest($request);
 
@@ -175,6 +204,7 @@ class GuideController extends AbstractController
 
         return $this->render('guide/edit.html.twig', [
             'guide' => $guide,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -182,8 +212,9 @@ class GuideController extends AbstractController
     /**
      * @Route("/{idG}", name="app_guide_delete", methods={"POST"})
      */
-    public function delete(Request $request, Guide $guide, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Guide $guide, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         if ($this->isCsrfTokenValid('delete'.$guide->getIdG(), $request->request->get('_token'))) {
             $entityManager->remove($guide);
             $entityManager->flush();

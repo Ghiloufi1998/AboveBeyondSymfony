@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentLikesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * 
@@ -15,8 +16,11 @@ class CommentLikes
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * 
+     * 
      */
     private $id;
 

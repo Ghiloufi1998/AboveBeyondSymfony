@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 
@@ -24,10 +26,10 @@ class HebergementController extends AbstractController
     /**
      * @Route("/newJsonhbr/new", name="newJsonhbr")
      */
-    public function newJsonres(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function newJsonres(Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
         $hbr = new Hebergement();
-        
+        $session->get('user');
 
             $hbr->setType($Request->get('type'));
             $hbr->setDisponibilite($Request->get('dis'));
@@ -47,11 +49,11 @@ class HebergementController extends AbstractController
     /**
      * @Route("/updatejsonhbr/{hebergementId}", name="updatejsonhbr")
      */
-    public function updatejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function updatejsonhbr($hebergementId,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
         $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         
-
+        $session->get('user');
             $hbr->setType($Request->get('type'));
             $hbr->setDisponibilite($Request->get('dis'));
             $hbr->setDescription($Request->get('desc'));
@@ -68,10 +70,10 @@ class HebergementController extends AbstractController
     /**
      * @Route("/deletejsonhbr/{hebergementId}", name="deletejsonhbr")
      */
-    public function deletejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function deletejsonhbr($hebergementId,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
         $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
-        
+        $session->get('user');
 
         $entityManager->remove($hbr);
         $entityManager->flush();
@@ -86,8 +88,8 @@ class HebergementController extends AbstractController
     /**
      * @Route("/Jsonhbr/{hebergementId}", name="json_hbr")
      */
-    public function Jsonres($hebergementId, Request $Request, NormalizerInterface $Normalizer){
-        
+    public function Jsonres($hebergementId, Request $Request,SessionInterface $session, NormalizerInterface $Normalizer){
+        $session->get('user');
         //$em->this->getDoctrine()->getManager();
         $h =   $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
@@ -100,7 +102,7 @@ class HebergementController extends AbstractController
      * @Route("/Allhbr", name="Allhbr")
      */
 
-    public function AllRes(NormalizerInterface $Normalizer){
+    public function AllRes(NormalizerInterface $Normalizer,SessionInterface $session){
         $h =   $this->getDoctrine()->getRepository(Hebergement::class)->findAll();
         $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
         return new Response(json_encode($jsonContent));
@@ -111,22 +113,25 @@ class HebergementController extends AbstractController
     /**
      * @Route("/", name="app_hebergement_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $hebergements = $entityManager
             ->getRepository(Hebergement::class)
             ->findAll();
 
         return $this->render('hebergement/index.html.twig', [
             'hebergements' => $hebergements,
+            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/hotels", name="hotels", methods={"GET"})
      */
-    public function hotels(EntityManagerInterface $entityManager,Request $request, PaginatorInterface $paginator): Response
+    public function hotels(EntityManagerInterface $entityManager,Request $request,SessionInterface $session, PaginatorInterface $paginator): Response
     {
+        $session->get('user');
         $hebergements = $entityManager
             ->getRepository(Hebergement::class)
             ->findAll();
@@ -142,14 +147,16 @@ class HebergementController extends AbstractController
 
         return $this->render('hebergement/afficher.html.twig', [
             'hebergements' => $hebergements,
+            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/new", name="app_hebergement_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->get('user');
         $hebergement = new Hebergement();
         $form = $this->createForm(HebergementType::class, $hebergement);
         $form->handleRequest($request);
@@ -167,6 +174,7 @@ class HebergementController extends AbstractController
 
         return $this->render('hebergement/new.html.twig', [
             'hebergement' => $hebergement,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -174,28 +182,33 @@ class HebergementController extends AbstractController
     /**
      * @Route("/{hebergementId}", name="app_hebergement_show", methods={"GET"})
      */
-    public function show(Hebergement $hebergement): Response
+    public function show(Hebergement $hebergement,SessionInterface $session): Response
     {
+        $session->get('user');
         return $this->render('hebergement/show.html.twig', [
             'hebergement' => $hebergement,
+            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/consulter/{hebergementId}", name="consulter", methods={"GET"})
      */
-    public function consulter(Hebergement $hebergement): Response
+    public function consulter(Hebergement $hebergement,SessionInterface $session): Response
     {
+        $session->get('user');
         return $this->render('hebergement/consulter.html.twig', [
             'hebergement' => $hebergement,
+            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/{hebergementId}/edit", name="app_hebergement_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Hebergement $hebergement, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Hebergement $hebergement,SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
+        $session->get('user');
         $form = $this->createForm(HebergementType::class, $hebergement);
         $form->handleRequest($request);
 
@@ -212,6 +225,7 @@ class HebergementController extends AbstractController
 
         return $this->render('hebergement/edit.html.twig', [
             'hebergement' => $hebergement,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -219,13 +233,16 @@ class HebergementController extends AbstractController
     /**
      * @Route("/{hebergementId}", name="app_hebergement_delete", methods={"POST"})
      */
-    public function delete(Request $request, Hebergement $hebergement, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Hebergement $hebergement,SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
+        $session->get('user');
         if ($this->isCsrfTokenValid('delete'.$hebergement->getHebergementId(), $request->request->get('_token'))) {
             $entityManager->remove($hebergement);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_hebergement_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_hebergement_index', [
+            'session' => $session,
+        ], Response::HTTP_SEE_OTHER);
     }
 }

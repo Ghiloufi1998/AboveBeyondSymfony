@@ -10,6 +10,8 @@ use App\Repository\FeedbackRepository;
 use App\Form\FeedbackType;
 use App\Entity\Feedback;
 use App\Repository\CommentLikesRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 
@@ -24,15 +26,16 @@ class FeedbackController extends AbstractController
       /**
      * @Route("/{id}/", name="kkk", methods={"GET", "POST"})
      */
-    public function like(Request $request,  $id ,FeedbackRepository $repfeed ,CommentLikesRepository $repc , EntityManagerInterface $entityanager): Response
+    public function like(Request $request,  $id ,SessionInterface $session,FeedbackRepository $repfeed ,CommentLikesRepository $repc , EntityManagerInterface $entityanager): Response
     {
-        
+        $session->get('user');
        $c=new CommentLikes();
       $f= $repfeed->find($id);
             $c->setFeedback($f);
             $entityManager->persist($c);
             $entityManager->flush();
             $f->setNbrLikes(getNbrLikes()+1);
+            $dump($c);
          
         return $this->render('Sondage/listSondageUser.html.twig');
     }
@@ -42,8 +45,10 @@ class FeedbackController extends AbstractController
      */
     public function index(): Response
     {
+        $session->get('user');
         return $this->render('feedback/index.html.twig', [
             'controller_name' => 'FeedbackController',
+            'session' => $session,
         ]);
     }
 
@@ -52,8 +57,9 @@ class FeedbackController extends AbstractController
         /**
      * @Route("/new", name="app_feedback_new")
      */
-    public function new(FeedbackRepository $repfeed ,Request $request):Response
+    public function new(FeedbackRepository $repfeed ,SessionInterface $session,Request $request):Response
     {
+        $session->get('user');
         $feedbacks=$repfeed->findAll();
         $feedback = new Feedback();
         $form= $this->createForm(FeedbackType::class,$feedback);
@@ -76,6 +82,7 @@ class FeedbackController extends AbstractController
               }
               return $this->render('sondage/ListSondageUser.html.twig', [
                 'form' => $form->createView(),
+                'session' => $session,
                 'commentaire'=>$commentaire,
             ]);
            

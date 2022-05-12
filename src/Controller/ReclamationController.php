@@ -78,6 +78,7 @@ class ReclamationController extends AbstractController
      */
     public function updatereclamation(Request $request, $id)
     {
+        $session->has('user');
         $em=$this->getDoctrine()->getManager();
         $Reclamation = $em->getRepository(Reclamation::class)->find($id);
         $form = $this->createForm(ReclamationType::class, $Reclamation);
@@ -95,6 +96,7 @@ class ReclamationController extends AbstractController
 
         return $this->render('reclamation/updateReclamation.html.twig', [
                         'form' => $form->createView(),
+                        'session' => $session,
         ]);
     }
 
@@ -119,11 +121,13 @@ class ReclamationController extends AbstractController
 
     public function showreclamation($id): Response
     {
+        $session->has('user');
         $repository=$this->getDoctrine()->getRepository(Reclamation::Class);
         $Reclamation=$repository->find($id);
 
         return $this->render('reclamation/showReclamation.html.twig', [
             'Reclamation' => $Reclamation,
+            'session' => $session,
         ]);
 }
  /**
@@ -132,12 +136,14 @@ class ReclamationController extends AbstractController
     public function listrecBack()
 
    {
+    $session->has('user');
     $repository=$this->getDoctrine()->getRepository(Reclamation::Class);
     $Reclamations=$repository->findAll();
 
     return $this->render('reclamation/listrecBack.html.twig', [
         
         'Reclamations' => $Reclamations,
+        'session' => $session,
     ]);
     
     }
@@ -147,11 +153,13 @@ class ReclamationController extends AbstractController
 
     public function showreclamationBack($id): Response
     {
+        $session->has('user');
         $repository=$this->getDoctrine()->getRepository(Reclamation::Class);
         $Reclamation=$repository->find($id);
 
         return $this->render('reclamation/showreclamationBack.html.twig', [
             'Reclamation' => $Reclamation,
+            'session' => $session,
         ]);
 }
 
@@ -163,6 +171,7 @@ class ReclamationController extends AbstractController
      */
     public function deletereclamationBack($id)
     {
+        
       
         $em=$this->getDoctrine()->getManager();
         $Reclamation = $em->getRepository(Reclamation::class)->find($id);
@@ -178,6 +187,7 @@ class ReclamationController extends AbstractController
      */
     public function TrierReclamation(Request $request , PaginatorInterface $paginator): Response
     {
+        $session->has('user');
         $repository = $this->getDoctrine()->getRepository(Reclamation::class);
         $Reclamations = $repository->findByReclamation();
         $reclamations = $paginator->paginate(
@@ -187,6 +197,7 @@ class ReclamationController extends AbstractController
 
         return $this->render('reclamation/listrecBack.html.twig', [
             'Reclamations' => $Reclamations,
+            'session' => $session,
         ]);
     }
 
@@ -195,6 +206,7 @@ class ReclamationController extends AbstractController
      */
     public function TrierReclamation2(Request $request , PaginatorInterface $paginator): Response
     {
+        $session->has('user');
         $repository = $this->getDoctrine()->getRepository(Reclamation::class);
         $Reclamations = $repository->findByReclamation2();
         $reclamations = $paginator->paginate(
@@ -204,6 +216,7 @@ class ReclamationController extends AbstractController
 
         return $this->render('reclamation/listrecBack.html.twig', [
             'Reclamations' => $Reclamations,
+            'session' => $session,
         ]);
     }
 
@@ -212,6 +225,7 @@ class ReclamationController extends AbstractController
      */
     public function TrierReclUser(SessionInterface $session,Request $request , PaginatorInterface $paginator ): Response
     {
+        $session->has('user');
         $repository = $this->getDoctrine()->getRepository(Reclamation::class);
         $Reclamations = $repository->findByReclUser($session->get('user'));
         $reclamations = $paginator->paginate(
@@ -231,6 +245,7 @@ class ReclamationController extends AbstractController
      */
     public function TrierReclUser2(SessionInterface $session,Request $request , PaginatorInterface $paginator ): Response
     {
+        $session->has('user');
         $repository = $this->getDoctrine()->getRepository(Reclamation::class);
         $Reclamations = $repository->findByReclUser2($session->get('user'));
         $reclamations = $paginator->paginate(

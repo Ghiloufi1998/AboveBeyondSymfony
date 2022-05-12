@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Infousersondg;
 use App\Entity\CommentLikes;
 use App\Entity\Feedback;
@@ -36,6 +37,9 @@ use App\Repository\CommentLikesRepository;
 use App\Form\InfousersondgType;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 
 
@@ -49,12 +53,14 @@ class SondageController extends AbstractController
      * 
     * @Route("/", name="app_sondage_index",methods={"GET"})
      */
-    public function index(SondageRepository $RepositorySondage, Request $request): Response
+    public function index(SondageRepository $RepositorySondage, SessionInterface $session,Request $request): Response
     {
+        $session->has('user');
         $sondages=$RepositorySondage->findAll();
         
  return $this->render('sondage/index.html.twig', [
-            'sondages' => $sondages
+            'sondages' => $sondages,
+            'session' => $session,
            
         ]);
     }
@@ -63,8 +69,9 @@ class SondageController extends AbstractController
      /**
      * @Route("/newJsonSond/new", name="newJsonSond")
      */
-    public function newJsonSond(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function newJsonSond(Request $Request, EntityManagerInterface $entityManager,SessionInterface $session, NormalizerInterface $Normalizer)
     {
+        $session->has('user');
         $S = new Sondage ();
         
 
@@ -83,8 +90,9 @@ class SondageController extends AbstractController
     /**
      * @Route("/updatejsons/{sondageId}", name="upsnd")
      */
-    public function updatejsonsond($sondageId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function updatejsonsond($sondageId,Request $Request, EntityManagerInterface $entityManager,SessionInterface $session, NormalizerInterface $Normalizer)
     {
+        $session->has('user');
         $s = $this->getDoctrine()->getRepository(Sondage::class)->find($sondageId);
         
 
@@ -101,8 +109,9 @@ class SondageController extends AbstractController
     /**
      * @Route("/deletejsonsond/{sondageId}", name="deletsondageId",methods={"GET", "POST"})
      */
-    public function deletejsonsond($sondageId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function deletejsonsond($sondageId,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
+        $session->has('user');
         $s = $this->getDoctrine()->getRepository(Sondage::class)->find($sondageId);
         
 
@@ -119,8 +128,8 @@ class SondageController extends AbstractController
     /**
      * @Route("/Jsonhbr/{hebergementId}", name="json_hbr")
      */
-    public function Jsonres($hebergementId, Request $Request, NormalizerInterface $Normalizer){
-        
+    public function Jsonres($hebergementId, Request $Request,SessionInterface $session, NormalizerInterface $Normalizer){
+        $session->has('user');
         //$em->this->getDoctrine()->getManager();
         $h =   $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
@@ -133,7 +142,8 @@ class SondageController extends AbstractController
      * @Route("/AllSondage", name="allasond")
      */
 
-    public function AllSondage(NormalizerInterface $Normalizer){
+    public function AllSondage(NormalizerInterface $Normalizer,SessionInterface $session){
+        $session->has('user');
         $s =   $this->getDoctrine()->getRepository(Sondage::class)->findAll();
         $jsonContent= $Normalizer->normalize($s,'json' ,['groups' =>'post:read' ] );
         return new Response(json_encode($jsonContent));
@@ -146,14 +156,16 @@ class SondageController extends AbstractController
       /**
      * @Route("/list", name="app_sondage_user")
      */
-    public function ListSondageUser(SondageRepository $RepositorySondage,Request $request,FeedbackRepository $repfeed): Response
+    public function ListSondageUser(SondageRepository $RepositorySondage,SessionInterface $session,Request $request,FeedbackRepository $repfeed): Response
     {    
+        $session->has('user');
         $sondages=$RepositorySondage->findAll();
         $comment=$repfeed->findAll();
         
       
  return $this->render('sondage/ListSondageUser.html.twig', [
             'sondages' => $sondages,
+            'session' => $session,
             'commentaire'=>$comment,
           // 'form_f'=>$form->createView(),
           // 'form'=>$form->createView(),
@@ -166,8 +178,9 @@ class SondageController extends AbstractController
         /**
      * @Route("/comment", name="app_sondage_comment")
      */
-    public function newComment(FeedbackRepository $repfeed ,CommentLikesRepository $repc ,Request $request, EntityManagerInterface $entityManager):Response
+    public function newComment(FeedbackRepository $repfeed ,SessionInterface $session,CommentLikesRepository $repc ,Request $request, EntityManagerInterface $entityManager):Response
     {
+        $session->has('user');
         $feedbacks=$repfeed->findAll();
         $feedback = new Feedback();
         $form= $this->createForm(FeedbackType::class,$feedback);
@@ -196,6 +209,7 @@ class SondageController extends AbstractController
                   return $this->redirectToRoute('app_sondage_user', ['commentaire'=>$feedbacks], Response::HTTP_SEE_OTHER);
               }
               return $this->render('sondage/feedback.html.twig', [
+                'session' => $session,
                 'form' => $form->createView(),
                 
             ]);
@@ -206,8 +220,9 @@ class SondageController extends AbstractController
      /**
      * @Route("/stat", name="app_sondage_stat")
      */
-    public function statistique(SondageRepository $repo, ReponsesRepository $rep, InfousersondgRepository $repUser): Response
+    public function statistique(SondageRepository $repo, ReponsesRepository $rep,SessionInterface $session, InfousersondgRepository $repUser): Response
     {
+        $session->has('user');
         $sondages = $repo->findAll();
         foreach($sondages as $sondage){
         $sondNom[]= $sondage->getSujet();
@@ -278,6 +293,7 @@ return $this->render('reponses/showRepStat.html.twig',[
           'repCount'=> json_encode($repCount),
           'nbrPay'=>json_encode($nbrPay),
           'pay_uni'=>json_encode($pay_uni),
+          'session' => $session,
           'nbrHomme'=>json_encode($nbrHomme),
           'nbrFemme'=>json_encode($nbrFemme),
           'nbrAge'=>json_encode($nbrAge),
@@ -296,8 +312,9 @@ return $this->render('reponses/showRepStat.html.twig',[
     /**
      * @Route("/new", name="app_sondage_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->has('user');
         $sondage = new Sondage();
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
@@ -311,6 +328,7 @@ return $this->render('reponses/showRepStat.html.twig',[
 
         return $this->render('sondage/new.html.twig', [
             'sondage' => $sondage,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -333,8 +351,9 @@ return $this->render('reponses/showRepStat.html.twig',[
      /**
      * @Route("/{sondageId}/new", name="app_infousersondg_new", methods={"GET", "POST"})
      */
-    public function newinfouser(Request $request, EntityManagerInterface $entityManager,$sondageId): Response
+    public function newinfouser(Request $request, EntityManagerInterface $entityManager,SessionInterface $session,$sondageId): Response
     {
+        $session->has('user');
         $infoUser = new Infousersondg();
         $form = $this->createForm(InfousersondgType::class, $infoUser);
         $form->handleRequest($request);
@@ -349,6 +368,7 @@ return $this->render('reponses/showRepStat.html.twig',[
 
         return $this->render('infousersondg/showFormUser.html.twig', [
             'infouser' => $infoUser,
+            'session' => $session,
             'form' => $form->createView(),
             'sondageId'=>$sondageId,
         ]);
@@ -357,8 +377,9 @@ return $this->render('reponses/showRepStat.html.twig',[
     /**
      * @Route("/{sondageId}/edit", name="app_sondage_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Sondage $sondage, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Sondage $sondage, EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
+        $session->has('user');
         $form = $this->createForm(SondageType::class, $sondage);
         $form->handleRequest($request);
 
@@ -370,6 +391,7 @@ return $this->render('reponses/showRepStat.html.twig',[
 
         return $this->render('sondage/edit.html.twig', [
             'sondage' => $sondage,
+            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -377,8 +399,9 @@ return $this->render('reponses/showRepStat.html.twig',[
     /**
      * @Route("/{id}/like", name="kkk", methods={"GET", "POST"})
      */
-    public function like(Request $request,SondageRepository  $rs , $id ,FeedbackRepository $repfeed ,CommentLikesRepository $repc , EntityManagerInterface $entityManager ,FlashyNotifier $flashy): Response
+    public function like(Request $request,SondageRepository  $rs , $id ,FeedbackRepository $repfeed ,SessionInterface $session,CommentLikesRepository $repc , EntityManagerInterface $entityManager ,FlashyNotifier $flashy): Response
     {
+        $session->has('user');
         $sondages=$rs->findAll();
         $comment=$repfeed->findAll();
 
@@ -394,14 +417,17 @@ return $this->render('reponses/showRepStat.html.twig',[
 
          
         return $this->render('Sondage/ListSondageUser.html.twig',
-    ['sondages'=>$sondages,'commentaire'=>$comment]);
+    ['sondages'=>$sondages,
+    'session' => $session,
+    'commentaire'=>$comment]);
     }
 
     /**
      * @Route("/{sondageId}", name="app_sondage_delete", methods={"POST"})
      */
-    public function delete(Request $request, Sondage $sondage, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Sondage $sondage,SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
+        $session->has('user');
         if ($this->isCsrfTokenValid('delete'.$sondage->getSondageId(), $request->request->get('_token'))) {
             $entityManager->remove($sondage);
             $entityManager->flush();
@@ -413,13 +439,15 @@ return $this->render('reponses/showRepStat.html.twig',[
      /**
      * @Route("/stat/{sondageId}/{questionId}", defaults={"questionId" = 0 },name="app_reponses_stat")
      */
-    public function repStatic (SondageRepository $srepo,QuestionsRepository $repo, ReponsesRepository $rep, $sondageId,$questionId): Response
+    public function repStatic (SondageRepository $srepo,QuestionsRepository $repo,SessionInterface $session, ReponsesRepository $rep, $sondageId,$questionId): Response
     {
+        $session->has('user');
         $questions = $repo->findById($sondageId);
         $sondage=$srepo->find($sondageId);
         if ($questionId===0){
             return $this->render('reponses/showReponse.html.twig', [
                 'questions' => $questions,
+                'session' => $session,
                 'questionId'=>$questionId
             ]);
           
@@ -436,6 +464,7 @@ return $this->render('reponses/showRepStat.html.twig',[
                            $nbrNon=count($rep->findByNo($questionId));
                            return $this->render('reponses/showReponse.html.twig', [
                             'questions' => $questions,
+                            'session' => $session,
                             'nbrYes' =>json_encode($nbrYes),
                             'nbrNon' =>json_encode($nbrNon),
                             'question'=>json_encode($question),
@@ -448,6 +477,7 @@ return $this->render('reponses/showRepStat.html.twig',[
                             return $this->render('reponses/showReponse.html.twig', [
                                 'questions' => $questions,
                                 'repText'=>$repText,
+                                'session' => $session,
                                 'question'=>$question,
                                 'questionId'=>$questionId,
                                 'type'=>$type
@@ -461,6 +491,7 @@ return $this->render('reponses/showRepStat.html.twig',[
                     return $this->render('reponses/showReponse.html.twig', [
                         'questions' => $questions,
                         'star1'=>json_encode($star1),
+                        'session' => $session,
                         'star2'=>json_encode($star2),
                         'star3'=>json_encode($star3),
                         'star4'=>json_encode($star4),
@@ -475,18 +506,16 @@ return $this->render('reponses/showRepStat.html.twig',[
        
         //stat sexe par sondage
 
-
-    
     }
 
 
      /**
      * @Route("/{sondageId}/showsurvey", name="app_sondage_showsurvey", methods={"GET","POST"})
      */
-    public function showAction($sondageId,Request $request,FlashyNotifier $flashy)
+    public function showAction($sondageId,Request $request,FlashyNotifier $flashy,SessionInterface $session)
     {
         $em = $this->getDoctrine()->getManager();
-
+        $session->has('user');
         
         $entity = $em->getRepository(Sondage::class)->find($sondageId);
         $builder = $this->createFormBuilder();
@@ -566,6 +595,7 @@ return $this->render('reponses/showRepStat.html.twig',[
 
         return $this->render('sondage/SubmitSondage.html.twig', array(
             'entity' => $entity,
+            'session' => $session,
             'form' => $form->createView()
         ));
     }
@@ -574,46 +604,49 @@ return $this->render('reponses/showRepStat.html.twig',[
      * @Route("/excel/{sondageId}", name="app_sondage_excel")
      */
 
-      public function exportToExcel($sondageId,SondageRepository $srepo,QuestionsRepository $repo, ReponsesRepository $rep,FlashyNotifier $flashy ):Response
-      {
-        $questions = $repo->findById($sondageId);
-        $sondage=$srepo->find($sondageId);
-        $spreadsheet = new Spreadsheet();
-        $worksheet = new Worksheet();
-        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
-        $drawing->setName('PhpSpreadsheet logo');
-       $drawing->setPath('./uploads/logo.png');
-       $drawing->setHeight(20);
-        $spreadsheet->getActiveSheet()->getHeaderFooter()->addImage($drawing, \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter::IMAGE_HEADER_LEFT);
-        $spreadsheet->getActiveSheet()->setBreak('A1', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_COLUMN);
+    public function exportToExcel($sondageId,SondageRepository $srepo,SessionInterface $session,QuestionsRepository $repo, ReponsesRepository $rep,FlashyNotifier $flashy ):Response
+    {
+        $session->has('user');
+        
+      $questions = $repo->findById($sondageId);
+      $sondage=$srepo->find($sondageId);
+      $spreadsheet = new Spreadsheet();
+      $worksheet = new Worksheet();
+      $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
+      $drawing->setName('PhpSpreadsheet logo');
+     // $drawing->setPath('./uploads/logo.png');
+      $drawing->setHeight(20);
+      $spreadsheet->getActiveSheet()->getHeaderFooter()->addImage($drawing, \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter::IMAGE_HEADER_LEFT);
+      $spreadsheet->getActiveSheet()->setBreak('A1', \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet::BREAK_COLUMN);
+    
       
-        
-        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A2', 'Suivis des Réponses !');
-        $sheet->setCellValue('A3', 'Sujet ');
-        $sheet->setCellValue('B3', $sondage->getSujet());
-        $sheet->setCellValue('A4', 'Catégorie');
-        $sheet->setCellValue('B4', $sondage->getCategorie());
+      /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
+      $sheet = $spreadsheet->getActiveSheet();
+      $sheet->setCellValue('A2', 'Suivis des Réponses !');
+      $sheet->setCellValue('A3', 'Sujet ');
+      $sheet->setCellValue('B3', $sondage->getSujet());
+      $sheet->setCellValue('A4', 'Catégorie');
+      $sheet->setCellValue('B4', $sondage->getCategorie());
 
-        $sheet->setTitle("My First Worksheet");
-               // ARRAYY 
-       
-        // Create your Office 2007 Excel (XLSX Format)
-        $writer = new Xlsx($spreadsheet);
-        
-        // In this case, we want to write the file in the public directory
-       // $publicDirectory = $this->get('kernel')->getProjectDir() . '/public';
-        // e.g /var/www/project/public/my_first_excel_symfony4.xlsx
-        $excelFilepath =  'C:\Users\user\Desktop\my_first_excel_symfony43.xlsx';
-        
-        // Create the file
-        $writer->save($excelFilepath);
-        
-        // Return a text response to the browser saying that the excel was succesfully created
-        return new Response("Excel generated succesfully");
+      $sheet->setTitle("My First Worksheet");
+             // ARRAYY 
+     
+      // Create your Office 2007 Excel (XLSX Format)
+      $writer = new Xlsx($spreadsheet);
+      
+      // In this case, we want to write the file in the public directory
+      $publicDirectory = $this->get('kernel')->getProjectDir() . '/public';
+      // e.g /var/www/project/public/my_first_excel_symfony4.xlsx
+      $excelFilepath =  $publicDirectory.'/my_first_excel_symfony43.xlsx';
+      
+      // Create the file
+      $writer->save($excelFilepath);
+      
+      // Return a text response to the browser saying that the excel was succesfully created
+      return new Response("Excel generated succesfully");
 
-      }
+    }
+
 
     /*  public function Search (SondageRepository $srepo){
           $data=new SearchData();

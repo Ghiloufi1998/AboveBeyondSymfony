@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PdfController extends AbstractController
@@ -16,7 +17,7 @@ class PdfController extends AbstractController
     /**
      * @Route("/FacturePDF", name="app_pdf")
      */
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
         return $this->render('pdf/index.html.twig', [
             'controller_name' => 'PdfController',
@@ -25,13 +26,13 @@ class PdfController extends AbstractController
     /**
      * @Route("/pdf", name="pdf")
      */
-    public function AffichePDF(ReservationRepository $repository,SessionInterface $s){
-
+    public function AffichePDF(ReservationRepository $repository,SessionInterface $session){
+        $session->get('user');
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $pdfOptions->set('isRemoteEnabled',true);
-        $revId=$s->get('revID');
+        $revId=$session->get('revID');
        // Instantiate Dompdf with our options
        $dompdf = new Dompdf($pdfOptions);
        $montant =$this->getDoctrine()->getRepository(Reservation::class)->showall($revId);
@@ -42,6 +43,7 @@ class PdfController extends AbstractController
         $html = $this->render('pdf/pdf.html.twig',
        ['montant'=> $montant,
        'details'=>$detail,
+       'session' => $session,
         'x'=>$prix,
        ]);
 

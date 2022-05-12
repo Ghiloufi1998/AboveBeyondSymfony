@@ -1,37 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vol index{% endblock %}
+{% block title %}Vol {% endblock %}
 
 {% block body %}
-    <h1>Vol index</h1>
-
+ <div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Vols </h1>    <p class="create">   <a href="{{ path('app_vol_new') }}"><button type="button" class="btn btn-primary">Create new</button></a><a href="{{ path('vol_list') }}"><button type="button" class="btn btn-primary">Imprimer</button></a></p>  </div>
+ 
+        <form method="post" ><label>Chercher</label>
+        <input type="text" name="AfficherClasse" onkeyup="myFunction()" placeholder="your dream destination "  id="myInput" >
+        </form >
+        <br> </br>   
     <table class="table">
         <thead>
             <tr>
-                <th>VolId</th>
+               
                 <th>Destination</th>
                 <th>Depart</th>
                 <th>Image</th>
                 <th>Prix</th>
                 <th>X</th>
                 <th>Y</th>
-                
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for vol in vols %}
             <tr>
-                <td>{{ vol.volId }}</td>
                 <td>{{ vol.destination }}</td>
                 <td>{{ vol.depart }}</td>
                 <td>{{ vol.image }}</td>
                 <td>{{ vol.prix }}</td>
                 <td>{{ vol.x }}</td>
                 <td>{{ vol.y }}</td>
-                <td>
+               <td>
                 
-                    <a href="{{ path('app_vol_show', {'volId': vol.volId}) }}">show</a>
-                    <a href="{{ path('app_vol_edit', {'volId': vol.volId}) }}">edit</a>
+  
+                    <a href="{{ path('app_vol_show', {'volId': vol.volId}) }}"><button type="button" class="btn btn-primary">show</button></a>
+
+                    <a href="{{ path('app_vol_edit', {'volId': vol.volId}) }}"><button type="button" class="btn btn-primary">edit</button></a>
                 </td>
             </tr>
         {% else %}
@@ -40,7 +47,31 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
-
-    <a href="{{ path('app_vol_new') }}">Create new</a>
+</table>
+ </div>
+</div>
+<script>
+        function myFunction() {
+            var input, filter, table, tr,tp, td, i,j, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("mytable");
+            tr = table.getElementsByTagName("tr");
+//   alert(td.length);
+            for (i = 0; i < tr.length; i++) {
+                td= tr[i].getElementsByTagName("td")[0];
+                
+                if ((td)||(tp)) {
+                    txtValue = td.textContent || td.innerText||tp.textContent || tp.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        
+        </script>
+   
 {% endblock %}

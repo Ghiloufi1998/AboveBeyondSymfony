@@ -97,15 +97,7 @@ class Feedback
         return $this->likes;
     }
 
-    public function addLike(CommentLikes $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setFeedback($this);
-        }
-
-        return $this;
-    }
+   
 
     public function removeLike(CommentLikes $like): self
     {

@@ -229,5 +229,25 @@ public function tot()
         return $users = $query->getResult();
     }  
 
+    public function useroff($destination){
+        $Em=$this->getEntityManager();
+        $query=$Em->getConnection()->prepare("UPDATE facture set facture.Montant_ttc = ( facture.Montant_ttc - (facture.Montant_ttc*( select offres.Pourcentage_red from reservation,offres,user,facture WHERE reservation.rev_ID=facture.rev_ID and offres.ID_off=user.id_offre and reservation.ID_user=user.id) /100)) WHERE facture.ID_fac=(select facture.ID_fac from reservation,offres,user,facture WHERE reservation.rev_ID=facture.rev_ID and offres.ID_off=user.id_offre and reservation.ID_user=user.id and user.id =14 and UPPER('Ukraine')=UPPER(reservation.Destination));
+        ");
+        return $users = $query->execute();
+    } 
+    public function montantoffr(){
+        $Em=$this->getEntityManager();
+        //SELECT f.Montant_ttc from Facture as f, Reservation AS rev, User as u where 
+        $query=$Em->createQuery("SELECT Distinct f.montantTtc from App\Entity\Facture as f, App\Entity\Reservation AS rev, App\Entity\User as u where rev.revId=f.rev and rev.idUser=14");
+        return $users = $query->getSingleScalarResult();
+    } 
+    
 
+    public function MontantPaiement(){
+        $Em=$this->getEntityManager();
+        $query=$Em->getConnection()->prepare("UPDATE Paiement  Set Montant =$prix ORDER BY Paiement.Pai_ID where facture.Pai_ID=Paiement.Pai_ID and facture.rev_ID=reservation.rev_ID and reservation.ID_user=user.id=14 ");
+        return $users = $query->execute();
+    } 
+ 
+   
 }

@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class PaiementUserController extends AbstractController
 {   
@@ -28,12 +29,13 @@ class PaiementUserController extends AbstractController
     /**
      * @Route("/userpai", name="app_pai_user")
      */
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {  
          //      $revId=$session->get('revID');
-
+         $session->get('user');
         return $this->render('paiement_user/index.html.twig', [
-            'controller_name' => 'PaiementUserController'
+            'controller_name' => 'PaiementUserController',
+            'session' => $session,
         ]);
       
     }
@@ -67,16 +69,16 @@ class PaiementUserController extends AbstractController
         return $this->redirect($session->url, 303);
     }
    
-    public function successUrl(FlashyNotifier $flashy, EntityManagerInterface $entityManager,SessionInterface $s): Response
-    {
-        $revId=$s->get('revID');
+    public function successUrl(FlashyNotifier $flashy, EntityManagerInterface $entityManager,SessionInterface $session): Response
+    {$session->get('user');
+        $revId=$session->get('revID');
         $repo=$this->getDoctrine()->getRepository(Facture::class);
         $fact=$repo->findOneByrev($revId);
         $fact->setEtat('payee');
         $entityManager->flush();
         //$prix =$this->getDoctrine()->getRepository(Reservation::class)->payer($revId);
         $flashy->success('Transaction réussite !', 'http://your-awesome-link.com');
-        return $this->render('paiement_user/success.html.twig', []);
+        return $this->render('paiement_user/success.html.twig', ['session' => $session,]);
     }
    
      public function cancelUrl(FlashyNotifier $flashy): Response

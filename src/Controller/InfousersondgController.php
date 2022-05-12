@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
  /**
      * @Route("/infousersondg", name="app_infousersondg")
@@ -18,18 +20,20 @@ class InfousersondgController extends AbstractController
      /**
      * @Route("/", name="app_infousersondg_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
         return $this->render('infousersondg/index.html.twig', [
             'controller_name' => 'InfousersondgController',
+            'session' => $session,
         ]);
     }
 
        /**
      * @Route("/{sondageId}/new", name="app_infousersondg_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager,$sondageId): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session,$sondageId): Response
     {
+        $session->get('user');
         $infoUser = new Infousersondg();
         $form = $this->createForm(InfousersondgType::class, $infoUser);
         $form->handleRequest($request);
@@ -44,6 +48,7 @@ class InfousersondgController extends AbstractController
 
         return $this->render('infousersondg/showFormUser.html.twig', [
             'infouser' => $infoUser,
+            'session' => $session,
             'form' => $form->createView(),
             'sondageId'=>$sondageId,
         ]);

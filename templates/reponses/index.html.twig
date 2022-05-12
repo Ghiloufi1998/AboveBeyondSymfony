@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="body">  
+    <br>
+    <br>
+<div class="tab">
+<div class="tab-header" > <h1> Liste des réponses</h1>  </div>
+<br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ReponsesId</th>
+                <th>Reponse</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+                <td>{{ reponse.reponsesId }}</td>
+                <td>{{ reponse.reponse }}</td>
+                <td>
+                    <a href="{{ path('app_reponses_show', {'reponsesId': reponse.reponsesId}) }}">show</a>
+                    <a href="{{ path('app_reponses_edit', {'reponsesId': reponse.reponsesId}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>    
+    
+   <div class="create"> <a href="{{ path('app_reponses_new') }}">Create new</a> </div>
+</div> 
+
+    
+{% endblock %}

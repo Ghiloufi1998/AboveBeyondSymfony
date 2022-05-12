@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voyageorganise index{% endblock %}
+{% block title %}Voyageorganise {% endblock %}
 
 {% block body %}
-    <h1>Voyageorganise index</h1>
-
-    <table class="table">
+   
+<div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Voyages  organisés </h1>    <p class="create">   <a href="{{ path('app_voyageorganise_new') }}"><button type="button" class="btn btn-primary">Create new</button></a></p>  </div>
+ 
+<table class="table">
         <thead>
             <tr>
-                <th>VoyageId</th>
                 <th>Description</th>
                 <th>Image</th>
                 <th>Prix</th>
@@ -19,14 +21,16 @@
         <tbody>
         {% for voyageorganise in voyageorganises %}
             <tr>
-                <td>{{ voyageorganise.voyageId }}</td>
+                
                 <td>{{ voyageorganise.description }}</td>
-                <td>{{ voyageorganise.image }}</td>
+                <td><img src ="{{ asset('uploads/images/' ~ voyageorganise.image) }}"
+   alt =""  width="80" height="80"></td>
+               
                 <td>{{ voyageorganise.prix }}</td>
                 <td>{{ voyageorganise.nbrePlaces }}</td>
                 <td>
-                    <a href="{{ path('app_voyageorganise_show', {'voyageId': voyageorganise.voyageId}) }}">show</a>
-                    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}">edit</a>
+                    <a href="{{ path('app_voyageorganise_show', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">show</button></a>
+                    <a href="{{ path('app_voyageorganise_edit', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">edit</button></a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +40,8 @@
         {% endfor %}
         </tbody>
     </table>
+ </div>
+</div>
 
-    <a href="{{ path('app_voyageorganise_new') }}">Create new</a>
+    
 {% endblock %}

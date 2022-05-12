@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Reponses
  *
- * @ORM\Table(name="réponses", indexes={@ORM\Index(name="Question_id", columns={"Question_id"})})
+ * @ORM\Table(name="reponses", indexes={@ORM\Index(name="Question_id", columns={"Question_id"})})
  * @ORM\Entity
  */
 class Reponses
@@ -16,7 +16,7 @@ class Reponses
     /**
      * @var int
      *
-     * @ORM\Column(name="réponses_id", type="integer", nullable=false)
+     * @ORM\Column(name="reponses_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -25,7 +25,7 @@ class Reponses
     /**
      * @var string
      *
-     * @ORM\Column(name="réponse", type="string", length=50, nullable=false)
+     * @ORM\Column(name="reponse", type="string", length=50, nullable=false)
      *  @Assert\NotBlank(message="Veuillez Choisir une réponse ")
      */
     private $reponse;
