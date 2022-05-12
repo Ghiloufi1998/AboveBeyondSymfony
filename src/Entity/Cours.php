@@ -47,11 +47,6 @@ class Cours
      *
      * @ORM\Column(name="Contenu", type="text", length=65535, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir un Contenu")
-     * @Assert\Regex(
-     *     pattern="/\d/",
-     *     match=false,
-     *     message="Veuillez Saisir une Chaine"
-     * )
      */
     private $contenu;
 

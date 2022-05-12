@@ -21,7 +21,7 @@ class CoursController extends AbstractController
     /**
      * @Route("/", name="app_cours_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManage,SessionInterface $session): Response
+    public function index(EntityManagerInterface $entityManager,SessionInterface $session): Response
     {
         $session->get('user');
         $cours = $entityManager

@@ -120,14 +120,10 @@ class VoyageorganiseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $voyageorganise->getImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {
+            $file->move ($this->getParameter('images_directory'),$fileName);
+            $guide->setImage("http://127.0.0.1:8000/uploads/" .$fileName);
                 // ... handle exception if something happens during file upload
-            }
+        
             $entityManager = $this->getDoctrine()->getManager();
             $voyageorganise->setImage($fileName);
             $entityManager->persist($voyageorganise);
