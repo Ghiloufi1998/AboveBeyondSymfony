@@ -60,7 +60,7 @@ class QuestionsController extends AbstractController
     }
 
     /**
-     * @Route("/updatejsons/{questionId}", name="upqst")
+     * @Route("/updatejsonsqst/{questionId}", name="upqst")
      */
     public function updatejsonsond($questionId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
@@ -78,7 +78,7 @@ class QuestionsController extends AbstractController
     }
 
     /**
-     * @Route("/deletejsonqst/{questionId}", name="deletsondageId")
+     * @Route("/deletejsonqst/{questionId}", name="deletqstId")
      */
     public function deletejsonsond($questionId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
@@ -92,6 +92,19 @@ class QuestionsController extends AbstractController
        $jsonContent= $Normalizer->normalize($q,'json' ,['groups' =>'post:read' ] );
         return new Response("deleted".json_encode($jsonContent));
     }
+
+    /**
+     * @Route("/ShowQuestion/{sondageId}", name="qst" )
+     */
+
+    public function ShowQuestion(NormalizerInterface $Normalizer,$sondageId){
+        $q =   $this->getDoctrine()->getRepository(Questions::class)->findBySondg($sondageId);
+        $jsonContent= $Normalizer->normalize($q,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+
+
+
+     }
 
 
 
@@ -120,6 +133,10 @@ class QuestionsController extends AbstractController
 
 
      }
+       
+   
+
+
 
     /**
      * @Route("/new", name="app_questions_new", methods={"GET", "POST"})

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * @Route("/reponses")
@@ -30,6 +31,19 @@ class ReponsesController extends AbstractController
             'reponses' => $reponses,
         ]);
     }
+
+    /**
+     * @Route("/AllReponse/{questionId}", name="rep" )
+     */
+
+   public function ShowReponse(NormalizerInterface $Normalizer,$questionId){
+        $q =   $this->getDoctrine()->getRepository(Reponses::class)->findByQstId($questionId);
+        $jsonContent= $Normalizer->normalize($q,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+
+
+
+     }
      /**
      * @Route("/statt", name="app_reponses_stat", methods={"GET"})
      */
@@ -99,6 +113,8 @@ class ReponsesController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    
 
     /**
      * @Route("/{reponsesId}", name="app_reponses_delete", methods={"POST"})

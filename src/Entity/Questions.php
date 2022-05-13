@@ -6,12 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\QuestionsRepository;
 
 /**
  * Questions
  *
  * @ORM\Table(name="questions", indexes={@ORM\Index(name="questions_ibfk_1", columns={"sondage_id"})})
- * @ORM\Entity
+ * 
+ *  @ORM\Entity(repositoryClass=QuestionsRepository::class)
  */
 class Questions
 {
@@ -57,7 +59,7 @@ class Questions
 
      /**
       * @var \Doctrine\Common\Collections\ArrayCollection $reponse
-     * @ORM\OneToMany(targetEntity="Reponses", mappedBy="questions", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Reponses", mappedBy="questions")
      * 
      * 
      */

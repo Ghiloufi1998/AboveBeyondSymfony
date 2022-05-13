@@ -48,5 +48,19 @@ class QuestionsRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+
+
+    public function findBySondg($id){
+        return $this->createQueryBuilder('a')
+        -> join ('a.sondage','c')
+        ->addSelect ('c')
+        ->andWhere('c.sondageId = :val')
+        ->setParameter('val', $id)
+        ->getQuery()
+        ->getArrayResult()
+    ;
+        ;
+     }
     
 }

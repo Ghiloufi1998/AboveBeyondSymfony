@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\ReponsesRepository;
 
 /**
  * Reponses
  *
  * @ORM\Table(name="réponses", indexes={@ORM\Index(name="Question_id", columns={"Question_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ReponsesRepository::class)
  */
 class Reponses
 {
@@ -19,6 +21,7 @@ class Reponses
      * @ORM\Column(name="réponses_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $reponsesId;
 
@@ -27,6 +30,7 @@ class Reponses
      *
      * @ORM\Column(name="réponse", type="string", length=50, nullable=false)
      *  @Assert\NotBlank(message="Veuillez Choisir une réponse ")
+     * @Groups("post:read")
      */
     private $reponse;
 
@@ -37,6 +41,7 @@ class Reponses
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Question_id", referencedColumnName="Question_id")
      * })
+     * @Groups("post:read")
      */
     private $question;
 
