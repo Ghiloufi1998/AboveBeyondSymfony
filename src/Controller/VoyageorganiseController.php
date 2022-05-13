@@ -3,18 +3,63 @@
 namespace App\Controller;
 
 use App\Entity\Voyageorganise;
+use App\Entity\User;
+
+use App\Entity\Reservation;
 use App\Form\VoyageorganiseType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 
 /**
  * @Route("/voyageorganise")
  */
 class VoyageorganiseController extends AbstractController
 {
+    
+     /**
+     * @Route("/res{voyageId}", name="resvoy", methods={"GET"})
+     */
+    public function reserver(Request $request, EntityManagerInterface $entityManager,Voyageorganise $voyageorganise,$voyageId, NormalizerInterface $Normalizer): Response
+    {
+        //$session->get('user');
+        $reservation= new Reservation();
+        $i="ihnidndnv";
+        $reservation->setType('VoyageOrganise');
+        $reservation->setNbrAdultes(1);
+        $reservation->setVol($this->getDoctrine()->getRepository(Voyageorganise::class)->find($voyageId)->getVol());
+        $reservation->setIdUser($this->getDoctrine()->getRepository(User::class)->find(14));
+        $reservation->setDestination($voyageorganise->getVol()->getDestination());
+        $reservation->setNbrEnfants(0);
+        $date = new \DateTime('@'.strtotime('now'));
+        $voyageorganise->setNbrePlaces( ($voyageorganise->getNbrePlaces() )-1 );
+
+        // $date = \DateTime::createFromFormat('Y-m-d H:i:s', strtotime('now'));
+        $reservation->setDateDeb($date);
+        $reservation->setDateFin( $date);
+       // $email=$reservation->getIdUser()->getEmail();
+        
+        $entityManager->persist($reservation);
+        $entityManager->flush();
+      
+
+
+           
+// ...
+return new Response(json_encode($voyageId));
+
+           
+
+
+       /* return $this->render('voyageorganise/index1.html.twig', [
+            'voyageorganises' => $voyageorganises,
+        ]);*/
+    }
+
     /**
      * @Route("/", name="app_voyageorganise_index", methods={"GET"})
      */
@@ -93,4 +138,7 @@ class VoyageorganiseController extends AbstractController
 
         return $this->redirectToRoute('app_voyageorganise_index', [], Response::HTTP_SEE_OTHER);
     }
+
+   
+
 }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * Vol
@@ -23,6 +25,7 @@ class Vol
      * @ORM\Column(name="Vol_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $volId;
 

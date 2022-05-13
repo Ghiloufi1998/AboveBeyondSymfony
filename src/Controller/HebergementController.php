@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use App\Services\QrcodeService;
+
 
 
 
@@ -47,8 +49,9 @@ class HebergementController extends AbstractController
     /**
      * @Route("/updatejsonhbr/{hebergementId}", name="updatejsonhbr")
      */
-    public function updatejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function updatejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer , QrcodeService $qrcodeService)
     {
+        
         $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         
 
@@ -59,11 +62,35 @@ class HebergementController extends AbstractController
             $hbr->setImage($Request->get('im'));
             $hbr->setPrix($Request->get('pr'));
             $entityManager->flush();
-         
+            $qrCode = null;
+            $qrrrr="Votre hebergement ".$hbr->getDescription()." de type :".$hbr->getType()." Adresse : ".$hbr->getAdresse();
+            $qrCode = $qrcodeService->qrcode('iheb',$qrrrr,$hbr->getDescription());
 
        $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
         return new Response(json_encode($jsonContent));
     }
+
+    /**
+     * @Route("/qrjson{hebergementId}", name="qrjson")
+     */
+    public function qrjson($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer , QrcodeService $qrcodeService)
+    {
+        $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
+        //$hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
+
+       
+        $qrCode = null;
+            
+            $qrrrr="Votre hebergement ".$hbr->getDescription()." de type :".$hbr->getType()." Adresse : ".$hbr->getAdresse();
+            $qrCode = $qrcodeService->qrcode('iheb',$qrrrr,$hbr->getDescription());
+
+       $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+
 
     /**
      * @Route("/deletejsonhbr/{hebergementId}", name="deletejsonhbr")
