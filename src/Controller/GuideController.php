@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonRespImageonse;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @Route("/guide")
@@ -36,6 +37,7 @@ class GuideController extends AbstractController
         $jsonContent = $Normalizer->normalize($guides , 'json',['groups'=>'post:read']);
         return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
      }
+     
         /**
      * @Route("/AllGuideByVol", name="AllGuideByvol",methods={"GET"})
      */
@@ -61,7 +63,15 @@ class GuideController extends AbstractController
             $guide->setTitre($Request->get('titre'));
             $guide->setPays($Request->get('Pays'));
             $guide->setLevel($Request->get('level'));
-            $guide->setImage($Request->get('image'));
+    
+            $fileNamePhoto=$Request->get('image');
+            $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+           // $filePathMobilePhoto=$Request->get('image');
+            $uploads_directoryPic = $this->getParameter('images_directory');
+            $filesystempic = new Filesystem();
+            $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+           // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+            $guide->setImage("http://127.0.0.1:8000/uploads/".$Request->get('image'));
             $guide->setIdVol($this->getDoctrine()->getRepository(Vol::class)->find($Request->get('idvol')));
             $entityManager->persist($guide);
             $entityManager->flush();
@@ -83,8 +93,16 @@ class GuideController extends AbstractController
         $guide->setTitre($Request->get('titre'));
         $guide->setPays($Request->get('Pays'));
         $guide->setLevel($Request->get('level'));
-        $guide->setImage($Request->get('image'));
+        $fileNamePhoto=$Request->get('image');
+        $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+       // $filePathMobilePhoto=$Request->get('image');
+        $uploads_directoryPic = $this->getParameter('images_directory');
+        $filesystempic = new Filesystem();
+        $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+       // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+        $guide->setImage("http://127.0.0.1:8000/uploads/".$Request->get('image'));
         $guide->setIdVol($this->getDoctrine()->getRepository(Vol::class)->find($Request->get('idvol')));
+        
             $entityManager->flush();
          
 

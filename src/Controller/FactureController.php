@@ -13,8 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/facture")
@@ -24,9 +22,8 @@ class FactureController extends AbstractController
     /**
      * @Route("/AllFacturesjson", name="AllFacture")
      */
-    public function getfacture( EntityManagerInterface $entityManager ,NormalizerInterface $normalizer,SessionInterface $session)
+    public function getfacture( EntityManagerInterface $entityManager ,NormalizerInterface $normalizer)
     {
-        $session->get('user');
         $factures = $entityManager
         ->getRepository(Facture::class)
         ->findAll();
@@ -42,13 +39,13 @@ class FactureController extends AbstractController
     /**
      * @Route("/AllFacture/new", name="NewFacture")
      */
-    public function AddFacture( Request $request,NormalizerInterface $normalizer,SessionInterface $session,EntityManagerInterface $entityManager )
+    public function AddFacture( Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
     {
-        $session->get('user');
         $facture = new Facture();
         $facture->setDateEch(new \DateTime($request->get("Date")));
         $facture->setMontantTtc($request->get("Montant"));
         $facture->setEtat($request->get("Etat"));
+        $facture->setEtat($request->get("revId"));
         $entityManager->persist($facture);
         $entityManager->flush();
         $jsonContent=$normalizer->normalize($facture,'json',['groups'=>'post:read']);
@@ -63,15 +60,14 @@ class FactureController extends AbstractController
     /**
      * @Route("/AllFacture/Update/{id}", name="UpdateFacture")
      */
-    public function UpFacture($id, Request $request,NormalizerInterface $normalizer,SessionInterface $session,EntityManagerInterface $entityManager )
+    public function UpFacture($id, Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
     {
-        $session->get('user');
         $facture = $entityManager
         ->getRepository(Facture::class)
         ->find($id);
-        $facture->setDateEch(new \DateTime($request->get("Date")));
-        $facture->setMontantTtc($request->get("Montant"));
-        $facture->setEtat($request->get("Etat"));
+        $facture->setDateEch(new \DateTime($request->get("dateEch")));
+        $facture->setMontantTtc($request->get("montantTtc"));
+        $facture->setEtat($request->get("etat"));
         $entityManager->persist($facture);
         $entityManager->flush();
         $jsonContent=$normalizer->normalize($facture,'json',['groups'=>'post:read']);
@@ -86,9 +82,8 @@ class FactureController extends AbstractController
     /**
      * @Route("/AllFacture/Del/{id}", name="delFacture")
      */
-    public function DelFacture($id, Request $request,SessionInterface $session,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
+    public function DelFacture($id, Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
     {
-        $session->get('user');
         $facture = $entityManager
         ->getRepository(Facture::class)
         ->find($id);
@@ -108,25 +103,22 @@ class FactureController extends AbstractController
     /**
      * @Route("/", name="app_facture_index", methods={"GET"})
      */
-    public function index(EntityManagerInterface $entityManager,SessionInterface $session): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        $session->get('user');
         $factures = $entityManager
             ->getRepository(Facture::class)
             ->findAll();
            
         return $this->render('facture/index.html.twig', [
             'factures' => $factures,
-            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/new", name="app_facture_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager,SessionInterface $session): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $session->get('user');
         $facture = new Facture();
         $form = $this->createForm(FactureType::class, $facture);
         $form->handleRequest($request);
@@ -140,7 +132,6 @@ class FactureController extends AbstractController
 
         return $this->render('facture/new.html.twig', [
             'facture' => $facture,
-            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -148,21 +139,18 @@ class FactureController extends AbstractController
     /**
      * @Route("/{idFac}", name="app_facture_show", methods={"GET"})
      */
-    public function show(Facture $facture,SessionInterface $session): Response
+    public function show(Facture $facture): Response
     {
-        $session->get('user');
         return $this->render('facture/show.html.twig', [
             'facture' => $facture,
-            'session' => $session,
         ]);
     }
 
     /**
      * @Route("/{idFac}/edit", name="app_facture_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Facture $facture,SessionInterface $session, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Facture $facture, EntityManagerInterface $entityManager): Response
     {
-        $session->get('user');
         $form = $this->createForm(FactureType::class, $facture);
         $form->handleRequest($request);
 
@@ -174,7 +162,6 @@ class FactureController extends AbstractController
 
         return $this->render('facture/edit.html.twig', [
             'facture' => $facture,
-            'session' => $session,
             'form' => $form->createView(),
         ]);
     }
@@ -182,9 +169,8 @@ class FactureController extends AbstractController
     /**
      * @Route("/{idFac}", name="app_facture_delete", methods={"POST"})
      */
-    public function delete($idFac,Request $request,SessionInterface $session, Facture $facture, EntityManagerInterface $entityManager,FactureRepository $FR,PaiementRepository $PaiementRepository): Response
+    public function delete($idFac,Request $request, Facture $facture, EntityManagerInterface $entityManager,FactureRepository $FR,PaiementRepository $PaiementRepository): Response
     {
-        $session->get('user');
            $x=$PaiementRepository->find($idFac);
 
            $entityManager->remove($facture);
@@ -192,9 +178,7 @@ class FactureController extends AbstractController
             $entityManager->flush();
         
 
-        return $this->redirectToRoute('app_facture_index', [
-            'session' => $session,
-        ], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_facture_index', [], Response::HTTP_SEE_OTHER);
     }
    
 

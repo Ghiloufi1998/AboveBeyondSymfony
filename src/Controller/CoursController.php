@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Entity\Guide;
 use App\Form\CoursType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,7 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 /**
  * @Route("/cours")
  */
@@ -33,6 +35,105 @@ class CoursController extends AbstractController
             'session' => $session,
         ]);
     }
+    /**
+     * @Route("/CoursByGuide/{idG}", name="CoursByGuide",methods={"GET"})
+     */
+    public function CoursByGuide(NormalizerInterface $Normalizer,$idG,SessionInterface $session)
+    {
+       // session$->get('user');
+        $repo=$this->getDoctrine()->getRepository(Cours::class);
+        $cours=$repo->findByidG($idG);
+        $jsonContent = $Normalizer->normalize($cours , 'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+     }
+
+    /**
+     * @Route("/AllCours", name="AllCours",methods={"GET"})
+     */
+
+    public function AllCours(NormalizerInterface $Normalizer,SessionInterface $session)
+    {
+        $session->get('user');
+        $repo=$this->getDoctrine()->getRepository(Cours::class);
+        $cours=$repo->findAll();
+        $jsonContent = $Normalizer->normalize($cours , 'json',['groups'=>'post:read']);
+        return new Response(json_encode($jsonContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+     }
+     /**
+     * @Route("/newCours/new", name="newCours")
+     */
+    public function newGuide(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer,SessionInterface $session)
+    {
+        $session->get('user');
+        $cours = new Cours();
+            $cours->setTitre($Request->get('titre'));
+           
+            $cours->setContenu($Request->get('contenu'));
+            $cours->setType($Request->get('type'));
+    
+            $fileNamePhoto=$Request->get('image');
+            $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+           // $filePathMobilePhoto=$Request->get('image');
+            $uploads_directoryPic = $this->getParameter('images_directory');
+            $filesystempic = new Filesystem();
+            $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+           // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+            $cours->setImage("http://127.0.0.1:8000/uploads/".$Request->get('image'));
+            $cours->setIdG($this->getDoctrine()->getRepository(Guide::class)->find($Request->get('idg')));
+            $entityManager->persist($cours);
+            $entityManager->flush();
+
+
+       $jsonContent= $Normalizer->normalize($cours,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+     /**
+     * @Route("/updateCours/{idCrs}", name="updateCours")
+     */
+    public function updateCours($idCrs,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $session->get('user');
+        $cours = $this->getDoctrine()->getRepository(Cours::class)->find($idCrs);
+        
+
+        $cours->setTitre($Request->get('titre'));
+           
+        $cours->setContenu($Request->get('contenu'));
+        $cours->setType($Request->get('type'));
+
+        $fileNamePhoto=$Request->get('image');
+        $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+       // $filePathMobilePhoto=$Request->get('image');
+        $uploads_directoryPic = $this->getParameter('images_directory');
+        $filesystempic = new Filesystem();
+        $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+       // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+        $cours->setImage("http://127.0.0.1:8000/uploads/".$Request->get('image'));
+        
+            $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($cours,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+     /**
+     * @Route("/deleteCours/{idCrs}", name="deleteGuide")
+     */
+    public function deleteGuide($idCrs,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $session->get('user');
+        $cours = $this->getDoctrine()->getRepository(Cours::class)->find($idCrs);
+        
+
+        $entityManager->remove($cours);
+        $entityManager->flush();
+         
+
+       $jsonContent= $Normalizer->normalize($cours,'json' ,['groups' =>'post:read' ] );
+        return new Response("deleted".json_encode($jsonContent));
+    }
+
     /**
      * @Route("/listeguide/consulter/{idG}", name="coursbyidg", methods={"GET"})
      */

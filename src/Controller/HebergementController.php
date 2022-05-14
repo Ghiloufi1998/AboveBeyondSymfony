@@ -13,8 +13,8 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
-
+use Symfony\Component\Filesystem\Filesystem;
+use App\Services\QrcodeService;
 
 /**
  * @Route("/hebergement")
@@ -24,18 +24,25 @@ class HebergementController extends AbstractController
 
 
     /**
-     * @Route("/newJsonhbr/new", name="newJsonhbr")
+     * @Route("/abcd/new", name="abcd")
      */
-    public function newJsonres(Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function newJsonres(Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
     {
         $hbr = new Hebergement();
-        $session->get('user');
+        
 
             $hbr->setType($Request->get('type'));
             $hbr->setDisponibilite($Request->get('dis'));
             $hbr->setDescription($Request->get('desc'));
             $hbr->setAdresse($Request->get('ad'));
-            $hbr->setImage($Request->get('im'));
+            $fileNamePhoto=$Request->get('im');
+            $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+           // $filePathMobilePhoto=$Request->get('image');
+            $uploads_directoryPic = $this->getParameter('images_directory');
+            $filesystempic = new Filesystem();
+            $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+           // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+            $hbr->setImage("http://127.0.0.1:8000/uploads/".$Request->get('im'));
             $hbr->setPrix($Request->get('pr'));
         
             $entityManager->persist($hbr);
@@ -49,31 +56,63 @@ class HebergementController extends AbstractController
     /**
      * @Route("/updatejsonhbr/{hebergementId}", name="updatejsonhbr")
      */
-    public function updatejsonhbr($hebergementId,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function updatejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer , QrcodeService $qrcodeService)
     {
+        
         $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         
-        $session->get('user');
+
             $hbr->setType($Request->get('type'));
             $hbr->setDisponibilite($Request->get('dis'));
             $hbr->setDescription($Request->get('desc'));
             $hbr->setAdresse($Request->get('ad'));
-            $hbr->setImage($Request->get('im'));
+            $fileNamePhoto=$Request->get('im');
+            $filePathMobilePhoto="file://C://Users//Ghiloufi//AppData//Local//Temp";
+           // $filePathMobilePhoto=$Request->get('image');
+            $uploads_directoryPic = $this->getParameter('images_directory');
+            $filesystempic = new Filesystem();
+            $filesystempic->copy($filePathMobilePhoto."//temp".$fileNamePhoto , $uploads_directoryPic."/"."$fileNamePhoto");
+           // $filesystempic->copy($filePathMobilePhoto,$uploads_directoryPic);
+            $hbr->setImage("http://127.0.0.1:8000/uploads/".$Request->get('im'));
             $hbr->setPrix($Request->get('pr'));
             $entityManager->flush();
-         
+            $qrCode = null;
+            $qrrrr="Votre hebergement ".$hbr->getDescription()." de type :".$hbr->getType()." Adresse : ".$hbr->getAdresse();
+            $qrCode = $qrcodeService->qrcode('iheb',$qrrrr,$hbr->getDescription());
 
        $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
         return new Response(json_encode($jsonContent));
     }
 
     /**
-     * @Route("/deletejsonhbr/{hebergementId}", name="deletejsonhbr")
+     * @Route("/qrjson{hebergementId}", name="qrjson")
      */
-    public function deletejsonhbr($hebergementId,Request $Request,SessionInterface $session, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    public function qrjson($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer , QrcodeService $qrcodeService)
     {
         $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
-        $session->get('user');
+        
+        //$hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
+
+       
+        $qrCode = null;
+            
+            $qrrrr="Votre hebergement ".$hbr->getDescription()." de type :".$hbr->getType()." Adresse : ".$hbr->getAdresse();
+            $qrCode = $qrcodeService->qrcode1('iheb',$qrrrr,$hbr->getDescription());
+
+       $jsonContent= $Normalizer->normalize($hbr,'json' ,['groups' =>'post:read' ] );
+        return new Response(json_encode($jsonContent));
+    }
+
+
+
+    /**
+     * @Route("/deletejsonhbr/{hebergementId}", name="deletejsonhbr")
+     */
+    public function deletejsonhbr($hebergementId,Request $Request, EntityManagerInterface $entityManager, NormalizerInterface $Normalizer)
+    {
+        $hbr = $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
+        
 
         $entityManager->remove($hbr);
         $entityManager->flush();
@@ -88,8 +127,8 @@ class HebergementController extends AbstractController
     /**
      * @Route("/Jsonhbr/{hebergementId}", name="json_hbr")
      */
-    public function Jsonres($hebergementId, Request $Request,SessionInterface $session, NormalizerInterface $Normalizer){
-        $session->get('user');
+    public function Jsonres($hebergementId, Request $Request, NormalizerInterface $Normalizer){
+        
         //$em->this->getDoctrine()->getManager();
         $h =   $this->getDoctrine()->getRepository(Hebergement::class)->find($hebergementId);
         $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
@@ -102,7 +141,7 @@ class HebergementController extends AbstractController
      * @Route("/Allhbr", name="Allhbr")
      */
 
-    public function AllRes(NormalizerInterface $Normalizer,SessionInterface $session){
+    public function AllRes(NormalizerInterface $Normalizer){
         $h =   $this->getDoctrine()->getRepository(Hebergement::class)->findAll();
         $jsonContent= $Normalizer->normalize($h,'json' ,['groups' =>'post:read' ] );
         return new Response(json_encode($jsonContent));

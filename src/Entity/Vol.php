@@ -21,6 +21,7 @@ class Vol
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @Groups("post:read")
+     * 
      */
     private $volId;
 

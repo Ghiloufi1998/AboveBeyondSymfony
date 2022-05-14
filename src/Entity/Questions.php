@@ -6,12 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\QuestionsRepository;
 
 /**
  * Questions
  *
  * @ORM\Table(name="questions", indexes={@ORM\Index(name="questions_ibfk_1", columns={"sondage_id"})})
- * @ORM\Entity
+ * 
+ *  @ORM\Entity(repositoryClass=QuestionsRepository::class)
  */
 class Questions
 {
@@ -55,7 +57,13 @@ class Questions
      */
     private $sondage;
 
-
+     /**
+      * @var \Doctrine\Common\Collections\ArrayCollection $reponse
+     * @ORM\OneToMany(targetEntity="Reponses", mappedBy="questions")
+     * 
+     * 
+     */
+    private $reponse;
 
     public function __construct()
     {
@@ -106,12 +114,16 @@ class Questions
         return $this->question;}
 
 
-     /*   
+        
 /**
  *  @return \Doctrine\Common\Collections\ArrayCollection
  */
+    public function getReponses(): Collection
+    {
+        return $this->reponse;
+    }
 
-   /* public function addReponse(Reponses $reponse): self
+    public function addReponse(Reponses $reponse): self
     {
         if (!$this->Reponses->contains($reponse)) {
             $this->Reponses[] = $reponse;
@@ -119,7 +131,7 @@ class Questions
         }
 
         return $this;
-    }*/
+    }
 
 
 

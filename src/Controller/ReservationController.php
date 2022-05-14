@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Entity\User;
+use App\Entity\Weather;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use App\Repository\ReservationRepository;
 use App\Form\ReservationType;
@@ -26,6 +27,53 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class ReservationController extends AbstractController
 {
+    
+    //meteo 
+    /**
+     * @Route("/weathermobile/{ville}", name="OOOOOOOOOO" , methods={"GET", "POST"})
+     */
+    public function weathermob($ville, NormalizerInterface $Normalizer): Response
+    {
+             // Url de l'API
+
+            
+
+   // $url = "https://api.openweathermap.org/data/2.5/weather?q=".$ville."&lang=fr&units=metric&appid=7dc20536ba29bf30592defd78bc8ce10";
+   $url = "https://api.openweathermap.org/data/2.5/weather?q=".$ville."&lang=fr&units=metric&appid=7dc20536ba29bf30592defd78bc8ce10";
+
+    // On get les resultat
+    $raw = file_get_contents($url);
+    // Décode la chaine JSON
+    $json = json_decode($raw);
+
+    // Nom de la ville
+    $name = $json->name;
+    
+    // Météo
+    $weather = $json->weather[0]->main;
+    $desc = $json->weather[0]->description;
+
+    // Températures
+    $temp = $json->main->temp;
+    $feel_like = $json->main->feels_like;
+
+    // Vent
+    $speed = $json->wind->speed;
+    $deg = $json->wind->deg;
+    $res = new Weather();
+    $res->speed=$speed;
+    $res->desc=$desc;
+    $res->temp=$temp;
+    $res->weather=$weather;
+    $res->fl=$feel_like;
+    
+
+    $jsonContent= $Normalizer->normalize($res,'json' ,['groups' =>'post:read' ] );
+
+
+    return new Response(json_encode($jsonContent));
+
+    }    
 
      /**
      * @Route("/newJsonres/new", name="newJsonres")

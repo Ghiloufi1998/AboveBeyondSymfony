@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\Facture;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
@@ -67,6 +67,15 @@ class ReservationRepository extends ServiceEntityRepository
         $query=$em->createQuery('select AVG(v.prix) from App\Entity\Reservation r, App\Entity\Vol v where v.volId = r.vol  ');
         return $query->getSingleScalarResult();   
      }
+public function Destination()
+    { 
+        $Em=$this->getEntityManager();
+        $query=$Em->createQuery("SELECT v.x,v.y from App\Entity\Vol v,App\Entity\Offres o where v.destination=o.destination GROUP BY  v.volId
+        "); 
+        return $users = $query->execute();
+        
+
+    } 
 
 
 

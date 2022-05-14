@@ -532,7 +532,6 @@ else{
 
         if ($User)
         {
-
             $jsonContent = $Normalizer->normalize($User,'json',['groups'=>'post:read']);
             return new Response(json_encode($jsonContent));
         }

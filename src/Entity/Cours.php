@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Cours
  *
@@ -19,6 +19,7 @@ class Cours
      * @ORM\Column(name="ID_crs", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idCrs;
 
@@ -26,6 +27,7 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="Type", type="string", length=250, nullable=false)
+     * @Groups("post:read")
      */
     private $type;
 
@@ -39,6 +41,7 @@ class Cours
      *     match=false,
      *     message="Veuillez Saisir une Chaine"
      * )
+     * @Groups("post:read")
      */
     private $titre;
 
@@ -47,6 +50,7 @@ class Cours
      *
      * @ORM\Column(name="Contenu", type="text", length=65535, nullable=false)
      * @Assert\NotBlank(message="Veuillez Saisir un Contenu")
+     * @Groups("post:read")
      */
     private $contenu;
 
@@ -55,6 +59,7 @@ class Cours
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     * @Groups("post:read")
      *
      */
     private $image;
@@ -66,6 +71,7 @@ class Cours
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_g", referencedColumnName="ID_g")
      * })
+     * @Groups("post:read")
      */
     private $idG;
 

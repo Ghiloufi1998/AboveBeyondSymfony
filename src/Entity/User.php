@@ -24,6 +24,7 @@ class User
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -31,6 +32,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @Groups("post:read")
      */
     private $name;
 
@@ -38,6 +40,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="fname", type="string", length=50, nullable=false)
+     * @Groups("post:read")
      */
     private $fname;
 
@@ -45,6 +48,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="gender", type="string", length=50, nullable=false)
+     * @Groups("post:read")
      */
     private $gender;
 
@@ -52,6 +56,7 @@ class User
      * @var int
      *
      * @ORM\Column(name="num", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $num;
 
@@ -59,6 +64,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=100, nullable=false)
+     * @Groups("post:read")
      */
     private $email;
 
@@ -66,11 +72,13 @@ class User
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=50, nullable=false)
+     * @Groups("post:read")
      */
     private $password;
     /**
-     *@Assert\NotBlank(message="Confirmpassword is required")
-     *@Assert\EqualTo(propertyPath="password",message="Vérifier votre password")
+     * @Assert\NotBlank(message="Confirmpassword is required")
+     * @Assert\EqualTo(propertyPath="password",message="Vérifier votre password")
+     * @Groups("post:read")
      */
 
     private $confirmpassword;
@@ -79,6 +87,7 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date", nullable=false)
+     * @Groups("post:read")
      */
     private $birthday;
 
@@ -86,6 +95,7 @@ class User
      * @var string|null
      *
      * @ORM\Column(name="image", type="string", length=200, nullable=true)
+     * @Groups("post:read")
      */
     private $image;
 
@@ -93,6 +103,7 @@ class User
      * @var int|null
      *
      * @ORM\Column(name="nombre_de_points", type="integer", nullable=true)
+     * @Groups("post:read")
      */
     private $nombreDePoints;
 
@@ -100,6 +111,7 @@ class User
      * @var string|null
      *
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $adresse;
 
@@ -107,6 +119,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $role;
 
@@ -117,6 +130,7 @@ class User
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_offre", referencedColumnName="ID_off")
      * })
+     * @Groups("post:read")
      */
     private $idOffre;
 

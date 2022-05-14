@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Reservation;
 use App\Entity\Vol;
 use App\Form\VolType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +20,22 @@ use Dompdf\Options;
  */
 class VolController extends AbstractController
 {
+    
+    /**
+     * @Route("/destination", name="Alldestination")
+     */
+    public function getdestination( EntityManagerInterface $entityManager ,NormalizerInterface $normalizer)
+    {
+        $Vol = $entityManager
+        ->getRepository(Reservation::class)
+        ->Destination();
+        $jsonContent=$normalizer->normalize($Vol,'json',['groups'=>'post:read']);
+        
+        
+        return new Response(json_encode($jsonContent));
 
+
+    }
     /**
      * @Route("/getVoljson", name="AllVol")
      */
@@ -36,7 +52,7 @@ class VolController extends AbstractController
 
     }
     /**
-     * @Route("/AllReservation/new", name="NewVol")
+     * @Route("/AllVol/new", name="NewVol")
      */
     public function AddReservation( Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
     {

@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert; 
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * Transport
@@ -20,6 +22,7 @@ class Transport
      * @ORM\Column(name="Transport_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $transportId;
 
@@ -39,6 +42,7 @@ class Transport
      *   )
      *
      * @ORM\Column(name="Type", type="string", length=255, nullable=false)
+     * @Groups("post:read")
      */
     private $type;
 
@@ -52,6 +56,7 @@ class Transport
      * )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
+     * @Groups("post:read")
      */
     private $description;
 
@@ -61,6 +66,7 @@ class Transport
      * @Assert\Expression(" this.getDisponibilite()==1 || this.getDisponibilite()==0  ",message="Dispo 0 ou 1 ")
      *
      * @ORM\Column(name="Disponibilite", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $Disponibilite;
 
@@ -69,6 +75,7 @@ class Transport
      * @var int
      *@Assert\Positive(message="Le prix doit etre positif ! ")
      * @ORM\Column(name="Prix", type="integer", nullable=false)
+     * @Groups("post:read")
      */
     private $prix;
 
@@ -82,6 +89,7 @@ class Transport
      *   minMessage = "min error ",
      *   maxMessage = "max error "
      *   )
+     * @Groups("post:read")
      *
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
@@ -95,6 +103,7 @@ class Transport
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Hebergement_id", referencedColumnName="Hebergement_id")
      * })
+     * @Groups("post:read")
      */
     private $hebergement;
 
