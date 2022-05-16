@@ -1,0 +1,60 @@
+{% extends 'front.html.twig' %}
+{% block usersession %}
+                 {% if session.has('user') %}
+                  <li class="nav-item"><a class="nav-link">{{session.all.user.name}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{path('test_logout')}}">Logout</a></li>
+                {% else %}
+                  <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                {% endif %}
+{% endblock %}
+
+{% block body %}
+ <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <div class="send-message">
+      <div class="container">
+     
+    
+              <a href="/listRec">Lister réclamations <i class="fa fa-angle-right"></i></a>
+                      
+              <h2 style="color:white;">Envoyer votre réclamation</h2>
+            
+          <div class="col-md-8">
+            <div class="contact-form">
+
+              {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+              
+                <div class="row">
+                 
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                     {{ form_errors(form.sujet) }}
+                     {{ form_widget(form.sujet,{'attr': {'class': 'form-group' , 'placeholder' : 'Subject'}}) }}
+                    </fieldset>
+                  </div>
+                  
+                   
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.description) }}
+                     {{ form_widget(form.description,{'attr': {'class': 'form-control' , 'placeholder' : 'Your Message'}}) }}
+                      </fieldset>
+                  </div>
+                  
+                  <br></br>
+                  <div class="col-lg-12">
+                    <fieldset>
+                    </br> </br>
+                    {{ form_widget(form.Send,{'attr': {'class': 'filled-button ', 'placeholder' : 'Envoyer'}}) }}
+                    </fieldset>
+                  </div>
+                </div>
+              {{ form_end(form) }}
+            </div>
+          </div>
+          <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+    </div> </div>
+{% endblock %}

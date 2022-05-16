@@ -3,9 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert; 
 use Symfony\Component\Serializer\Annotation\Groups;
-
+use Symfony\Component\Validator\Constraints as Assert; 
 
 /**
  * Vol
@@ -16,10 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Vol
 {
     /**
-     * 
-     * 
-     * 
-     * 
      * @var int
      *
      * @ORM\Column(name="Vol_id", type="integer", nullable=false)
@@ -29,62 +24,68 @@ class Vol
      */
     private $volId;
 
-    /**
-     * @Assert\NotBlank
-     * 
+   /**
+     * @Assert\NotBlank(message=" Destination obligatoire ! ")
      * @var string
-     * @Assert\Length(
-     *      min = 3,
+     * Assert\Length(
+     *      min = 5,
      *      max = 50,
      *   minMessage = "min error ",
      *   maxMessage = "max error "
      *   )
      *
      * @ORM\Column(name="Destination", type="string", length=255, nullable=false)
-     */
-
-     
-    
+     *@Groups("post:read")
+     */ 
     private $destination;
-
-       
-
-    /**
+/**
+     * @Assert\NotBlank(message="Depart obligatoire !  ")
      * @var string
-     *@Assert\Length(
-     *      min = 3,
+     * Assert\Length(
+     *      min = 5,
      *      max = 50,
      *   minMessage = "min error ",
      *   maxMessage = "max error "
      *   )
-     * @ORM\Column(name="Départ", type="string", length=255, nullable=false)
+     *@Groups("post:read")
+     * @ORM\Column(name="Depart", type="string", length=255, nullable=false)
      */
     private $depart;
 
-    /**
+     /**
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
+     * @Groups("post:read")
      *
      * @ORM\Column(name="Image", type="string", length=255, nullable=false)
      */
     private $image;
 
-    /**
+     /**
+     * @Assert\NotBlank(message="Veuillez indiquer le  prix ! ")
      * @var int|null
-     *
+     * @Assert\Positive(message="Le prix doit etre positif ! ")
+     *@Groups("post:read")
      * @ORM\Column(name="Prix", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $prix = NULL;
 
     /**
      * @var float|null
-     *
+     *@Groups("post:read")
      * @ORM\Column(name="x", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
      */
     private $x = NULL;
 
     /**
      * @var float|null
-     *
+     *@Groups("post:read")
      * @ORM\Column(name="y", type="float", precision=10, scale=0, nullable=true, options={"default"="NULL"})
      */
     private $y = NULL;
@@ -106,12 +107,12 @@ class Vol
         return $this;
     }
 
-    public function getdepart(): ?string
+    public function getDepart(): ?string
     {
         return $this->depart;
     }
 
-    public function setdepart(string $depart): self
+    public function setDepart(string $depart): self
     {
         $this->depart = $depart;
 
@@ -165,10 +166,9 @@ class Vol
 
         return $this;
     }
-
     public function __toString() {
-        return $this->destination;}
-    
+        return $this->destination;
+    }
 
 
 }

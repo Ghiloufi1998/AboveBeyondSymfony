@@ -1,0 +1,67 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+ <style>.container-fluid{
+
+  padding:30px 50px;
+  transform: translate(-50%, -50%);
+  margin-left:50%;
+   margin-top:200px;
+   justify-content: space-between;
+  width: 700px;
+  background: black;
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 8px 
+}
+.col,#some-custom-id{
+  padding-top:15px
+ 
+}
+.hslo{
+  margin-right:400px;
+  margin-left:400px;
+ overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px 8px
+  
+
+}
+
+
+</style>
+
+  <div class="hslo">
+   <div class="body-form" >
+                        <div  class="form">
+    <div class="" >
+    {{ form_start(form,{attr: {novalidate: 'novalidate','class': 'form-group'}}) }}
+  <div class="">
+        <div class="">
+       {{ form_row(form.date) }}
+       </div>
+        <div class="" id="some-custom-id" >
+         {{ form_row(form. montant, { 'attr':{'disabled':'disabled','value' : prix }}) }}
+        </div>
+        </div>
+        <div class="" id="some-custom-id">
+           {{ form_row(form. modePay) }}
+        </div>
+         <br> <br>
+       <button  >{{ button_label|default('Add To Cart') }}</button>
+       </div>
+      
+    
+       {{ form_end(form) }}
+    </div>
+   
+  </div>
+  </div>
+  </div> </div></div> </div></div>
+
+  
+       
+
+{% endblock %}

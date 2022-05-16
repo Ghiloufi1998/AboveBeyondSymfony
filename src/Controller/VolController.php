@@ -5,21 +5,109 @@ namespace App\Controller;
 use App\Entity\Vol;
 use App\Form\VolType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 /**
  * @Route("/vol")
  */
 class VolController extends AbstractController
 {
+
+    /**
+     * @Route("/getVoljson", name="AllVol")
+     */
+    public function getVol( EntityManagerInterface $entityManager ,NormalizerInterface $normalizer)
+    {
+        $Vol = $entityManager
+        ->getRepository(Vol::class)
+        ->findAll();
+        $jsonContent=$normalizer->normalize($Vol,'json',['groups'=>'post:read']);
+        
+        
+        return new Response(json_encode($jsonContent));
+
+
+    }
+    /**
+     * @Route("/AllReservation/new", name="NewVol")
+     */
+    public function AddReservation( Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
+    {
+        $Vol = new Vol();
+        $Vol->setY($request->get("Y"));
+        $Vol->setX($request->get("X"));
+        $Vol->setPrix($request->get("Prix"));
+        $Vol->setDestination($request->get("destination"));
+        $Vol->setDepart($request->get("Depart"));
+        $Vol->setImage($request->get("Image"));
+        $entityManager->persist($Vol);
+        $entityManager->flush();
+        $jsonContent=$normalizer->normalize($Vol,'json',['groups'=>'post:read']);
+        
+       /* return $this->render('facture/Allstudents.html.twig', [
+            'data' => $jsonContent,
+        ]);*/
+        return new Response(json_encode($jsonContent));
+
+
+    }
+     /**
+     * @Route("/AllVol/Update/{id}", name="UpdateVol")
+     */
+    public function UpVol($id, Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
+    {
+        $Vol = $entityManager
+        ->getRepository(Vol::class)
+        ->find($id);
+        $Vol->setY($request->get("Y"));
+        $Vol->setX($request->get("X"));
+        $Vol->setPrix($request->get("Prix"));
+        $Vol->setDestination($request->get("destination"));
+        $Vol->setDepart($request->get("Depart"));
+        $Vol->setImage($request->get("Image"));
+        $entityManager->persist($Vol);
+        $entityManager->flush();
+        $jsonContent=$normalizer->normalize($Vol,'json',['groups'=>'post:read']);
+        
+       /* return $this->render('facture/Allstudents.html.twig', [
+            'data' => $jsonContent,
+        ]);*/
+        return new Response("Modification".json_encode($jsonContent));
+
+
+    }
+    /**
+     * @Route("/AllVol/Del/{id}", name="delVol")
+     */
+    public function DelVol($id, Request $request,NormalizerInterface $normalizer,EntityManagerInterface $entityManager )
+    {
+        $Vol = $entityManager
+        ->getRepository(Vol::class)
+        ->find($id);
+        $entityManager->remove($Vol);
+        $entityManager->flush();
+        $jsonContent=$normalizer->normalize($Vol,'json',['groups'=>'post:read']);
+        
+       /* return $this->render('facture/Allstudents.html.twig', [
+            'data' => $jsonContent,
+        ]);*/
+        return new Response("supprimer".json_encode($jsonContent));
+
+
+    }
     /**
      * @Route("/", name="app_vol_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response
-    {
+    {    $vol=new Vol();
+        
         $vols = $entityManager
             ->getRepository(Vol::class)
             ->findAll();
@@ -28,6 +116,39 @@ class VolController extends AbstractController
             'vols' => $vols,
         ]);
     }
+    
+    /**
+     * @Route("/listvol", name="vol_list", methods={"GET"})
+     */
+     public function listV (EntityManagerInterface $entityManager): Response
+     
+    {
+        $pdfOptions = new Options ();
+        $pdfOptions->set('defaultFont', 'Arial');
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $vols = $entityManager->getRepository(Vol::class)->findAll();
+       
+        //Retrieve the HTML generated in our twig flle
+        $html =$this->renderView('vol/listvol.html.twig', [
+            'vols' => $vols,
+         ]);
+    
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'portrait' or
+        $dompdf->setPaper('A4', 'portrait');
+        // Render the HIML as PDF
+         $dompdf->render ();
+        //Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+        "Attachment" => true
+        ]);
+        
+      
+    }
+
 
     /**
      * @Route("/new", name="app_vol_new", methods={"GET", "POST"})
@@ -41,7 +162,6 @@ class VolController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($vol);
             $entityManager->flush();
-            
 
             return $this->redirectToRoute('app_vol_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -93,14 +213,5 @@ class VolController extends AbstractController
         }
 
         return $this->redirectToRoute('app_vol_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    /**
-     * @Route("/admin", name="admin", methods={"GET"})
-     */
-    public function indexAdmin(EntityManagerInterface $entityManager): Response
-    {
-       
-        return $this->render('Admin/index.html.twig');
     }
 }

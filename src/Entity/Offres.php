@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Offres
  *
@@ -22,29 +22,29 @@ class Offres
     private $idOff;
 
     /**
-     * @var string
-     *
+     * @var string|null
+     * @Assert\NotBlank
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
      */
     private $description;
 
     /**
-     * @var int
-     *
+     * @var int|null
+     * @Assert\NotBlank
      * @ORM\Column(name="Nb_point_req", type="integer", nullable=false)
      */
     private $nbPointReq;
 
     /**
-     * @var string
-     *
+     * @var string|null
+     * @Assert\NotBlank
      * @ORM\Column(name="Destination", type="string", length=250, nullable=false)
      */
     private $destination;
 
     /**
-     * @var int
-     *
+     * @var int|null
+     * @Assert\NotBlank
      * @ORM\Column(name="Pourcentage_red", type="integer", nullable=false)
      */
     private $pourcentageRed;
@@ -59,9 +59,9 @@ class Offres
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
-        $this->description = $description;
+        $this->description = (string)$description;
 
         return $this;
     }
@@ -71,21 +71,20 @@ class Offres
         return $this->nbPointReq;
     }
 
-    public function setNbPointReq(int $nbPointReq): self
+    public function setNbPointReq(?int  $nbPointReq): self
     {
-        $this->nbPointReq = $nbPointReq;
+        $this->nbPointReq = (int) $nbPointReq;
 
         return $this;
     }
-
     public function getDestination(): ?string
     {
         return $this->destination;
     }
 
-    public function setDestination(string $destination): self
+    public function setDestination(?string $destination): self
     {
-        $this->destination = $destination;
+        $this->destination = (string)$destination;
 
         return $this;
     }
@@ -95,9 +94,9 @@ class Offres
         return $this->pourcentageRed;
     }
 
-    public function setPourcentageRed(int $pourcentageRed): self
+    public function setPourcentageRed(?int $pourcentageRed): self
     {
-        $this->pourcentageRed = $pourcentageRed;
+        $this->pourcentageRed =(int) $pourcentageRed;
 
         return $this;
     }

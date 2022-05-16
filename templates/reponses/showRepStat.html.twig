@@ -1,0 +1,290 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js') }}" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<div class="body">  
+
+   <h1> Suivis des réponses </h1>
+   <div class="container00">
+    <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                <div class="col-lg-8 mb-4 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary">Bienvenue! 🎉</h5>
+                          <p class="mb-4">
+                            Vous pouvez consulter les statistiques de chaque sondage par défférents critéres
+                          </p>
+
+                          
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="../assets/img/illustrations/man-with-laptop-light.png"
+                            height="140"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <!-- Order Statistics -->
+                  
+                  <div class= "listeSondage">
+                  
+                <div class="col-lg-6 ">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                      <div class="card-title mb-0">
+                        <h5 class="m-0 me-2">Statistique des réponses</h5>
+                        <small class="text-muted"></small>
+                      </div>
+                      <div class="dropdown">
+                        <button
+                          class="btn p-0"
+                          type="button"
+                          id="orederStatistics"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                          <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                          <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                          <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex flex-column align-items-center gap-1">
+                          <h2 class="mb-2"></h2>
+                          <span>suivis réponses</span>
+                        </div>
+                        <div id="orderStatisticsChart"></div>
+                      </div>
+                      <ul class="p-0 m-0">
+                        <li class="d-flex mb-4 pb-1">
+                         
+                         
+                         <div class="tab">
+<div class="tab-header" > <h5> Liste des sondages </h5>   </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+               <!-- <th>SondageId</th> -->
+                <th><small>Sujet</small></th>
+                <th><small>Catégorie</small></th>
+                <th><small>actions</small></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+            <tr>
+               <!-- <td>{{ sondage.sondageId }}</td> -->
+                <td><small>{{ sondage.sujet }}</small></td>
+                <td><small>{{ sondage.categorie }}</small></td>
+                <td>
+                    <a href="{{ path('app_reponses_stat', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary btn-sm"><small>Details</small></button></a>
+                    
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>       
+                          
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <!-- Total Revenue -->
+                
+                <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">Sondage</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="sondage" width="0.25" height="0.75"></canvas></div>
+                <script>
+                var ctx = document.getElementById('sondage').getContext('2d');
+var sondGraph = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{sondNom|raw}},
+        datasets: [{
+            label: 'Nombre des réponses par catégorie',
+            data: {{repCount|raw}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+          
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+                      </div>
+                      </div>
+                      </div>
+                               </br>
+                           <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">Age</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="age" width="0.25" height="0.75"></canvas>
+                <script>
+                var ctx2 = document.getElementById('age').getContext('2d');
+var sondGraph2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: [25,30,18,20,44],
+        datasets: [{
+            label: 'Nombre Age',
+            data: [40,30,20,10],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+             borderWidth: 0.2,
+          
+        }]
+    },
+    options: {
+        
+        plugins :{
+          tooltip:{
+            yAlign:'botton'
+          }
+        },
+        indexAxis:'y',
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+                </script>
+                </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+
+                      </div>
+                      </div>
+                      
+                         </br>
+                   <div class="col-12 col-lg-6 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">sexe</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+               <canvas id="sexe" width="0.25" height="0.75"></canvas>
+               <script>
+               var ctx3 = document.getElementById('sexe').getContext('2d');
+var sondGraph3 = new Chart(ctx3, {
+    type: 'pie',
+    data: {
+        labels: ['Femme','Homme'],
+        datasets: [{
+            label: 'Nombre de sexe',
+            data: [{{nbrFemme|raw}},{{nbrHomme|raw}}],
+             backgroundColor: [
+              'rgb(255, 99, 132)',
+               'rgb(54, 162, 235)'
+      
+    ],
+    hoverOffset: 4
+          
+        }]
+    },
+   
+});
+ </script>
+           </div>
+                        </div>
+                      </div>
+                    </div>
+          </br>      
+          
+                   <div class="col-24 col-xl-24 order-2 order-md-3 order-lg-2 mb-4">
+                  <div class="card1">
+                   <div class="row row-bordered g-0"> 
+                      <div class="col-md-8">
+                        <h5 class="card-header m-0 me-2 pb-3">PAY</h5>
+                        <div  class="px-2">  <!-- Chart  -->
+                <canvas id="pay" width="200" height="100"></canvas>
+                <script>
+                var ctx4 = document.getElementById('pay').getContext('2d');
+                var sondGraph4 = new Chart(ctx4, {
+                  type: 'line',
+                   data: {
+                  labels: ['Tunisie','France','Malta','Mexique'],
+                  datasets: [{
+                   label: 'Nombre de pay',
+                   data: [33,55,44,65],
+                   fill: false,
+                   borderColor: 'rgb(75, 192, 192)',
+                   tension: 0.1
+                 }]
+                 },
+             });
+                </script>
+                </div>
+                      </div>
+                      </div>
+                      </div>
+                      </div>
+</div>
+
+
+
+<!-- config chart -->
+{% endblock %}
+
+

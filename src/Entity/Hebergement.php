@@ -72,7 +72,7 @@ class Hebergement
      * @Assert\Expression(" this.getDisponibilite()==1 || this.getDisponibilite()==0  ",message="Dispo 0 ou 1 ")
      *
      * 
-     * @ORM\Column(name="Disponibilité", type="integer", nullable=false)
+     * @ORM\Column(name="Disponibilite", type="integer", nullable=false)
      * @Groups("post:read")
      */
     private $Disponibilite;

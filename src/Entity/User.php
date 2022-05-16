@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * User
  *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="ck", columns={"id_offre"})})
- * @ORM\Entity
+ * @ORM\Table(name="user", indexes={@ORM\Index(name="pk_off", columns={"id_offre"})})
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User
 {
@@ -24,51 +30,78 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false)
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prénom", type="string", length=255, nullable=false)
+     * @ORM\Column(name="fname", type="string", length=50, nullable=false)
      */
-    private $pr�nom;
+    private $fname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sexe", type="string", length=255, nullable=false)
+     * @ORM\Column(name="gender", type="string", length=50, nullable=false)
      */
-    private $sexe;
+    private $gender;
 
     /**
-     * @var \DateTime
+     * @var int
      *
-     * @ORM\Column(name="date_de_naissance", type="date", nullable=false)
+     * @ORM\Column(name="num", type="integer", nullable=false)
      */
-    private $dateDeNaissance;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
-     */
-    private $adresse;
+    private $num;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=100, nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mot_de_passe", type="string", length=255, nullable=false)
+     * @ORM\Column(name="password", type="string", length=50, nullable=false)
      */
-    private $motDePasse;
+    private $password;
+    /**
+     *@Assert\NotBlank(message="Confirmpassword is required")
+     *@Assert\EqualTo(propertyPath="password",message="Vérifier votre password")
+     */
+
+    private $confirmpassword;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthday", type="date", nullable=false)
+     */
+    private $birthday;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=200, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="nombre_de_points", type="integer", nullable=true)
+     */
+    private $nombreDePoints;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
 
     /**
      * @var string
@@ -76,20 +109,6 @@ class User
      * @ORM\Column(name="role", type="string", length=255, nullable=false)
      */
     private $role;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=false)
-     */
-    private $image;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="nombre_de_points", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $nombreDePoints = NULL;
 
     /**
      * @var \Offres
@@ -105,69 +124,51 @@ class User
     {
         return $this->id;
     }
-    public function setId(?int $Id): self
+
+    public function getName(): ?string
     {
-        $this->id = $Id;
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getFname(): ?string
     {
-        return $this->nom;
+        return $this->fname;
     }
 
-    public function setNom(string $nom): self
+    public function setFname(string $fname): self
     {
-        $this->nom = $nom;
+        $this->fname = $fname;
 
         return $this;
     }
 
-    public function getPr�nom(): ?string
+    public function getGender(): ?string
     {
-        return $this->pr�nom;
+        return $this->gender;
     }
 
-    public function setPr�nom(string $pr�nom): self
+    public function setGender(string $gender): self
     {
-        $this->pr�nom = $pr�nom;
+        $this->gender = $gender;
 
         return $this;
     }
 
-    public function getSexe(): ?string
+    public function getNum(): ?int
     {
-        return $this->sexe;
+        return $this->num;
     }
 
-    public function setSexe(string $sexe): self
+    public function setNum(int $num): self
     {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    public function getDateDeNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateDeNaissance;
-    }
-
-    public function setDateDeNaissance(\DateTimeInterface $dateDeNaissance): self
-    {
-        $this->dateDeNaissance = $dateDeNaissance;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
+        $this->num = $num;
 
         return $this;
     }
@@ -184,26 +185,38 @@ class User
         return $this;
     }
 
-    public function getMotDePasse(): ?string
+    public function getPassword(): ?string
     {
-        return $this->motDePasse;
+        return $this->password;
     }
 
-    public function setMotDePasse(string $motDePasse): self
+    public function setPassword(string $password): self
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
+
+        return $this;
+    }
+    public function getconfirmpassword(): ?string
+    {
+        return $this->confirmpassword;
+    }
+
+    public function setconfirmpassword(string $confirmpassword): self
+    {
+        $this->confirmpassword = $confirmpassword;
 
         return $this;
     }
 
-    public function getRole(): ?string
+
+    public function getBirthday(): ?\DateTimeInterface
     {
-        return $this->role;
+        return $this->birthday;
     }
 
-    public function setRole(string $role): self
+    public function setBirthday(\DateTimeInterface $birthday): self
     {
-        $this->role = $role;
+        $this->birthday = $birthday;
 
         return $this;
     }
@@ -213,7 +226,7 @@ class User
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -232,6 +245,30 @@ class User
         return $this;
     }
 
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
     public function getIdOffre(): ?Offres
     {
         return $this->idOffre;
@@ -243,9 +280,6 @@ class User
 
         return $this;
     }
-    public function __toString() {
-        return $this->nom;}
-    
 
 
 }

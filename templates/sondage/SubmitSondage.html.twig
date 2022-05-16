@@ -1,0 +1,26 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}New Sondage {% endblock %}
+
+{% block body %}
+    <div class="body-form" >
+    <div  class="form">
+    
+<h1>Salut !!</h1>
+<br>
+<br>
+
+    
+     
+    {{ include('sondage/_form.html.twig') }}
+    <br>
+<br>
+
+    <a href="{{ path('app_sondage_user') }}"><button type="button" class="btn btn-primary">back to list</button></a>
+    
+
+    </div>
+    </div>
+  
+   
+{% endblock %}

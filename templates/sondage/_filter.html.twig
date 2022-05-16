@@ -1,0 +1,11 @@
+{{ form_start(form_f,{'attr': {'novalidate': 'novalidate'}})  }}
+   
+{{form_row(form_f.SearchBar)}}
+<p>Catégorie</p>
+
+{{form_row(form_f.sondage)}}
+
+<a href="{{ path('app_sondage_user',{'sondageSujet': form_f.SearchBar})}}"><button type="submit" class="btn btn-primary">Filtrer</button>
+
+    
+{{ form_end(form_f) }}

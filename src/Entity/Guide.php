@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Guide
  *
@@ -18,6 +19,7 @@ class Guide
      * @ORM\Column(name="ID_g", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $idG;
 
@@ -25,6 +27,13 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="Titre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un titre")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
+     * @Groups("post:read")
      */
     private $titre;
 
@@ -32,6 +41,13 @@ class Guide
      * @var string
      *
      * @ORM\Column(name="Pays", type="string", length=250, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Choisir un Pays")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez remplir avec des caratéres"
+     * )
+     * @Groups("post:read")
      */
     private $pays;
 
@@ -39,8 +55,25 @@ class Guide
      * @var int
      *
      * @ORM\Column(name="Level", type="integer", nullable=false)
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "Veuillez Choisir un Niveau entre {{ min }} et {{ max }} ",
+     * )
+     * @Assert\NotBlank(message="Veuillez Saisir un Niveau")
+     * @Groups("post:read")
      */
     private $level;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     * @Groups("post:read")
+     * 
+     */
+    private $image;
 
     /**
      * @var \Vol
@@ -49,9 +82,10 @@ class Guide
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_vol", referencedColumnName="Vol_id")
      * })
+     * @Groups("post:read")
      */
     private $idVol;
-
+   
     public function getIdG(): ?int
     {
         return $this->idG;
@@ -62,7 +96,7 @@ class Guide
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(?string $titre): self
     {
         $this->titre = $titre;
 
@@ -74,7 +108,7 @@ class Guide
         return $this->pays;
     }
 
-    public function setPays(string $pays): self
+    public function setPays(?string $pays): self
     {
         $this->pays = $pays;
 
@@ -86,9 +120,21 @@ class Guide
         return $this->level;
     }
 
-    public function setLevel(int $level): self
+    public function setLevel(?int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -104,6 +150,7 @@ class Guide
 
         return $this;
     }
-
-
+    public function __toString() {
+        return $this->titre;
+    }
 }

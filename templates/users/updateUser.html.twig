@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="body">  
+    <div class="tab">
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Update User</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+
+              {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+              
+                <div class="row">
+                 
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                     {{ form_errors(form.name) }}
+                     {{ form_widget(form.name,{'attr': {'class': 'form-control' , 'placeholder' : 'Name'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.fname) }}
+                     {{ form_widget(form.fname,{'attr': {'class': 'form-control' , 'placeholder' : 'FAMILY NAME'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.birthday) }}
+                     {{ form_widget(form.birthday,{'attr': {'class': 'form-control' , 'placeholder' : 'BIRTHDATE'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.gender) }}
+                     {{ form_widget(form.gender,{'attr': {'class': 'form-control' , 'placeholder' : 'Gender'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.num) }}
+                     {{ form_widget(form.num,{'attr': {'class': 'form-control' , 'placeholder' : 'Telephone Number'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.email) }}
+                     {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
+                    </fieldset>
+                  </div>
+                   <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.password) }}
+                     {{ form_widget(form.password,{'attr': {'class': 'form-control' , 'placeholder' : 'Password'}}) }}
+                    </fieldset>
+                  </div>
+                   <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.confirmpassword) }}
+                     {{ form_widget(form.confirmpassword,{'attr': {'class': 'form-control' , 'placeholder' : 'Confirm Password'}}) }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                    {{ form_errors(form.image) }}
+                     {{ form_widget(form.image) }}
+                    </fieldset>
+                  </div>
+                               <br></br>
+                  <div class="row row-space">
+                      <div class="col-2">
+                        <div class="input-group">
+                        <br></br>
+                        {{ form_widget(form.Modifier,{'attr': {'class': 'btn btn-danger ', 'placeholder' : 'Modifier'}}) }}
+
+                        </div>
+                         </div>
+                         
+                </div>
+              </form>
+              {{ form_end(form) }}
+            </div>
+          </div>
+          </div>
+</div>
+</section>
+{% endblock %}

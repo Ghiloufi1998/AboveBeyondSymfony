@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Cours
@@ -32,6 +33,12 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="Titre", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Saisir un titre")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Veuillez Saisir une Chaine"
+     * )
      */
     private $titre;
 
@@ -39,8 +46,18 @@ class Cours
      * @var string
      *
      * @ORM\Column(name="Contenu", type="text", length=65535, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Saisir un Contenu")
      */
     private $contenu;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="Veuillez Téleverser une image")
+     *
+     */
+    private $image;
 
     /**
      * @var \Guide
@@ -62,7 +79,7 @@ class Cours
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -74,7 +91,7 @@ class Cours
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre(?string $titre): self
     {
         $this->titre = $titre;
 
@@ -86,9 +103,21 @@ class Cours
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): self
+    public function setContenu(?string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -104,6 +133,10 @@ class Cours
 
         return $this;
     }
+    public function __toString() {
+        return $this->titre;
+    }
+
 
 
 }

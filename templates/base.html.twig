@@ -4,7 +4,7 @@
   <head>                        
 
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Above And Beyond Agency!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -105,11 +105,18 @@
                                   <ul class="menu-inner py-1">
                                     <!-- Dashboard -->
                                     <li class="menu-item ">
-                                      <a href="index.html" class="menu-link">
+                                      <a href="" class="menu-link">
                                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                         <div data-i18n="Analytics">Accueil</div>
                                       </a>
                                     </li>
+                                    <li class="menu-item ">
+                                      <a href="{{path('test_logout')}}" class="menu-link">
+                                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                        <div data-i18n="Analytics">Logout</div>
+                                      </a>
+                                    </li>
+                                    
                                     <br> 
                                     <li class="menu-item">
                                       <a href="{{ path('app_reservation_index') }}" class="menu-link menu-toggle">
@@ -131,66 +138,66 @@
                                       </a>
 
                                       <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_hebergement_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Vol </div>
                                       </a>
                                       </li>
                                       <li class="menu-item open" >
-                                      <a href="javascript:void(0)" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_guide_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-box"></i>
                                         <div data-i18n="User interface">Gestion Guide Culturel</div>
                                       </a>
                                       <ul class="menu-sub">
                                     <li class="menu-item">
-                                      <a href="#" class="menu-link">
+                                      <a href="{{ path('app_guide_index') }}" class="menu-link">
                                         <div data-i18n="Accordion">Gestion Guide</div>
                                       </a>
                                     </li>
                                     <li class="menu-item">
-                                      <a href="#" class="menu-link">
+                                      <a href="{{ path('app_cours_index') }}" class="menu-link">
                                         <div data-i18n="Alerts">Gestion Cours</div>
                                       </a>
                                     </li>
                                     <li class="menu-item">
-                                      <a href="#" class="menu-link">
+                                      <a href="{{ path('app_exercices_index') }}" class="menu-link">
                                         <div data-i18n="Badges">Gestion Exercices</div>
                                       </a>
                                     </li>
                                     </ul>
                                     
                                       <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_sondage_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Sondage </div>
                                       </a>
 
                                       <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('listUser') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Utilisateur </div>
                                       </a>
                                       </li>
                                         <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('listrecBack') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Réclamation </div>
                                       </a>
                                       </li> 
                                        <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_offres_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Offres </div>
                                       </a>
                                       </li>
                                        <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_paiement_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Paiement </div>
                                       </a>
                                       </li>
                                        <li class="menu-item">
-                                      <a href="" class="menu-link menu-toggle">
+                                      <a href="{{ path('app_facture_index') }}" class="menu-link menu-toggle">
                                         <i class="menu-icon tf-icons bx bx-detail"></i>
                                         <div data-i18n="Form Elements">Gestion Facture </div>
                                       </a>

@@ -1,0 +1,56 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="{{asset('style.css')}}" rel="stylesheet" id="bootstrap-css">
+<script src="{{asset('factureuser.js')}}"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Include the above in your HEAD tag -->
+
+
+<div class="container"style="max-width:700px;">
+    <div class="row" style="margin-left:-100%;">
+       
+
+        <!-- Add to cart -->
+        <div class="col-12 col-lg-6 add_to_cart_block">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <p class="price">99.00 $</p>
+                    <p class="price_discounted">149.90 $</p>
+                    <form method="get" action="cart.html">
+                        <div class="form-group">
+                            <label for="colors">Mode de paiement</label>
+                            <select class="custom-select" id="colors">
+                                <option selected>Select</option>
+                                <option value="1">versement</option>
+                                <option value="2">en ligne</option>
+                                <option value="3">espece</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date Limite :</label>
+                            <div class="input-group mb-3">
+                             <input type="date">
+                        </div>
+                        <a href="{{asset('/userpai')}}" class="btn btn-success btn-lg btn-block text-uppercase">
+                            <i class="fa fa-shopping-cart"></i> Add To Cart
+                        </a>
+                    </form>
+                    <div class="product_rassurance">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-credit-card fa-2x"></i><br/>Secure payment</li>
+                            <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br/>+99 999 999 999</li>
+                        </ul>
+                    </div>
+                    <div class="datasheet p-3 mb-2 bg-info text-white">
+                        <a href="" class="text-white"><i class="fa fa-file-text"></i> Download DataSheet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

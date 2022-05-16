@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Serializer\Annotation\Groups; 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 /**
  * Voyageorganise
  *
- * @ORM\Table(name="voyageorganise", indexes={@ORM\Index(name="vol_ck", columns={"Vol_id"}), @ORM\Index(name="t_ck", columns={"Transport_id"})})
+ * @ORM\Table(name="voyageorganise", indexes={@ORM\Index(name="t_ck", columns={"Transport_id"}), @ORM\Index(name="vol_ck", columns={"Vol_id"})})
  * @ORM\Entity
+ * 
  */
 class Voyageorganise
 {
@@ -18,32 +20,53 @@ class Voyageorganise
      * @ORM\Column(name="Voyage_id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Groups("post:read")
      */
     private $voyageId;
 
     /**
+     * @Assert\NotBlank(message="Veuillez remplir  ce champ! ")
      * @var string
+     * Assert\Length(
+     *      min = 3,
+     *      max = 12,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Description", type="text", length=65535, nullable=false)
+     * @Groups("post:read")
      */
     private $description;
 
-    /**
+     /**
+     * Assert\NotBlank(message="Champ image vide ! ")
      * @var string
+     * Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *   minMessage = "min error ",
+     *   maxMessage = "max error "
+     *   )
      *
      * @ORM\Column(name="Image", type="string", length=100, nullable=false)
+     * @Groups("post:read")
      */
     private $image;
 
     /**
-     * @var int
+     * @Assert\NotBlank(message="Veuillez indiquer le  prix ! ")
+     * @var int|null
+     * @Assert\Positive(message="Le prix doit etre positif ! ")
      *
      * @ORM\Column(name="Prix", type="integer", nullable=false)
      */
     private $prix;
 
     /**
-     * @var int
+     * @Assert\NotBlank(message="Veuillez indiquer le  nombre de places ! ")
+     * @var int|null
+     * @Assert\Positive(message="Le nombre doit etre positif ! ")
      *
      * @ORM\Column(name="Nbre_Places", type="integer", nullable=false)
      */
@@ -58,7 +81,7 @@ class Voyageorganise
      * })
      */
     private $vol;
-
+   
     /**
      * @var \Transport
      *
@@ -68,6 +91,7 @@ class Voyageorganise
      * })
      */
     private $transport;
+   
 
     public function getVoyageId(): ?int
     {
@@ -86,12 +110,12 @@ class Voyageorganise
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( $image): self
     {
         $this->image = $image;
 

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}  
+{% block body %}
+  <div class="body">  
+<div class="tab">
+<div class="tab-header" > <h1>Offres index</h1>   <p class="create"> <a href="{{ path('app_offres_new') }}">Create new</a> </p>  </div>
+   
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdOff</th>
+                <th>Description</th>
+                <th>NbPointReq</th>
+                <th>Destination</th>
+                <th>PourcentageRed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.idOff }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.nbPointReq }}</td>
+                <td>{{ offre.destination }}</td>
+                <td>{{ offre.pourcentageRed }}</td>
+                 <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                          
+                              <a class="dropdown-item" href="{{ path('app_offres_show', {'idOff': offre.idOff}) }}" href="javascript:void(0);""  >
+                                <i class="bx bx-edit-alt me-1"></i> show</a>
+                              
+                              <a class="dropdown-item" href="{{ path('app_offres_edit', {'idOff': offre.idOff}) }}"href="javascript:void(0);"">
+                                <i class="bx bx-trash me-1"></i> Delete</a>
+                              
+                            </div>
+                          </div>
+                        
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offres_new') }}">Create new</a>
+   {% endblock %}

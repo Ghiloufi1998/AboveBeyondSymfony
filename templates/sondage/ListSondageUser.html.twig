@@ -1,0 +1,137 @@
+{% extends 'front.html.twig' %}
+
+{% block body %}
+<script src="https://kit.fontawesome.com/d31e5c894d.js" crossorigin="anonymous"></script>
+<div class="body">  
+<div class="tab">
+
+<div class="banner-bottom">
+		<div class="container">
+		<div class="tab-header" > <h1> List Sondage </h1>   </div>
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Sujet</th>
+                <th>Catégorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sondage in sondages %}
+           <tr>
+               
+                <td>{{ sondage.sujet }}</td>
+                <td>{{ sondage.categorie }}</td>
+                <td>
+                    <a href="{{ path('app_infousersondg_new', {'sondageId': sondage.sondageId}) }}"><button type="button" class="btn btn-primary">Répondre</button></a>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+           
+        {% endfor %}
+        </tbody>
+    </table>
+   
+   
+    </div>       
+   
+</div>    
+</div>    
+</div>   
+
+<div class="comment3">
+<div class="news-grids">
+
+						<div class="news-grids-info">
+							<h4>Les Commentaires</h4>
+                            <i class="fa-solid fa-comment"></i>
+						</div>
+						<div class="news-grids-bottom">
+							<!-- date -->
+							<div id="design" class="date">
+								<div id="cycler">   
+                                {% for comment in commentaire %}
+                                
+									<div class="date-text">
+										 
+										 <p>{{comment.commentaire}}</p>
+                                        <a href="{{ path('kkk', {'id': comment.id }) }}" class="btn btn-link">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span class="js-likes">{{comment.nbrLikes}}</span>
+                                        
+                                         <span class="js-label">j'aime</span>
+                                         
+                                        
+                                         <!--  <i class="fas fa-thumbs-up"></i>-->
+                                    
+                                         
+                                        
+                                        </a>
+                                        
+									</div>
+                                    
+                                    {% endfor %}
+								<!--	<div class="date-text">
+										<a href="single.html">July 08,2015</a>
+										<p>Nullam non turpis sit amet metus tristique egestas et et orci.</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">February 15,2015</a>
+										<p>Duis venenatis ac ipsum vel ultricies in placerat quam</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">January 15,2015</a>
+										<p>Pellentesque ullamcorper fringilla ipsum, ornare dapibus velit volutpat sit amet.</p>
+									</div>
+									<div class="date-text">
+										<a href="single.html">September 24,2014</a>
+										<p>In lobortis ipsum mi, ac imperdiet elit pellentesque at.</p>
+									</div>-->
+								</div>
+								<script>
+									function cycle($item, $cycler){
+										setTimeout(cycle, 20000, $item.next(), $cycler);
+										
+										$item.slideUp(1000,function(){
+											$item.appendTo($cycler).show();        
+										});
+						
+										}
+									cycle($('#cycler div:first'),  $('#cycler'));
+								</script>
+                                
+							</div>
+                            
+							<!-- //date -->
+                           
+						</div>
+                        
+					</div>
+                   
+				</div>
+                <center>  <a href="{{ path('app_sondage_comment') }}"><button type="button" class="btn btn-primary btn-lg "><h5>Ajouter Commentaire</h5></button></a></center>
+				<div class="clearfix"> </div>
+                
+			</div>
+		</div>
+        
+		<!-- //container -->
+	</div>
+
+    </div>
+    
+
+ <div>
+      
+    
+    
+    </div>
+
+
+    
+{% endblock %}
+

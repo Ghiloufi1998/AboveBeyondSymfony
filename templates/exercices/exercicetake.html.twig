@@ -1,0 +1,61 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Liste Cours de Guide {% endblock %}
+
+{% block body %}
+
+ <div class="move-text">
+ 
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<script type="text/javascript" src="front/js/jquery.marquee.min.js"></script>
+        <script>
+		  $('.marquee').marquee({ pauseOnHover: true });
+		  //@ sourceURL=pen.js
+          
+		</script>
+	</div>
+    <div style="text-align:right; margin-right:70px;">
+         <a href="{{ path('exercicebyidc', {'idCrs': exercice.getIdCrs.idCrs}) }}" class="btn btn-success" style="margin-bottom:10px;">Continuer avec autres Exercices</a>
+    </div>
+<div class="body-form" >
+    <div  class="form">
+    <h1>Répondre au question </h1>
+     <div style="font-family:'FontAwesome';">
+    {{ include('exercices/_form.html.twig') }}
+     </div>
+        <div style="font-family:'FontAwesome';">
+
+ </div>
+
+ {% for flashMessage in app.session.flashbag.get('notice') %}
+
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+
+ 
+{% endfor %}
+   
+
+	
+</div>
+    </div>
+    {{ flasher_render() }}
+ 
+        <script>
+            var botmanWidget = {
+            frameEndpoint: '{{ path("chatframe") }}',
+            chatServer: '{{ path("message") }}',
+            introMessage: 'Bonjour, Je suis la pour vous aidez ',
+            title: 'Above & beyond Bot ', 
+            mainColor: '#3993dd',
+            bubbleBackground: '#3993dd',
+            aboutText: ''
+        };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+{% endblock %}

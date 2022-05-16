@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Reclamation
  *
- * @ORM\Table(name="reclamation", indexes={@ORM\Index(name="id_user", columns={"id_user"})})
+ * @ORM\Table(name="reclamation", indexes={@ORM\Index(name="reclamation_ibfk_1", columns={"user_id"})})
  * @ORM\Entity
  */
 class Reclamation
@@ -22,16 +22,23 @@ class Reclamation
     private $id;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\Column(name="etat", type="integer", nullable=false)
+     * @ORM\Column(name="date", type="date", nullable=false)
      */
-    private $etat;
+    private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="sujet", type="string", length=255, nullable=false)
+     */
+    private $sujet;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
      */
     private $description;
 
@@ -40,24 +47,36 @@ class Reclamation
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * })
      */
-    private $idUser;
+    private $user;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEtat(): ?int
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->etat;
+        return $this->date;
     }
 
-    public function setEtat(int $etat): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->etat = $etat;
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getSujet(): ?string
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(string $sujet): self
+    {
+        $this->sujet = $sujet;
 
         return $this;
     }
@@ -74,14 +93,14 @@ class Reclamation
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getUser(): ?User
     {
-        return $this->idUser;
+        return $this->user;
     }
 
-    public function setIdUser(?User $idUser): self
+    public function setUser(?User $user): self
     {
-        $this->idUser = $idUser;
+        $this->user = $user;
 
         return $this;
     }

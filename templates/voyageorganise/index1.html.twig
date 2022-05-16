@@ -1,0 +1,55 @@
+
+{% extends 'front.html.twig' %}
+
+{% block title %}Voyageorganise {% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+<div class="voyage">
+<div class="banner-bottom">
+		<div class="container">
+<div class="tab">
+<div class="tab-header" > <h1> Liste des Voyages  organisés </h1>    <p class="create">     </div>
+ 
+<table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Prix</th>
+                <th>NbrePlaces</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyageorganise in voyageorganises %}
+            <tr>
+                
+                <td>{{ voyageorganise.description }}</td>
+                 <td><img src ="{{ asset('uploads/' ~ voyageorganise.image) }}"
+   alt =""  width="80" height="80"></td>
+               
+                <td>{{ voyageorganise.prix }}</td>
+                <td>{{ voyageorganise.nbrePlaces }}</td>
+                <td>
+                    <a href="{{ path('resvoy', {'voyageId': voyageorganise.voyageId}) }}"><button type="button" class="btn btn-primary">Réserver</button></a>
+                </td>
+            </tr>
+        {% else %}
+        
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ </div>
+</div>
+</div> </div> </div> </div>
+   <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+{% endblock %}
+

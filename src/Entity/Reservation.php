@@ -132,7 +132,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Hebergement_id", referencedColumnName="Hebergement_id")
      * })
-     * @Groups("post:read")
+     * 
      */
     private $hebergement;
 
@@ -145,7 +145,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Vol_id", referencedColumnName="Vol_id")
      * })
-     * @Groups("post:read")
+     * 
      */
     private $vol;
 
@@ -156,7 +156,7 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ID_user", referencedColumnName="id")
      * })
-     * @Groups("post:read")
+     * 
      */
     private $idUser;
 
